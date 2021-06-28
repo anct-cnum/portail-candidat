@@ -1,0 +1,141 @@
+$blue-france:#000091;
+
+.flashBag {
+  background-color: white;
+  color: #008941;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 20px;
+}
+
+.labelError {
+  color: #FF3333;
+}
+
+.spinnerCustom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapperModal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.header__logo-rf {
+    height: 78px;
+}
+
+.Login {
+    border-radius: 8px;
+    text-align: center;
+}
+
+.fr-sur-mesure {
+    flex: none;
+    padding-right: 0;
+    height: 75px;
+}
+
+.logo-conseiller-numerique {
+    height: 75px;
+    margin-left: 1.25rem;
+    display: flex;
+}
+
+.logo-conseiller-numerique img:first-child {
+    height: 54px;
+    margin-top: 1.1em;
+    font-weight: lighter!important;
+}
+
+.fr-tag.current {
+    font-weight: 600;
+    color: white;
+    background-color: #5770BE;
+}
+
+.fr-tag:hover {
+  background-color: #D5DBEF;
+}
+
+.hidden {
+  display: none;
+}
+
+.big-btn {
+  display: inline-block;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem!important;
+  width: 60%;
+  text-align: center;
+  background: white!important;
+  border: 1px solid #383838!important;
+  color: #383838!important;
+}
+
+/** Icones menu gauche **/
+.Menu .fr-sidemenu__item--active [class^="fr-fi"] {
+    color: $blue-france;
+}
+
+/** style custom **/
+.alignRight {
+    text-align: right;
+}
+
+.valignTextTop {
+  vertical-align: text-top;
+}
+
+.valignMiddle {
+  vertical-align: middle;
+}
+
+.valignBottom {
+  vertical-align: bottom;
+}
+
+.conseiller .customTitleLink {
+    color: $blue-france;
+    text-align: right;
+}
+
+.capitalizeFirstLetter {
+  text-transform: capitalize;
+  color: $blue-france;
+}
+
+.centrerTexte {
+  text-align: center;
+}
+
+.titrage {
+  font-size: 56px;
+}
+
+.invalid, .important {
+  color: #e10600;
+}
+.valid {
+  color: #008941;
+}
+
+/** Header **/
+.fr-header__tools-links {
+  display: block!important;
+}

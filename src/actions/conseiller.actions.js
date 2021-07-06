@@ -18,13 +18,13 @@ function get(id) {
   };
 
   function request() {
-    return { type: 'GET_INFOS_CONSEILLER_REQUEST' };
+    return { type: 'GET_CONSEILLER_REQUEST' };
   }
   function success(conseiller) {
-    return { type: 'GET_INFOS_CONSEILLER_SUCCESS', conseiller };
+    return { type: 'GET_CONSEILLER_SUCCESS', conseiller };
   }
   function failure(error) {
-    return { type: 'GET_INFOS_CONSEILLER_FAILURE', error };
+    return { type: 'GET_CONSEILLER_FAILURE', error };
   }
 
 }

@@ -5,7 +5,8 @@ import { userService } from './user.service';
 const apiUrlRoot = process.env.REACT_APP_API;
 
 export const conseillerService = {
-  get
+  get,
+  patchInfoConseiller
 };
 
 function get(id) {
@@ -15,6 +16,16 @@ function get(id) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/${id}`, requestOptions).then(handleResponse);
+}
+
+function patchInfoConseiller(info) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader()),
+    body: JSON.stringify(info)
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/${info._id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

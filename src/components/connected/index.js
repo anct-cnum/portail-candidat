@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import Header from '../common/Header';
 import Documents from './Documents';
 import Informations from './Informations';
 import Menu from './Menu';
 import Welcome from './Welcome';
+import { useDispatch, useSelector } from 'react-redux';
+import { conseillerActions } from '../../actions';
 
 function Connected() {
+  const dispatch = useDispatch();
+  const { $id } = useSelector(state => state.authentication.user?.user.entity);
+
+  useEffect(() => {
+    dispatch(conseillerActions.get($id));
+  }, []);
 
   return (
     <>

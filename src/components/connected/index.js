@@ -4,6 +4,7 @@ import Header from '../common/Header';
 import Documents from './Documents';
 import Informations from './Informations';
 import Menu from './Menu';
+import MonCompte from './MonCompte';
 import Welcome from './Welcome';
 
 function Connected() {
@@ -21,6 +22,7 @@ function Connected() {
             <Route path={`/accueil`} component={Welcome} />
             <Route path={`/informations`} component={Informations} />
             <Route path={`/documents`} component={Documents} />
+            <Route path={`/mon-compte`} component={MonCompte} />
           </div>
           <div className="fr-col-1"></div>
         </div>

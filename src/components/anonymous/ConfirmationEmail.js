@@ -28,17 +28,18 @@ function EmailConfirmer({ match }) {
     <div>
       <Header/>
       <div className="">
-        <div className="rf-grid-row rf-grid-row--center rf-mt-3w">
+        <div className="fr-grid-row rf-grid-row--center fr-mt-3w">
+          <div className="fr-col-offset-3"/>
           <div style={{ width: '50%', textAlign: 'center' }}>
             {tokenVerified === true &&
-                  <div>
-                    <p className="rf-label flashBag" style={{ fontSize: '16px' }}>
+            <div>
+              <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
                   La confirmation de votre e-mail a été effectuée avec succès
                   &nbsp;
-                      <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
-                    </p>
-                    <h3>Nous allons vous rediriger sur la page de connexion...</h3>
-                  </div>
+                <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
+              </p>
+              <h4>Nous allons vous rediriger sur la page de connexion...</h4>
+            </div>
             }
             {tokenVerified === false &&
                   <p className="rf-label flashBag labelError" style={{ fontSize: '16px' }}>

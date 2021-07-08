@@ -19,7 +19,6 @@ function Informations() {
             <ul style={{ listStyleType: 'none', marginLeft: '-1rem' }}>
               <li>Nom : <strong>{ conseiller?.nom }</strong></li>
               <li>Prénom : { conseiller?.prenom }</li>
-              <li>Fonction : { conseiller?.fonction }</li>
               <li>Email : { conseiller?.email }</li>
               <li>Téléphone : { conseiller?.telephone }</li>
             </ul>

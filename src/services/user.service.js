@@ -65,13 +65,12 @@ function logout() {
   localStorage.removeItem('user');
 }
 
-function updateUserEmail(id, newEmail) {
-  console.log('SERVICE ETAPE 1', newEmail);
+function updateUserEmail(id, infos) {
   const apiUrlRoot = process.env.REACT_APP_API;
   const requestOptions = {
     method: 'PATCH',
     headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader()),
-    body: JSON.stringify({ name: newEmail })
+    body: JSON.stringify(infos)
   };
 
   let uri = `${apiUrlRoot}/candidat/sendEmailUpdate/${id}`;
@@ -79,7 +78,6 @@ function updateUserEmail(id, newEmail) {
 }
 
 function confirmeUserEmail(token) {
-  console.log('SERVICE', token);
   const apiUrlRoot = process.env.REACT_APP_API;
   const requestOptions = {
     method: 'PATCH',

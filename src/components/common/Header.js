@@ -33,7 +33,7 @@ function Header({ connected }) {
               </div>
             </div>
             { connected &&
-                <div className="fr-header__tools fr-mt-2w" style={{ marginBottom: '33px', display: 'flex' }}>
+                <div className="fr-header__tools fr-mt-2w" style={{ marginBottom: '33px' }}>
                   <div className="fr-shortcuts">
                     <ul className="fr-shortcuts__list" style={{ display: 'flex' }}>
                       <li className="fr-shortcuts__item">
@@ -47,9 +47,13 @@ function Header({ connected }) {
                                 </h3>
                               </button>
                               <div className={ menu === true ? 'fr-collapse--expanded' : 'fr-collapse fr-nav--expanded'} id="menu-776">
-                                <ul className="fr-menu__list" style={{ textAlign: 'center', marginTop: '1rem' }}>
-                                  <li className="fr-sidemenu__item fr-sidemenu__item--active">
-                                    <Link to={'/mon-compte'}>Mon compte</Link>
+                                <ul className="fr-menu__list" style={{ paddingInline: '4rem' }}>
+                                  <li className={`fr-sidemenu__item ${location.pathname.startsWith('/mon-compte') ? 'fr-sidemenu__item--active' : ''}`}>
+                                    <Link className="fr-sidemenu__link" to={'/mon-compte'} style={{ padding: '0.5rem 0' }}>
+                                      <div className="fr-container">
+                                        Mon compte
+                                      </div>
+                                    </Link>
                                   </li>
                                 </ul>
                               </div>

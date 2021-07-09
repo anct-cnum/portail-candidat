@@ -50,6 +50,7 @@ function MonCompte() {
     setForm(false);
     setTimeout(() => {
       setFlashMessage(false);
+      dispatch(conseillerActions.get($id));
     }, 10000);
   };
 

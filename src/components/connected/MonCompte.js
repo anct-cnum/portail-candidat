@@ -42,7 +42,7 @@ function MonCompte() {
   };
 
   const updateEmail = () => {
-    dispatch(userActions.updateUserEmail({ id: _id, infos: infos }));
+    dispatch(userActions.updateInfosCandidat({ id: _id, infos: infos }));
     setTimeout(() => {
       dispatch(conseillerActions.get($id));
       setFlashMessage(true);
@@ -69,7 +69,7 @@ function MonCompte() {
                 { (error === undefined || error === false) &&
                  <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
 
-                   { infos.email === conseiller?.email ? <> La mise à jours a été éffectué avec succès </> :
+                   { infos.email === conseiller?.email ? <> La mise à jour effectué avec succès </> :
                      <>Nous vous avons envoyé un mail à : <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation</> }
                   &nbsp;
                    <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
@@ -104,7 +104,7 @@ function MonCompte() {
             <input className="fr-input" type="text" id="text-input-text" name="telephone" value={infos?.telephone} onChange={handleForm}/>
           </form>
           <div className="fr-col-lg-4 fr-col-md-4 fr-col-4 fr-col-sm-8">
-            <button onClick={() => setForm(false)} className="fr-btn">Annuler </button>
+            <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>
             <button className="fr-btn fr-m-auto" style={{ float: 'right' }} onClick={updateEmail}>Valider</button>
           </div>
         </div>

@@ -9,8 +9,8 @@ export const userActions = {
   choosePassword,
   inviteAccountsPrefet,
   forgottenPassword,
-  updateUserEmail,
-  confirmeUserEmail
+  updateInfosCandidat,
+  confirmUserEmail
 };
 
 function login(username, password) {
@@ -186,10 +186,10 @@ function forgottenPassword(username) {
   }
 }
 
-function updateUserEmail({ id, infos }) {
+function updateInfosCandidat({ id, infos }) {
   return dispatch => {
     dispatch(request());
-    userService.updateUserEmail(id, infos)
+    userService.updateInfosCandidat(id, infos)
     .then(
       user => dispatch(success(user)),
       error => {
@@ -208,10 +208,10 @@ function updateUserEmail({ id, infos }) {
     return { type: 'UPDATE_USER_EMAIL_FAILURE', error };
   }
 }
-function confirmeUserEmail(token) {
+function confirmUserEmail(token) {
   return dispatch => {
     dispatch(request());
-    userService.confirmeUserEmail(token)
+    userService.confirmUserEmail(token)
     .then(
       user => dispatch(success(user)),
       error => {

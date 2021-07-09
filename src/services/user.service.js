@@ -5,8 +5,8 @@ export const userService = {
   logout,
   verifyToken,
   choosePassword,
-  updateUserEmail,
-  confirmeUserEmail
+  updateInfosCandidat,
+  confirmUserEmail
 };
 
 function login(username, password) {
@@ -65,7 +65,7 @@ function logout() {
   localStorage.removeItem('user');
 }
 
-function updateUserEmail(id, infos) {
+function updateInfosCandidat(id, infos) {
   const apiUrlRoot = process.env.REACT_APP_API;
   const requestOptions = {
     method: 'PATCH',
@@ -73,11 +73,11 @@ function updateUserEmail(id, infos) {
     body: JSON.stringify(infos)
   };
 
-  let uri = `${apiUrlRoot}/candidat/sendEmailUpdate/${id}`;
+  let uri = `${apiUrlRoot}/candidat/updateInfosCandidat/${id}`;
   return fetch(uri, requestOptions).then(handleResponse);
 }
 
-function confirmeUserEmail(token) {
+function confirmUserEmail(token) {
   const apiUrlRoot = process.env.REACT_APP_API;
   const requestOptions = {
     method: 'PATCH',

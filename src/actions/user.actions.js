@@ -8,7 +8,9 @@ export const userActions = {
   verifyPrefetToken,
   choosePassword,
   inviteAccountsPrefet,
-  forgottenPassword
+  forgottenPassword,
+  updateInfosCandidat,
+  confirmUserEmail
 };
 
 function login(username, password) {
@@ -181,5 +183,50 @@ function forgottenPassword(username) {
   }
   function failure(error) {
     return { type: 'SEND_EMAIL_FAILURE', error };
+  }
+}
+
+function updateInfosCandidat({ id, infos }) {
+  return dispatch => {
+    dispatch(request());
+    userService.updateInfosCandidat(id, infos)
+    .then(
+      user => dispatch(success(user)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+
+  function request() {
+    return { type: 'UPDATE_USER_EMAIL_REQUEST' };
+  }
+  function success(user) {
+    return { type: 'UPDATE_USER_EMAIL_SUCCESS', user };
+  }
+  function failure(error) {
+    return { type: 'UPDATE_USER_EMAIL_FAILURE', error };
+  }
+}
+function confirmUserEmail(token) {
+  return dispatch => {
+    dispatch(request());
+    userService.confirmUserEmail(token)
+    .then(
+      user => dispatch(success(user)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+
+  function request() {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_REQUEST' };
+  }
+  function success(user) {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_SUCCESS', user };
+  }
+  function failure(error) {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_FAILURE', error };
   }
 }

@@ -1,8 +1,12 @@
+import { authHeader } from '../helpers';
+
 export const userService = {
   login,
   logout,
   verifyToken,
   choosePassword,
+  updateInfosCandidat,
+  confirmUserEmail
 };
 
 function login(username, password) {
@@ -61,6 +65,27 @@ function logout() {
   localStorage.removeItem('user');
 }
 
+function updateInfosCandidat(id, infos) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader()),
+    body: JSON.stringify(infos)
+  };
+
+  let uri = `${apiUrlRoot}/candidat/updateInfosCandidat/${id}`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
+
+function confirmUserEmail(token) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: authHeader(),
+  };
+  let uri = `${apiUrlRoot}/candidat/confirmation-email/${token}`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);

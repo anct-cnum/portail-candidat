@@ -10,17 +10,15 @@ function EmailConfirmer({ match }) {
   const token = match.params.token;
   const dispatch = useDispatch();
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
-  const role = useSelector(state => state?.user?.userConnected?.role);
   useEffect(() => {
     dispatch(userActions.verifyToken(token));
-
   }, []);
   setTimeout(() => {
     if (tokenVerified === true) {
-      dispatch(userActions.confirmeUserEmail(token));
+      dispatch(userActions.confirmUserEmail(token));
     }
     setTimeout(() => {
-      history.push(`/login?role=${role}`);
+      history.push(`/login`);
     }, 7000);
   }, 0);
 

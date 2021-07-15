@@ -10576,10 +10576,10 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
-react-flash-message@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-flash-message/-/react-flash-message-1.0.7.tgz#3aae30324a81b48910fc4e162e80818662329588"
-  integrity sha512-EwyGkQfEiSAFoQfzGHzVMIkNU3XzgGL6eFiTeWeteDPnE3LfKMARNDGGkwk1ATZ3qBJnOH1IrWJicUzOLE8tIQ==
+react-flash-message@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-flash-message/-/react-flash-message-1.0.5.tgz#1bca3a19597ba6e3c950344cc7fc752df0b653f3"
+  integrity sha512-Xaza4Tub+ByjaPkBlMYFCh34rZsyxSK1A63lpot10a8I+D8hUt9GfW2Sy1GVfUaClRBc2sBT7kYYXg7KGZTW4w==
   dependencies:
     prop-types "^15.6.1"
 

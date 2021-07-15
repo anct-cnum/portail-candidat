@@ -8,6 +8,7 @@ import ChoosePassword from './components/anonymous/createAccount/ChoosePassword'
 
 import PrivateRoute from './components/connected/PrivateRoute';
 import Footer from './components/common/Footer';
+import EmailConfirmer from './components/anonymous/ConfirmationEmail';
 
 require('dotenv').config();
 
@@ -19,6 +20,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/inscription/:token" component={ChoosePassword} />
+          <Route path="/candidat/confirmation-email/:token" component={EmailConfirmer} />
           <PrivateRoute exact path="*" component={Home} />
         </Switch>
       </Router>

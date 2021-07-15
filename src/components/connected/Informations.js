@@ -16,13 +16,10 @@ function Informations() {
         <div className="fr-grid-row">
           <div style={{ margin: '0 0 0 1rem' }}>
             <h2>Mes informations</h2>
-            <ul style={{ listStyleType: 'none', marginLeft: '-1rem' }}>
-              <li>Nom : <strong>{ conseiller?.nom }</strong></li>
-              <li>Prénom : { conseiller?.prenom }</li>
-              <li>Fonction : { conseiller?.fonction }</li>
-              <li>Email : { conseiller?.email }</li>
-              <li>Téléphone : { conseiller?.telephone }</li>
-            </ul>
+            <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ conseiller?.nom }</strong></p>
+            <p style={{ marginBottom: 'revert' }}>Prénom : { conseiller?.prenom }</p>
+            <p style={{ marginBottom: 'revert' }}>Email : { conseiller?.email }</p>
+            <p>Téléphone : { conseiller?.telephone }</p>
           </div>
         </div>
       </div>

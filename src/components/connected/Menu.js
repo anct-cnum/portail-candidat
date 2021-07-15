@@ -39,15 +39,6 @@ function Menu() {
                 </div>
               </Link>
             </li>
-            <li className={`fr-sidemenu__item ${location.pathname.startsWith('/documents') ? 'fr-sidemenu__item--active' : ''}`}>
-              <Link className="fr-sidemenu__link" to="/documents" style={{ padding: '0.5rem 0' }}>
-                <div className="fr-container">
-                  <div className="fr-grid-row fr-grid-row--end">
-                    Mes documents
-                  </div>
-                </div>
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

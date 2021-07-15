@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Header from '../common/Header';
-import Documents from './Documents';
 import Informations from './Informations';
 import Menu from './Menu';
 import Welcome from './Welcome';
@@ -20,7 +19,6 @@ function Connected() {
           <div className="fr-col-7">
             <Route path={`/accueil`} component={Welcome} />
             <Route path={`/informations`} component={Informations} />
-            <Route path={`/documents`} component={Documents} />
           </div>
           <div className="fr-col-1"></div>
         </div>

@@ -19,10 +19,12 @@ function Connected() {
             <Menu />
           </div>
           <div className="fr-col-7">
-            <Route path={`/accueil`} component={Welcome} />
-            <Route path={`/informations`} component={Informations} />
-            <Route path={`/documents`} component={Documents} />
-            <Route path={`/mon-compte`} component={MonCompte} />
+            <>
+              <Route path={`/accueil`} component={Welcome} />
+              <Route path={`/informations`} component={Informations} />
+              <Route path={`/documents`} component={Documents} />
+              <Route path={`/mon-compte`} component={MonCompte} />
+            </>
           </div>
           <div className="fr-col-1"></div>
         </div>

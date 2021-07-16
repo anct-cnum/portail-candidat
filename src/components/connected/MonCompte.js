@@ -18,10 +18,6 @@ function MonCompte() {
     telephone: conseiller?.telephone
   });
 
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-  }, []);
-
   const activeFormulaire = () => {
     setForm(true);
     setFlashMessage(false);

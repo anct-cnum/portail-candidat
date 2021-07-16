@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { conseillerActions } from '../../actions';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 function Informations() {
-  const dispatch = useDispatch();
   const conseiller = useSelector(state => state.conseiller?.conseiller);
-  const { $id } = useSelector(state => state.authentication.user?.user.entity);
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-  }, []);
 
   return (
     <div className="informations">

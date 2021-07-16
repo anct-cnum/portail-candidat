@@ -5,7 +5,8 @@ import { userService } from './user.service';
 const apiUrlRoot = process.env.REACT_APP_API;
 
 export const conseillerService = {
-  get
+  get,
+  createSexeAge
 };
 
 function get(id) {
@@ -15,6 +16,22 @@ function get(id) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/${id}`, requestOptions).then(handleResponse);
+}
+
+function createSexeAge(user) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user,
+    })
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

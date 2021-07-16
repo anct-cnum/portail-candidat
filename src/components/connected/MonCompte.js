@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions, conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
@@ -17,10 +17,6 @@ function MonCompte() {
     email: conseiller?.email,
     telephone: conseiller?.telephone
   });
-
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-  }, []);
 
   const activeFormulaire = () => {
     setForm(true);

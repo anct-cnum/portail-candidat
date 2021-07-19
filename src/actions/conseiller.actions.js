@@ -29,12 +29,12 @@ function get(id) {
   }
 }
 
-function uploadCurriculumVitae(conseiller, fileCV) {
+function uploadCurriculumVitae(fileCV) {
 
   return dispatch => {
     dispatch(request());
 
-    conseillerService.uploadCurriculumVitae(conseiller, fileCV)
+    conseillerService.uploadCurriculumVitae(fileCV)
     .then(
       conseiller => dispatch(success(conseiller)),
       error => {

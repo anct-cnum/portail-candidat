@@ -35,16 +35,13 @@ function createSexeAge(user) {
   return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
 }
 
-function uploadCurriculumVitae(conseiller, fileCV) {
+function uploadCurriculumVitae(fileCV) {
   const apiUrlRoot = process.env.REACT_APP_API;
 
   const requestOptions = {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
     body: JSON.stringify({
-      conseiller,
       fileCV
     })
   };

@@ -7,6 +7,7 @@ import { conseillerActions } from '../../actions';
 function Informations() {
   const dispatch = useDispatch();
   const conseiller = useSelector(state => state.conseiller?.conseiller);
+
   const hasCv = false;
   const errorTab = [{
     key: 'too-many-files',
@@ -20,7 +21,7 @@ function Informations() {
     const data = new FormData();
     data.append('file', acceptedFiles);
 
-    dispatch(conseillerActions.uploadCurriculumVitae(conseiller, data));
+    dispatch(conseillerActions.uploadCurriculumVitae(data));
 
   }, []);
 
@@ -41,7 +42,7 @@ function Informations() {
             <h2>Mon Curriculum vit&aelig;</h2>
             { hasCv &&
             <>
-              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce liens :<br />
+              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien :<br />
                 <a href="">Mon Curriculum vit&aelig;</a> </p>
               <p>Pour mettre à jour votre CV : </p>
             </>

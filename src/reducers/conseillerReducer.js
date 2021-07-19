@@ -27,6 +27,20 @@ export default function conseiller(state = null, action) {
         error: action.error,
         isUpdated: false
       };
+    case 'POST_CURRICULUM_VITAE_REQUEST':
+      return {
+        loading: true
+      };
+    case 'POST_CURRICULUM_VITAE_SUCCESS':
+      return {
+        ...state,
+        isUploaded: action.isUploaded
+      };
+    case 'POST_CURRICULUM_VITAE_FAILURE':
+      return {
+        error: action.error,
+        isUploaded: false
+      };
     default:
       return state;
   }

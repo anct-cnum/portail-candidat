@@ -1,7 +1,8 @@
 import { conseillerService } from '../services/conseiller.service.js';
 
 export const conseillerActions = {
-  get
+  get,
+  uploadCurriculumVitae
 };
 
 function get(id) {
@@ -26,5 +27,28 @@ function get(id) {
   function failure(error) {
     return { type: 'GET_CONSEILLER_FAILURE', error };
   }
+}
 
+function uploadCurriculumVitae(conseiller, fileCV) {
+
+  return dispatch => {
+    dispatch(request());
+
+    conseillerService.uploadCurriculumVitae(conseiller, fileCV)
+    .then(
+      conseiller => dispatch(success(conseiller)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+  function request() {
+    return { type: 'POST_CURRICULUM_VITAE_REQUEST' };
+  }
+  function success(conseiller) {
+    return { type: 'POST_CURRICULUM_VITAE_SUCCESS', conseiller };
+  }
+  function failure(error) {
+    return { type: 'POST_CURRICULUM_VITAE_FAILURE', error };
+  }
 }

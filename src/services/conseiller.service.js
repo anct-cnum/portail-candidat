@@ -6,7 +6,8 @@ const apiUrlRoot = process.env.REACT_APP_API;
 
 export const conseillerService = {
   get,
-  createSexeAge
+  createSexeAge,
+  uploadCurriculumVitae
 };
 
 function get(id) {
@@ -32,6 +33,23 @@ function createSexeAge(user) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
+}
+
+function uploadCurriculumVitae(conseiller, fileCV) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      conseiller,
+      fileCV
+    })
+  };
+  /* TODO: nom de fonction provisoire */
+  return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

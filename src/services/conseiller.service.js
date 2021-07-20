@@ -1,5 +1,5 @@
-import { authHeader, history } from '../helpers';
 import axios from 'axios';
+import { authHeader, history } from '../helpers';
 
 import { userService } from './user.service';
 
@@ -39,15 +39,15 @@ function createSexeAge(user) {
 function uploadCurriculumVitae(fileCV) {
   const apiUrlRoot = process.env.REACT_APP_API;
 
-  const requestOptions = {
-    method: 'POST',
-    headers: Object.assign(authHeader(), { 'Content-Type': 'multipart/form-data' }),
-    body: fileCV
-  };
+  return axios({
+    method: 'post',
+    url: `${apiUrlRoot}/conseillers/uploadCV`,
+    data: fileCV,
+    headers: Object.assign(authHeader(), { 'Content-Type': 'multipart/form-data' })
+  });
 
-  //axios.post('conseillers/uploadCV', fileCV);
   /* TODO: nom de fonction provisoire */
-  return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);
+  //return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

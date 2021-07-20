@@ -40,10 +40,8 @@ function uploadCurriculumVitae(fileCV) {
 
   const requestOptions = {
     method: 'POST',
-    headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
-    body: JSON.stringify({
-      fileCV
-    })
+    headers: Object.assign(authHeader()),
+    body: fileCV
   };
   /* TODO: nom de fonction provisoire */
   return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);

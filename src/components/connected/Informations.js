@@ -18,7 +18,10 @@ function Informations() {
   }];
 
   const onDrop = useCallback(acceptedFiles => {
-    dispatch(conseillerActions.uploadCurriculumVitae(acceptedFiles[0]));
+    const formData = new FormData();
+    formData.append('file', acceptedFiles[0]);
+
+    dispatch(conseillerActions.uploadCurriculumVitae(formData));
   }, []);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: '.pdf', maxFiles: 1 });

@@ -1,4 +1,5 @@
 import { authHeader, history } from '../helpers';
+import axios from 'axios';
 
 import { userService } from './user.service';
 
@@ -40,9 +41,11 @@ function uploadCurriculumVitae(fileCV) {
 
   const requestOptions = {
     method: 'POST',
-    headers: Object.assign(authHeader()),
+    headers: Object.assign(authHeader(), { 'Content-Type': 'multipart/form-data' }),
     body: fileCV
   };
+
+  //axios.post('conseillers/uploadCV', fileCV);
   /* TODO: nom de fonction provisoire */
   return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);
 }

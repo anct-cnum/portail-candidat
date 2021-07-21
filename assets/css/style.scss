@@ -149,6 +149,9 @@ $blue-france:#000091;
   background-color: #f3f3f3;
   padding: 15px 15px 1px;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   .drop-error-message {
     text-align: center;
     color: #ff6961;

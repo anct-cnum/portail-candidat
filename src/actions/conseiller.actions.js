@@ -36,7 +36,7 @@ function uploadCurriculumVitae(fileCV) {
 
     conseillerService.uploadCurriculumVitae(fileCV)
     .then(
-      conseiller => dispatch(success(conseiller)),
+      data => dispatch(success(data.isUploaded)),
       error => {
         dispatch(failure(error));
       }
@@ -45,8 +45,8 @@ function uploadCurriculumVitae(fileCV) {
   function request() {
     return { type: 'POST_CURRICULUM_VITAE_REQUEST' };
   }
-  function success(conseiller) {
-    return { type: 'POST_CURRICULUM_VITAE_SUCCESS', conseiller };
+  function success(isUploaded) {
+    return { type: 'POST_CURRICULUM_VITAE_SUCCESS', isUploaded };
   }
   function failure(error) {
     return { type: 'POST_CURRICULUM_VITAE_FAILURE', error };

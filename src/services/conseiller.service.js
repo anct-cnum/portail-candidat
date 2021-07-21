@@ -8,7 +8,8 @@ const apiUrlRoot = process.env.REACT_APP_API;
 export const conseillerService = {
   get,
   createSexeAge,
-  uploadCurriculumVitae
+  uploadCurriculumVitae,
+  getCurriculumVitae,
 };
 
 function get(id) {
@@ -21,8 +22,6 @@ function get(id) {
 }
 
 function createSexeAge(user) {
-  const apiUrlRoot = process.env.REACT_APP_API;
-
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -37,20 +36,27 @@ function createSexeAge(user) {
 }
 
 function uploadCurriculumVitae(fileCV) {
-  const apiUrlRoot = process.env.REACT_APP_API;
-
   return axios({
     method: 'post',
-    url: `${apiUrlRoot}/conseillers/uploadCV`,
+    url: `${apiUrlRoot}/conseillers/cv`,
     data: fileCV,
     headers: Object.assign(authHeader(), { 'Content-Type': 'multipart/form-data' })
-  });
+  }).then(handleResponse);
+}
 
-  /* TODO: nom de fonction provisoire */
-  //return fetch(`${apiUrlRoot}/conseillers/uploadCV`, requestOptions).then(handleResponse);
+function getCurriculumVitae(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
+  if (response.data) {
+    return response.data;
+  }
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {

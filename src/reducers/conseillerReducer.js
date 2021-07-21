@@ -38,7 +38,8 @@ export default function conseiller(state = null, action) {
       };
     case 'POST_CURRICULUM_VITAE_FAILURE':
       return {
-        error: action.error,
+        ...state,
+        uploadError: action.error,
         isUploaded: false
       };
     default:

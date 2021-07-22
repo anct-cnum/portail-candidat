@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
@@ -9,7 +9,10 @@ function Informations() {
   const user = useSelector(state => state.authentication.user.user);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
+  const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
   const error = useSelector(state => state.conseiller?.uploadError);
+  const downloadError = useSelector(state => state.conseiller?.downloadError);
+  const blob = useSelector(state => state.conseiller?.blob);
 
   const errorTab = [{
     key: 'too-many-files',
@@ -32,19 +35,35 @@ function Informations() {
     }
   }, []);
 
+
+  useEffect(() => {
+    if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
+      dispatch(conseillerActions.resetFile());
+    }
+  });
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
     { onDrop, accept: '.pdf,.doc,.docx', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
+
+  const downloadCV = () => {
+    dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
+    dispatch(conseillerActions.get(user?.entity?.$id));
+  };
 
   return (
     <div className="informations">
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
-          { isUploaded &&
+          { isUploaded || isDownloaded &&
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={10000} >
                 <div className="flashBag">
                   <span>
-                    Votre nouveau Curriculum Vit&aelig; a été ajouté !
+                    { isUploaded &&
+                      <>Votre nouveau Curriculum Vit&aelig; a été ajouté !</>
+                    }
+                    { isDownloaded &&
+                      <>Votre Curriculum Vit&aelig; est prêt à être téléchargé !</>
+                    }
                   </span>
                 </div>
               </FlashMessage>
@@ -71,14 +90,17 @@ function Informations() {
           </div>
           <div className="fr-col-12 fr-col-md-6" >
             <h2>Mon Curriculum vit&aelig;</h2>
-            { candidat?.cvFichier &&
+            { candidat?.cv?.file &&
             <>
               <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien :<br />
-                <a href="">Mon Curriculum vit&aelig;</a> </p>
+                <button className="fr-btn fr-mt-3w" onClick={downloadCV}>
+                  <span className="fr-fi-download-line image-download" aria-hidden="true"></span>
+                  Mon Curriculum vit&aelig;
+                </button> </p>
               <p>Pour mettre à jour votre CV : </p>
             </>
             }
-            { !candidat?.cvFichier &&
+            { !candidat?.cv?.file &&
               <p>Vous n&apos;avez pas encore téléchargé votre Curriculum vit&aelig;, faites le dès maintenant ! </p>
             }
             <div className={fileRejections.length > 0 ? 'dropZone drop-error' : 'dropZone' } {...getRootProps()}>

@@ -42,6 +42,27 @@ export default function conseiller(state = null, action) {
         uploadError: action.error,
         isUploaded: false
       };
+    case 'GET_CURRICULUM_VITAE_REQUEST':
+      return {
+        loading: true
+      };
+    case 'GET_CURRICULUM_VITAE_SUCCESS':
+      return {
+        ...state,
+        blob: action.data,
+        isDownloaded: action.download
+      };
+    case 'GET_CURRICULUM_VITAE_FAILURE':
+      return {
+        ...state,
+        downloadError: action.error,
+        isDownloaded: false
+      };
+    case 'RESET_FILE':
+      return {
+        ...state,
+        blob: null,
+      };
     default:
       return state;
   }

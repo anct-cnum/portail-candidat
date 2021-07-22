@@ -1,8 +1,11 @@
+import download from 'downloadjs';
 import { conseillerService } from '../services/conseiller.service.js';
 
 export const conseillerActions = {
   get,
-  uploadCurriculumVitae
+  uploadCurriculumVitae,
+  getCurriculumVitae,
+  resetFile
 };
 
 function get(id) {
@@ -49,4 +52,33 @@ function uploadCurriculumVitae(fileCV) {
   function failure(error) {
     return { type: 'POST_CURRICULUM_VITAE_FAILURE', error };
   }
+}
+
+function getCurriculumVitae(id, candidat) {
+
+  return dispatch => {
+    dispatch(request());
+
+    conseillerService.getCurriculumVitae(id)
+    .then(
+      data => {
+
+        dispatch(success(data, download(data, candidat.nom + '_' + candidat.prenom + '.pdf')));
+      },
+      error => dispatch(failure(error))
+    );
+  };
+  function request() {
+    return { type: 'GET_CURRICULUM_VITAE_REQUEST' };
+  }
+  function success(data, download) {
+    return { type: 'GET_CURRICULUM_VITAE_SUCCESS', data, download };
+  }
+  function failure(error) {
+    return { type: 'GET_CURRICULUM_VITAE_FAILURE', error };
+  }
+}
+
+function resetFile() {
+  return { type: 'RESET_FILE' };
 }

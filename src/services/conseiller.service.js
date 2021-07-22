@@ -60,7 +60,7 @@ function getCurriculumVitae(id) {
     headers: authHeader()
   };
 
-  return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleResponse);
+  return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleFileResponse);
 }
 
 function handleResponse(response) {
@@ -80,5 +80,20 @@ function handleResponse(response) {
     }
 
     return data;
+  });
+}
+
+function handleFileResponse(response) {
+  return response.blob().then(blob => {
+    if (!response.ok) {
+      if (response.status === 401) {
+        // auto logout if 401 response returned from api
+        userService.logout();
+        history.push('/');
+      }
+      const error = (blob && blob.message) || response.statusText;
+      return Promise.reject(error);
+    }
+    return blob;
   });
 }

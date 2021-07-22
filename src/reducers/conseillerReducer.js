@@ -56,8 +56,7 @@ export default function conseiller(state = null, action) {
     case 'GET_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
-        downloadError: action.error,
-        isDownloaded: false
+        downloadError: action.error
       };
     case 'RESET_FILE':
       return {

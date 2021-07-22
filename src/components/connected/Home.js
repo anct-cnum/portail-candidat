@@ -19,7 +19,7 @@ function Home() {
       { user?.role === 'candidat' && (!candidat || candidat?.sexe !== undefined) &&
         <Connected />
       }
-      { candidat && candidat?.sexe === undefined &&
+      { user?.role === 'candidat' && candidat && candidat?.sexe === undefined &&
         <FormulaireSexeAge />
       }
     </>

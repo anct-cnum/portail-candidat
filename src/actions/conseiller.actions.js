@@ -61,7 +61,7 @@ function getCurriculumVitae(id, candidat) {
 
     conseillerService.getCurriculumVitae(id)
     .then(
-      data => dispatch(success(data, download(data, candidat.nom + '_' + candidat.prenom + '.pdf'))),
+      data => dispatch(success(data, download(data, candidat?.nom + '_' + candidat?.prenom + '.' + candidat?.cv?.extension))),
       error => dispatch(failure(error))
     );
   };

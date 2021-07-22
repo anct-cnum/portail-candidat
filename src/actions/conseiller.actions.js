@@ -37,9 +37,7 @@ function uploadCurriculumVitae(fileCV) {
     conseillerService.uploadCurriculumVitae(fileCV)
     .then(
       data => dispatch(success(data.isUploaded)),
-      error => {
-        dispatch(failure(error));
-      }
+      error => dispatch(failure(error))
     );
   };
   function request() {

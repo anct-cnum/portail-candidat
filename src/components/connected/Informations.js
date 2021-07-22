@@ -9,6 +9,7 @@ function Informations() {
   const user = useSelector(state => state.authentication.user.user);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
+  const error = useSelector(state => state.conseiller?.uploadError);
 
   const errorTab = [{
     key: 'too-many-files',
@@ -32,8 +33,8 @@ function Informations() {
   }, []);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
-    { onDrop, accept: '.pdf,.doc,.docx', maxFiles: 1});
-//, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE
+    { onDrop, accept: '.pdf,.doc,.docx', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
+
   return (
     <div className="informations">
       <div className="fr-container-fluid">
@@ -41,9 +42,21 @@ function Informations() {
           { isUploaded &&
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={10000} >
-                <div className=" flashBag">
+                <div className="flashBag">
                   <span>
                     Votre nouveau Curriculum Vit&aelig; a été ajouté !
+                  </span>
+                </div>
+              </FlashMessage>
+            </div>
+          }
+          {!isUploaded && error &&
+
+            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
+              <FlashMessage duration={10000} >
+                <div className="flashBag labelError">
+                  <span>
+                    {error}
                   </span>
                 </div>
               </FlashMessage>

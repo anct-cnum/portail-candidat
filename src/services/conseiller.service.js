@@ -36,12 +36,22 @@ function createSexeAge(user) {
 }
 
 function uploadCurriculumVitae(fileCV) {
+
   return axios({
     method: 'post',
     url: `${apiUrlRoot}/conseillers/cv`,
     data: fileCV,
     headers: Object.assign(authHeader(), { 'Content-Type': 'multipart/form-data' })
-  }).then(handleResponse);
+  }).then(handleResponse).catch(error => {
+    if (error.response) {
+      error = error.response?.data?.message;
+    } else if (error.request) {
+      error = error?.request;
+    } else {
+      error = error?.message;
+    }
+    return Promise.reject(error);
+  });
 }
 
 function getCurriculumVitae(id) {

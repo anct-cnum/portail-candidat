@@ -55,7 +55,7 @@ function ChoosePassword({ match }) {
               <span>Chargement...</span>
             }
 
-            { (user?.role !== 'candidat' || tokenVerified === false) &&
+            { ((user && user?.role !== 'candidat') || tokenVerified === false) &&
               <span>Désolé mais le lien est invalide.</span>
             }
 

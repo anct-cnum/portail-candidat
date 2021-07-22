@@ -29,34 +29,38 @@ export default function conseiller(state = null, action) {
       };
     case 'POST_CURRICULUM_VITAE_REQUEST':
       return {
-        loading: true
+        uploading: true,
+        isUploaded: false,
       };
     case 'POST_CURRICULUM_VITAE_SUCCESS':
       return {
         ...state,
-        isUploaded: action.isUploaded
+        isUploaded: action.isUploaded,
+        uploading: false
       };
     case 'POST_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
         uploadError: action.error,
-        isUploaded: false
+        isUploaded: false,
       };
     case 'GET_CURRICULUM_VITAE_REQUEST':
       return {
-        loading: true,
+        downloading: true,
         isDownloaded: false
       };
     case 'GET_CURRICULUM_VITAE_SUCCESS':
       return {
         ...state,
         blob: action.data,
-        isDownloaded: action.download
+        isDownloaded: action.download,
+        downloading: false,
       };
     case 'GET_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
-        downloadError: action.error
+        downloadError: action.error,
+        isDownloaded: false
       };
     case 'RESET_FILE':
       return {

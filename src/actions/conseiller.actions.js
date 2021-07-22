@@ -5,7 +5,7 @@ export const conseillerActions = {
   get,
   uploadCurriculumVitae,
   getCurriculumVitae,
-  resetFile
+  resetCVFile
 };
 
 function get(id) {
@@ -76,6 +76,6 @@ function getCurriculumVitae(id, candidat) {
   }
 }
 
-function resetFile() {
+function resetCVFile() {
   return { type: 'RESET_FILE' };
 }

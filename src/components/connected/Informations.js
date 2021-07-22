@@ -10,7 +10,9 @@ function Informations() {
   const user = useSelector(state => state.authentication.user.user);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
+  const uploading = useSelector(state => state.conseiller?.uploading);
   const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
+  const downloading = useSelector(state => state.conseiller?.downloading);
   const error = useSelector(state => state.conseiller?.uploadError);
   const downloadError = useSelector(state => state.conseiller?.downloadError);
   const blob = useSelector(state => state.conseiller?.blob);
@@ -39,9 +41,10 @@ function Informations() {
 
   useEffect(() => {
     if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
-      dispatch(conseillerActions.resetFile());
+      dispatch(conseillerActions.resetCVFile());
     }
-  });
+  }, [blob, downloadError]);
+
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
     { onDrop, accept: '.pdf,.doc,.docx', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
 
@@ -54,22 +57,29 @@ function Informations() {
     <div className="informations">
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
-          { isUploaded || isDownloaded &&
+          { isDownloaded &&
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={10000} >
                 <div className="flashBag">
                   <span>
-                    { isUploaded &&
-                      <>Votre nouveau Curriculum Vit&aelig; a été ajouté !</>
-                    }
-                    { isDownloaded &&
-                      <>Votre Curriculum Vit&aelig; est prêt à être téléchargé !</>
-                    }
+                      Votre Curriculum Vit&aelig; est prêt à être téléchargé !
                   </span>
                 </div>
               </FlashMessage>
             </div>
           }
+          { isUploaded &&
+            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
+              <FlashMessage duration={10000} >
+                <div className="flashBag">
+                  <span>
+                    Votre nouveau Curriculum Vit&aelig; a été ajouté !
+                  </span>
+                </div>
+              </FlashMessage>
+            </div>
+          }
+
           {!isUploaded && error &&
 
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
@@ -89,7 +99,7 @@ function Informations() {
                 color="#00BFFF"
                 height={100}
                 width={100}
-                visible={isDownloaded === false}
+                visible={downloading === true || uploading === true}
               />
             </div>
             <h2>Mes informations</h2>
@@ -122,7 +132,9 @@ function Informations() {
                   {
                     isDragActive ?
                       <p>Déposez votre CV ici ...</p> :
-                      <p className="texte-dropZone">Faites glisser votre CV au format pdf ici, ou cliquez pour selectionner votre pdf.</p>
+                      <p className="texte-dropZone">
+                        Faites glisser votre CV au format .pdf, .doc ou .docx ici, ou cliquez pour selectionner votre .pdf, .doc ou .docx.
+                      </p>
                   }
                 </>
               }

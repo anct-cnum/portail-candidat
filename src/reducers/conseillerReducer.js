@@ -44,7 +44,8 @@ export default function conseiller(state = null, action) {
       };
     case 'GET_CURRICULUM_VITAE_REQUEST':
       return {
-        loading: true
+        loading: true,
+        isDownloaded: false
       };
     case 'GET_CURRICULUM_VITAE_SUCCESS':
       return {

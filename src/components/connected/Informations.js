@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
+import Spinner from 'react-loader-spinner';
 
 function Informations() {
   const dispatch = useDispatch();
@@ -82,6 +83,15 @@ function Informations() {
             </div>
           }
           <div className="fr-col-12 fr-col-md-6">
+            <div className="spinnerCustom">
+              <Spinner
+                type="Oval"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                visible={isDownloaded === false}
+              />
+            </div>
             <h2>Mes informations</h2>
             <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ candidat?.nom }</strong></p>
             <p style={{ marginBottom: 'revert' }}>Prénom : { candidat?.prenom }</p>

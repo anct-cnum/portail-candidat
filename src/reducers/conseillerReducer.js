@@ -2,6 +2,7 @@ export default function conseiller(state = null, action) {
   switch (action.type) {
     case 'GET_CONSEILLER_REQUEST':
       return {
+        ...state,
         loading: true
       };
     case 'GET_CONSEILLER_SUCCESS':
@@ -29,6 +30,7 @@ export default function conseiller(state = null, action) {
       };
     case 'POST_CURRICULUM_VITAE_REQUEST':
       return {
+        conseiller: state.conseiller,
         uploading: true,
         isUploaded: false,
       };
@@ -40,12 +42,14 @@ export default function conseiller(state = null, action) {
       };
     case 'POST_CURRICULUM_VITAE_FAILURE':
       return {
-        ...state,
+        conseiller: state.conseiller,
         uploadError: action.error,
         isUploaded: false,
+        uploading: false
       };
     case 'GET_CURRICULUM_VITAE_REQUEST':
       return {
+        conseiller: state.conseiller,
         downloading: true,
         isDownloaded: false
       };
@@ -58,13 +62,13 @@ export default function conseiller(state = null, action) {
       };
     case 'GET_CURRICULUM_VITAE_FAILURE':
       return {
-        ...state,
+        conseiller: state.conseiller,
         downloadError: action.error,
+        downloading: false,
         isDownloaded: false
       };
     case 'RESET_FILE':
       return {
-        ...state,
         blob: null,
       };
     default:

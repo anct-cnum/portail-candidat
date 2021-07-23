@@ -32,9 +32,7 @@ function Informations() {
     if (acceptedFiles.length > 0) {
       const formData = new FormData();
       formData.append('file', acceptedFiles[0], acceptedFiles[0].name);
-
       dispatch(conseillerActions.uploadCurriculumVitae(formData));
-      dispatch(conseillerActions.get(user?.entity?.$id));
     }
   }, []);
 
@@ -50,24 +48,17 @@ function Informations() {
 
   const downloadCV = () => {
     dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
-    dispatch(conseillerActions.get(user?.entity?.$id));
   };
+  useEffect(() => {
+    if (isDownloaded || isUploaded) {
+      dispatch(conseillerActions.get(user?.entity?.$id));
+    }
+  }, [isDownloaded, isUploaded]);
 
   return (
     <div className="informations">
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
-          { isDownloaded &&
-            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={10000} >
-                <div className="flashBag">
-                  <span>
-                      Votre Curriculum Vit&aelig; est prêt à être téléchargé !
-                  </span>
-                </div>
-              </FlashMessage>
-            </div>
-          }
           { isUploaded &&
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={10000} >

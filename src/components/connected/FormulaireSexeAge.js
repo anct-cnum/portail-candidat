@@ -37,7 +37,7 @@ function FormulaireSexeAge() {
   }
 
   function handleSubmit() {
-    if (date !== '' && sexe !== '') {
+    if (date !== '' && date !== null && sexe !== '') {
       setInputs(inputs => ({ ...inputs, errorInputs: false }));
       dispatch(formulaireSexeAgeActions.updateCandidat({ idCandidat: $id, sexe: sexe, dateDeNaissance: date }));
       dispatch(conseillerActions.get($id));

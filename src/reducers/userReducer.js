@@ -2,6 +2,7 @@ export default function user(state = null, action) {
   switch (action.type) {
     case 'UPDATE_USER_EMAIL_REQUEST':
       return {
+        ...state,
         loading: true,
         flashMessage: true
       };
@@ -13,11 +14,13 @@ export default function user(state = null, action) {
       };
     case 'UPDATE_USER_EMAIL_FAILURE':
       return {
+        ...state,
         patchError: action.error,
         flashMessage: true
       };
     case 'CONFIRMATION_UPDATE_USER_EMAIL_REQUEST':
       return {
+        ...state,
         loading: true,
         flashMessage: true
       };
@@ -29,6 +32,7 @@ export default function user(state = null, action) {
       };
     case 'CONFIRMATION_UPDATE_USER_EMAIL_FAILURE':
       return {
+        ...state,
         patchError: action.error,
         flashMessage: true
       };

@@ -141,3 +141,38 @@ $blue-france:#000091;
   display: block!important;
 }
 
+.informations p {
+  margin: 0 0 1.5rem;
+}
+.image-download {
+  margin: 0 15px 0 6px;
+}
+
+.dropZone {
+  background-color: #f3f3f3;
+  padding: 15px 15px 1px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .drop-error-message {
+    text-align: center;
+    color: #ff6961;
+  }
+  .image-dropZone {
+    float: left;
+    margin: 0 15px;
+  }
+  .texte-dropZone {
+    margin: 0 10px 1.5rem 54px;
+  }
+}
+
+.drop-error {
+  background-color: #ffb4bf;
+  border: 1px solid #ff6961;
+}
+
+
+
+

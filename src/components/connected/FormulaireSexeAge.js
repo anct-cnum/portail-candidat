@@ -73,52 +73,53 @@ function FormulaireSexeAge() {
                 <FlashMessage duration={10000} >
                   <div className=" flashBag">
                     <span>
-                      Vos informations ont bien été ajouté, vous allez être redirigé vers l&apos;accueil !
+                      Vos informations ont bien été ajoutées, vous allez être redirigé vers l&apos;accueil !
                     </span>
                   </div>
                 </FlashMessage>
               </div>
             }
           </div>
-          <div className="fr-col-6 fr-col-md-4 centrerTexte">
-            <div className="fr-form-group ">
-              <fieldset className="fr-fieldset fr-fieldset--inline">
-                <div className="fr-mb-3w">Sexe <span className="important">*</span></div>
-                <div className="fr-fieldset__content fr-ml-md-12w fr-ml-0w">
-                  <div className = "fr-radio-group ">
-                    <input name="sexe" value="Femme" className="" type="radio" id="Femme" onClick={handleChange} required="required"/>
-                    <label className="fr-label" htmlFor="Femme">Femme</label>
+          { !isUpdated &&
+            <div className="fr-col-6 fr-col-md-4 centrerTexte">
+              <div className="fr-form-group ">
+                <fieldset className="fr-fieldset fr-fieldset--inline">
+                  <div className="fr-mb-3w">Vous êtes&nbsp;: <span className="important">*</span></div>
+                  <div className="fr-fieldset__content fr-ml-md-12w fr-ml-0w">
+                    <div className = "fr-radio-group ">
+                      <input name="sexe" value="Femme" className="" type="radio" id="Femme" onClick={handleChange} required="required"/>
+                      <label className="fr-label" htmlFor="Femme">Femme</label>
+                    </div>
+
+                    <div className = "fr-radio-group">
+                      <input name="sexe" value="Homme" className="" type="radio" id="Homme" onClick={handleChange}/>
+                      <label className="fr-label" htmlFor="Homme">Homme</label>
+                    </div>
                   </div>
+                </fieldset>
+              </div>
 
-                  <div className = "fr-radio-group">
-                    <input name="sexe" value="Homme" className="" type="radio" id="Homme" onClick={handleChange}/>
-                    <label className="fr-label" htmlFor="Homme">Homme</label>
-                  </div>
-                </div>
-              </fieldset>
+              <div className="fr-my-3w">
+                <label className="fr-label fr-mb-3w" htmlFor="date">Vous êtes né(e) le&nbsp;: <span className="important">*</span></label>
+                <DatePicker
+                  id="date"
+                  name="date"
+                  className="fr-input"
+                  placeholderText="jj/mm/yyyy"
+                  dateFormat="dd/MM/yyyy"
+                  locale="fr"
+                  selected={date}
+                  onChange={handleChange}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                  required="required"
+                />
+              </div>
+              <button className="fr-btn" onClick={handleSubmit}>Valider</button>
             </div>
-
-            <div className="fr-my-3w">
-              <label className="fr-label fr-mb-3w" htmlFor="date">Date de naissance <span className="important">*</span></label>
-              <DatePicker
-                id="date"
-                name="date"
-                className="fr-input"
-                placeholderText="jj/mm/yyyy"
-                dateFormat="dd/MM/yyyy"
-                locale="fr"
-                selected={date}
-                onChange={handleChange}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                required="required"
-              />
-            </div>
-
-            <button className="fr-btn" onClick={handleSubmit}>Valider</button>
-          </div>
+          }
         </div>
       </div>
     </>

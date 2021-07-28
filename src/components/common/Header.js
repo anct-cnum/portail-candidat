@@ -20,7 +20,7 @@ function Header({ connected }) {
       <div className="fr-container">
         <div className="fr-grid-row fr-grid-row--top">
           <div className="fr-col-1"></div>
-          <div className="fr-col-10 fr-mt-2w" style={{ display: 'flex' }}>
+          <div className="fr-col-10 fr-mt-2w responsiveHeaderTools" style={{ display: 'flex' }}>
             <div className="rf-header__body"style={{ display: 'flex' }}>
               <div className="fr-header__service">
                 <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique France Services" style={{ height: '50px' }}/>

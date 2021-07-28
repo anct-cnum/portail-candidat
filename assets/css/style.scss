@@ -173,6 +173,8 @@ $blue-france:#000091;
   border: 1px solid #ff6961;
 }
 
-
-
-
+@media (max-width: 768px) {
+  .responsiveHeaderTools {
+    display: block!important;
+  }
+}

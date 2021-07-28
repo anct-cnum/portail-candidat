@@ -22,7 +22,7 @@ function Informations() {
     label: 'La plateforme n\'accepte qu\'un seul fichier !'
   }, {
     key: 'file-invalid-type',
-    label: 'Le type de fichier doit obligatoirement être un .pdf, un .doc ou un .docx !'
+    label: 'Le type de fichier doit obligatoirement être un .pdf !'
   }, {
     key: 'file-too-large',
     label: 'La taille du fichier ne doit pas excéder 10Mo !'
@@ -44,7 +44,7 @@ function Informations() {
   }, [blob, downloadError]);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
-    { onDrop, accept: '.pdf,.doc,.docx', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
+    { onDrop, accept: '.pdf', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
 
   const downloadCV = () => {
     dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
@@ -60,11 +60,15 @@ function Informations() {
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
           { isUploaded &&
-            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={10000} >
+            <div className="fr-col-12 fr-mb-3w">
+              <FlashMessage duration={100000} >
                 <div className="flashBag">
                   <span>
-                    Votre nouveau Curriculum Vit&aelig; a été ajouté !
+                    Votre nouveau Curriculum Vit&aelig; a été ajouté avec succès !
+                  </span>
+                  <br/><br/>
+                  <span style={{ color: 'initial' }}>
+                    Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
                   </span>
                 </div>
               </FlashMessage>
@@ -74,7 +78,7 @@ function Informations() {
           {!isUploaded && error &&
 
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={10000} >
+              <FlashMessage duration={100000} >
                 <div className="flashBag labelError">
                   <span>
                     {error}
@@ -103,12 +107,12 @@ function Informations() {
             <h2>Mon Curriculum vit&aelig;</h2>
             { candidat?.cv?.file &&
             <>
-              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien :<br />
+              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien&nbsp;:<br />
                 <button className="fr-btn fr-mt-3w" onClick={downloadCV}>
                   <span className="fr-fi-download-line image-download" aria-hidden="true"></span>
                   Mon Curriculum vit&aelig;
                 </button> </p>
-              <p>Pour mettre à jour votre CV : </p>
+              <p>Pour mettre à jour votre CV&nbsp;:</p>
             </>
             }
             { !candidat?.cv?.file &&
@@ -124,7 +128,7 @@ function Informations() {
                     isDragActive ?
                       <p>Déposez votre CV ici ...</p> :
                       <p className="texte-dropZone">
-                        Faites glisser votre CV au format .pdf, .doc ou .docx ici, ou cliquez pour selectionner votre .pdf, .doc ou .docx.
+                        Faites glisser votre CV ou cliquez ici pour le sélectionner <strong>(format pdf)</strong>
                       </p>
                   }
                 </>

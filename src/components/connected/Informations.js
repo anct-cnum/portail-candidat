@@ -60,11 +60,15 @@ function Informations() {
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
           { isUploaded &&
-            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={10000} >
+            <div className="fr-col-12 fr-mb-3w">
+              <FlashMessage duration={100000} >
                 <div className="flashBag">
                   <span>
                     Votre nouveau Curriculum Vit&aelig; a été ajouté avec succès !
+                  </span>
+                  <br/><br/>
+                  <span style={{ color: 'initial' }}>
+                    Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
                   </span>
                 </div>
               </FlashMessage>
@@ -74,7 +78,7 @@ function Informations() {
           {!isUploaded && error &&
 
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={10000} >
+              <FlashMessage duration={100000} >
                 <div className="flashBag labelError">
                   <span>
                     {error}
@@ -139,12 +143,6 @@ function Informations() {
                 </div>
               }
             </div>
-            <br/>
-            <span>
-              <strong>
-                Il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
-              </strong>
-            </span>
           </div>
         </div>
       </div>

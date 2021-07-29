@@ -64,7 +64,7 @@ function Informations() {
               <FlashMessage duration={100000} >
                 <div className="flashBag">
                   <span>
-                    Votre nouveau Curriculum Vit&aelig; a été ajouté avec succès !
+                    Votre Curriculum Vit&aelig; a été ajouté avec succès !
                   </span>
                   <br/><br/>
                   <span style={{ color: 'initial' }}>

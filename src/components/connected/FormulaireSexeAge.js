@@ -36,7 +36,7 @@ function FormulaireSexeAge() {
   }
 
   function handleSubmit() {
-    dispatch(formulaireSexeAgeActions.updateCandidat({ idCandidat: $id, sexe: sexe, dateDeNaissance: date }));
+    dispatch(formulaireSexeAgeActions.updateCandidat({ idEntity: $id, sexe: sexe, dateDeNaissance: date }));
   }
 
   return (

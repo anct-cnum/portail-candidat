@@ -16,10 +16,10 @@ function Home() {
 
   return (
     <>
-      { user?.role === 'candidat' && candidat?.sexe !== undefined &&
+      { user?.role === 'candidat' && (!candidat || candidat?.sexe !== undefined) &&
         <Connected />
       }
-      { candidat?.sexe === undefined &&
+      { user?.role === 'candidat' && candidat && candidat?.sexe === undefined &&
         <FormulaireSexeAge />
       }
     </>

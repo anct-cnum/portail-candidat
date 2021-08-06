@@ -10,13 +10,20 @@ import PrivateRoute from './components/connected/PrivateRoute';
 import Footer from './components/common/Footer';
 import EmailConfirmer from './components/anonymous/ConfirmationEmail';
 import ForgottenPassword from './components/anonymous/ForgottenPassword';
+import { useSelector } from 'react-redux';
 
 require('dotenv').config();
 
 function App() {
 
+  const downloading = useSelector(state => state.conseiller?.downloading);
+  const uploading = useSelector(state => state.conseiller?.uploading);
+
   return (
     <div className="App">
+      { (downloading === true || uploading === true) &&
+        <div className="wrapperModal"></div>
+      }
       <Router history={history}>
         <Switch>
           <Route path="/login" component={Login} />

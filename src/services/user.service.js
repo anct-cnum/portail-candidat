@@ -6,7 +6,8 @@ export const userService = {
   verifyToken,
   choosePassword,
   updateInfosCandidat,
-  confirmUserEmail
+  confirmUserEmail,
+  sendForgottenPasswordEmail
 };
 
 function login(username, password) {
@@ -86,6 +87,24 @@ function confirmUserEmail(token) {
   let uri = `${apiUrlRoot}/candidat/confirmation-email/${token}`;
   return fetch(uri, requestOptions).then(handleResponse);
 }
+
+function sendForgottenPasswordEmail(username) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'username': username
+    })
+  };
+
+  let uri = `${apiUrlRoot}/users/sendForgottenPasswordEmail`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
+
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);

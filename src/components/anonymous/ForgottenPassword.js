@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 function ForgottenPassword({ match = null }) {
   const dispatch = useDispatch();
   const token = match.params.token;
-  const state = useSelector(state => state);
-  console.log('state:', state);
   /* Etape 1*/
   const [inputEmail, setInputsEmail] = useState({
     username: ''

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import Header from '../common/Header';
@@ -71,6 +71,9 @@ function Login() {
               </div>
               {loggingIn && <span>Connexion en cours...</span>}
               <button className="fr-btn" onClick={handleSubmit}>Se connecter</button>
+              <p className="fr-mt-3w">
+                <Link to={`/mot-de-passe-oublie`}>Mot de passe oublié ?</Link>
+              </p>
             </div>
           </div>
         </div>

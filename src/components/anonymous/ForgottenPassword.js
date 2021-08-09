@@ -109,49 +109,49 @@ function ForgottenPassword({ match = null }) {
                 <span>Désolé mais le lien est invalide.</span>
               }
 
-              { tokenVerified && !passwordChoosen &&
+              { tokenVerified && !passwordChoosen && user?.role === 'candidat' &&
+              <div>
                 <div>
-                  <div>
-                    {errorPassword && <span>{errorPassword.error ? errorPassword.error :
-                      'Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)'}
-                    </span>}
-                  </div>
-
-                  <div className="fr-my-3w">
-                    <label className="fr-label">Votre adresse email:</label>
-                    <span>{user.name}</span>
-                  </div>
-
-                  <div className="fr-my-3w">
-                    <label className="fr-label">Mot de passe</label>
-                    <input name="password"
-                      type="password"
-                      value={password}
-                      onChange={handleChangePassword}
-                      className={(submittedPassword && !password ? ' is-invalid fr-input' : 'fr-input')} />
-                    {submittedPassword && !password &&
-                      <div className="invalid">Mot de passe requis</div>
-                    }
-                    { password && !checkComplexity.test(password) &&
-                      <span>Le mot de passe ne correspond pas aux exigences de sécurité.</span>
-                    }
-                  </div>
-
-                  <div className="fr-my-3w">
-                    <label className="fr-label">Mot de passe (confirmation)</label>
-                    <input name="confirmPassword"
-                      type="password"
-                      value={confirmPassword}
-                      onChange={handleChangePassword}
-                      className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
-                    {password !== confirmPassword &&
-                      <div className="invalid">Mot de passe doit être identique</div>
-                    }
-                  </div>
-
-                  {choosingPassword && <span>Chargement...</span>}
-                  <button className="fr-btn" onClick={handleSubmitPassword}>Valider</button>
+                  {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s\'est produite'}</span>}
                 </div>
+                <span>Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
+
+
+                <div className="fr-my-3w">
+                  <label className="fr-label">Votre adresse email:</label>
+                  <span>{user.name}</span>
+                </div>
+
+                <div className="fr-my-3w">
+                  <label className="fr-label">Mot de passe</label>
+                  <input name="password"
+                    type="password"
+                    value={password}
+                    onChange={handleChangePassword}
+                    className={(submittedPassword && !password ? ' is-invalid fr-input' : 'fr-input')} />
+                  {submittedPassword && !password &&
+                      <div className="invalid">Mot de passe requis</div>
+                  }
+                  { password && !checkComplexity.test(password) &&
+                      <span>Le mot de passe ne correspond pas aux exigences de sécurité.</span>
+                  }
+                </div>
+
+                <div className="fr-my-3w">
+                  <label className="fr-label">Mot de passe (confirmation)</label>
+                  <input name="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={handleChangePassword}
+                    className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
+                  {password !== confirmPassword &&
+                      <div className="invalid">Mot de passe doit être identique</div>
+                  }
+                </div>
+
+                {choosingPassword && <span>Chargement...</span>}
+                <button className="fr-btn" onClick={handleSubmitPassword}>Valider</button>
+              </div>
               }
               { passwordChoosen &&
                 <>

@@ -54,11 +54,11 @@ function ForgottenPassword({ match = null }) {
     setInputsPassword(inputsPassword => ({ ...inputsPassword, [name]: value }));
   }
 
-  const checkComplexity = password => password.length >= 6;
+  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,199})/);
 
   function handleSubmitPassword() {
     setSubmittedPassword(true);
-    if (password && confirmPassword === password && checkComplexity(password)) {
+    if (password && confirmPassword === password && checkComplexity.test(password)) {
       dispatch(userActions.choosePassword(token, password, 'renouvellement'));
     }
   }
@@ -112,7 +112,9 @@ function ForgottenPassword({ match = null }) {
               { tokenVerified && !passwordChoosen &&
                 <div>
                   <div>
-                    {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s\'est produite'}</span>}
+                    {errorPassword && <span>{errorPassword.error ? errorPassword.error :
+                      'Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)'}
+                    </span>}
                   </div>
 
                   <div className="fr-my-3w">
@@ -130,8 +132,8 @@ function ForgottenPassword({ match = null }) {
                     {submittedPassword && !password &&
                       <div className="invalid">Mot de passe requis</div>
                     }
-                    { password && !checkComplexity(password) &&
-                      <span>Le mot de passe doit contenir au moins 6 caractères.</span>
+                    { password && !checkComplexity.test(password) &&
+                      <span>Le mot de passe ne correspond pas aux exigences de sécurité.</span>
                     }
                   </div>
 

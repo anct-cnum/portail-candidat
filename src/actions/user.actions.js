@@ -59,10 +59,10 @@ function verifyToken(token) {
 
     userService.verifyToken(token)
     .then(
-      user => {
-        user.role = user.roles[0];
-        delete user.roles;
-        dispatch(success(user));
+      resultVerifyToken => {
+        resultVerifyToken.role = resultVerifyToken.roles[0];
+        delete resultVerifyToken.roles;
+        dispatch(success(resultVerifyToken));
       },
       error => {
         dispatch(failure(error));
@@ -73,8 +73,8 @@ function verifyToken(token) {
   function request(token) {
     return { type: 'VERIFY_TOKEN_REQUEST', token };
   }
-  function success(user) {
-    return { type: 'VERIFY_TOKEN_SUCCESS', user };
+  function success(resultVerifyToken) {
+    return { type: 'VERIFY_TOKEN_SUCCESS', resultVerifyToken };
   }
   function failure(error) {
     return { type: 'VERIFY_TOKEN_FAILURE', error };
@@ -139,10 +139,10 @@ function choosePassword(token, password, typeEmail) {
 
     userService.choosePassword(token, password, typeEmail)
     .then(
-      user => {
-        user.role = user.roles[0];
-        delete user.roles;
-        dispatch(success(user));
+      resultChoosePassword => {
+        resultChoosePassword.role = resultChoosePassword.roles[0];
+        delete resultChoosePassword.roles;
+        dispatch(success(resultChoosePassword));
       },
       error => {
         dispatch(failure(error));
@@ -153,8 +153,8 @@ function choosePassword(token, password, typeEmail) {
   function request(token) {
     return { type: 'CHOOSE_PASSWORD_REQUEST', token };
   }
-  function success(user) {
-    return { type: 'CHOOSE_PASSWORD_SUCCESS', user };
+  function success(resultChoosePassword) {
+    return { type: 'CHOOSE_PASSWORD_SUCCESS', resultChoosePassword };
   }
   function failure(error) {
     return { type: 'CHOOSE_PASSWORD_FAILURE', error };

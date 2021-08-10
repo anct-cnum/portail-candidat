@@ -17,7 +17,8 @@ function ChoosePassword({ match }) {
   const token = match.params.token;
   const verifyingToken = useSelector(state => state.createAccount.verifyingToken);
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
-  const user = useSelector(state => state.createAccount.user);
+  const resultVerifyToken = useSelector(state => state.createAccount.resultVerifyToken);
+  const resultChoosePassword = useSelector(state => state.createAccount.resultChoosePassword);
   const choosingPassword = useSelector(state => state.createAccount.choosingPassword);
   const passwordChoosen = useSelector(state => state.createAccount.passwordChoosen);
   const error = useSelector(state => state.createAccount.error);
@@ -55,11 +56,11 @@ function ChoosePassword({ match }) {
               <span>Chargement...</span>
             }
 
-            { ((user && user?.role !== 'candidat') || tokenVerified === false) &&
+            { ((resultVerifyToken && resultVerifyToken?.role !== 'candidat') || tokenVerified === false) &&
               <span>Désolé mais le lien est invalide.</span>
             }
 
-            { tokenVerified && !passwordChoosen && user?.role === 'candidat' &&
+            { tokenVerified && !passwordChoosen && resultVerifyToken?.role === 'candidat' &&
               <div>
                 <div>
                   {error && <span>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
@@ -67,7 +68,7 @@ function ChoosePassword({ match }) {
                 <span>Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
                 <div className="fr-my-3w">
                   <label className="fr-label">Votre adresse email:</label>
-                  <span>{user.name}</span>
+                  <span>{resultVerifyToken.name}</span>
                 </div>
 
                 <div className="fr-my-3w">
@@ -103,7 +104,7 @@ function ChoosePassword({ match }) {
             }
 
             { passwordChoosen &&
-              <span>Votre compte a été créé avec succès. <Link to={`/login`}>Vous pouvez vous connecter</Link>.</span>
+              <span>Votre compte a été créé avec succès. <Link to={`/login?role=${resultChoosePassword?.role}`}>Vous pouvez vous connecter</Link>.</span>
             }
 
             <div className="fr-col-3"></div>

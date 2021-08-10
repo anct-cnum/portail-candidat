@@ -37,7 +37,8 @@ function ForgottenPassword({ match = null }) {
   const [submittedPassword, setSubmittedPassword] = useState(false);
   const { password, confirmPassword } = inputsPassword;
 
-  const user = useSelector(state => state.createAccount.user);
+  const resultVerifyToken = useSelector(state => state.createAccount.resultVerifyToken);
+  const resultChoosePassword = useSelector(state => state.createAccount.resultChoosePassword);
   const verifyingToken = useSelector(state => state.createAccount.verifyingToken);
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
 
@@ -109,7 +110,7 @@ function ForgottenPassword({ match = null }) {
                 <span>Désolé mais le lien est invalide.</span>
               }
 
-              { tokenVerified && !passwordChoosen && user?.role === 'candidat' &&
+              { tokenVerified && !passwordChoosen && resultVerifyToken?.role === 'candidat' &&
               <div>
                 <div>
                   {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s\'est produite'}</span>}
@@ -119,7 +120,7 @@ function ForgottenPassword({ match = null }) {
 
                 <div className="fr-my-3w">
                   <label className="fr-label">Votre adresse email:</label>
-                  <span>{user.name}</span>
+                  <span>{resultVerifyToken.name}</span>
                 </div>
 
                 <div className="fr-my-3w">
@@ -158,7 +159,7 @@ function ForgottenPassword({ match = null }) {
                   <span>
                     Votre mot de passe a été renouvelé avec succès <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle', color: 'green' }}></i>
                   </span><br/><br/>
-                  <span><Link to={`/login?role=${user?.role}`}>Vous pouvez vous connecter</Link></span>
+                  <span><Link to={`/login?role=${resultChoosePassword?.role}`}>Vous pouvez vous connecter</Link></span>
                 </>
               }
               <div className="fr-col-3"></div>

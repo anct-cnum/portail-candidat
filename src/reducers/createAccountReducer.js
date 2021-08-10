@@ -6,9 +6,10 @@ export default function authentication(state = {}, action) {
         user: action.user
       };
     case 'VERIFY_TOKEN_SUCCESS':
+      console.log('VERIFY_TOKEN_SUCCESS:', action.resultVerifyToken);
       return {
         tokenVerified: true,
-        user: action.user
+        resultVerifyToken: action.resultVerifyToken
       };
     case 'VERIFY_TOKEN_FAILURE':
       return {
@@ -21,9 +22,10 @@ export default function authentication(state = {}, action) {
         user: action.user
       };
     case 'CHOOSE_PASSWORD_SUCCESS':
+      console.log('CHOOSE_PASSWORD_SUCCESS:', action.resultChoosePassword);
       return {
         passwordChoosen: true,
-        user: action.user
+        resultChoosePassword: action.resultChoosePassword
       };
     case 'CHOOSE_PASSWORD_FAILURE':
       return {

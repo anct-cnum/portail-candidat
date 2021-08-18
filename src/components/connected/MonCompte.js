@@ -97,7 +97,7 @@ function MonCompte() {
             <label className="fr-label">E-mail</label>
             <input className="fr-input" type="text" id="text-input-text" name="email" value={infos?.email} onChange={handleForm}/>
             <label className="fr-label">Téléphone</label>
-            <input className="fr-input" type="text" id="text-input-text" name="telephone" value={infos?.telephone} onChange={handleForm}/>
+            <input className="fr-input" type="text" id="text-input-text" maxLength="20" name="telephone" value={infos?.telephone} onChange={handleForm}/>
           </form>
           <div className="fr-col-lg-4 fr-col-md-4 fr-col-4 fr-col-sm-8">
             <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>

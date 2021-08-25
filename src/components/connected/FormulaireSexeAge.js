@@ -19,6 +19,10 @@ function FormulaireSexeAge() {
     sexe: '',
   });
 
+  const todayDate = new Date();
+  const maxDate = todayDate.getFullYear() - 18;
+  const minDate = todayDate.getFullYear() - 99;
+
   const { date, sexe, errorInputs } = inputs;
 
   if (isUpdated) {
@@ -113,6 +117,8 @@ function FormulaireSexeAge() {
                   peekNextMonth
                   showMonthDropdown
                   showYearDropdown
+                  maxDate={new Date('12/31/' + maxDate)}
+                  minDate={new Date('01/01/' + minDate)}
                   dropdownMode="select"
                   required="required"
                 />

@@ -6,7 +6,6 @@ export default function authentication(state = {}, action) {
         user: action.user
       };
     case 'VERIFY_TOKEN_SUCCESS':
-      console.log('VERIFY_TOKEN_SUCCESS:', action.resultVerifyToken);
       return {
         tokenVerified: true,
         resultVerifyToken: action.resultVerifyToken

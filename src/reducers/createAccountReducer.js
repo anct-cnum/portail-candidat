@@ -21,7 +21,6 @@ export default function authentication(state = {}, action) {
         user: action.user
       };
     case 'CHOOSE_PASSWORD_SUCCESS':
-      console.log('CHOOSE_PASSWORD_SUCCESS:', action.resultChoosePassword);
       return {
         passwordChoosen: true,
         resultChoosePassword: action.resultChoosePassword

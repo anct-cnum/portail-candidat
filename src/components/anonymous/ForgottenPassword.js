@@ -134,7 +134,7 @@ function ForgottenPassword({ match = null }) {
                       <div className="invalid">Mot de passe requis</div>
                   }
                   { password && !checkComplexity.test(password) &&
-                      <span>Le mot de passe ne correspond pas aux exigences de sécurité.</span>
+                      <span className="invalid">Le mot de passe ne correspond pas aux exigences de sécurité.</span>
                   }
                 </div>
 

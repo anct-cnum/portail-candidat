@@ -134,7 +134,7 @@ function ForgottenPassword({ match = null }) {
                       <div className="invalid">Mot de passe requis</div>
                   }
                   { password && !checkComplexity.test(password) &&
-                      <span>Le mot de passe ne correspond pas aux exigences de sécurité.</span>
+                      <span className="invalid">Le mot de passe ne correspond pas aux exigences de sécurité.</span>
                   }
                 </div>
 
@@ -146,7 +146,7 @@ function ForgottenPassword({ match = null }) {
                     onChange={handleChangePassword}
                     className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
                   {password !== confirmPassword &&
-                      <div className="invalid">Mot de passe doit être identique</div>
+                      <div className="invalid">Le mot de passe doit être identique</div>
                   }
                 </div>
 

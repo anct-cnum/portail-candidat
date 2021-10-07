@@ -10,11 +10,13 @@ function Informations() {
   const user = useSelector(state => state.authentication.user.user);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
+  const isDeleted = useSelector(state => state.conseiller?.isDeleted);
   const uploading = useSelector(state => state.conseiller?.uploading);
   const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
   const downloading = useSelector(state => state.conseiller?.downloading);
-  const error = useSelector(state => state.conseiller?.uploadError);
+  const uploadError = useSelector(state => state.conseiller?.uploadError);
   const downloadError = useSelector(state => state.conseiller?.downloadError);
+  const deleteError = useSelector(state => state.conseiller?.deleteError);
   const blob = useSelector(state => state.conseiller?.blob);
 
   const errorTab = [{
@@ -49,11 +51,16 @@ function Informations() {
   const downloadCV = () => {
     dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
   };
+
+  const deleteCV = () => {
+    dispatch(conseillerActions.deleteCurriculumVitae(user?.entity?.$id, candidat));
+  };
+
   useEffect(() => {
-    if (isDownloaded || isUploaded) {
+    if (isDownloaded || isUploaded || isDeleted) {
       dispatch(conseillerActions.get(user?.entity?.$id));
     }
-  }, [isDownloaded, isUploaded]);
+  }, [isDownloaded, isUploaded, isDeleted]);
 
   return (
     <div className="informations">
@@ -75,18 +82,44 @@ function Informations() {
             </div>
           }
 
-          {!isUploaded && error &&
+          {!isUploaded && uploadError &&
 
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={100000} >
                 <div className="flashBag labelError">
                   <span>
-                    {error}
+                    {uploadError}
                   </span>
                 </div>
               </FlashMessage>
             </div>
           }
+
+          { isDeleted &&
+            <div className="fr-col-12 fr-mb-3w">
+              <FlashMessage duration={100000} >
+                <div className="flashBag">
+                  <span>
+                    Votre Curriculum Vit&aelig; a été supprimé avec succès !
+                  </span>
+                </div>
+              </FlashMessage>
+            </div>
+          }
+
+          {deleteError &&
+
+          <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
+            <FlashMessage duration={100000} >
+              <div className="flashBag labelError">
+                <span>
+                  Une erreur s&apos;est produite pendant la suppression
+                </span>
+              </div>
+            </FlashMessage>
+          </div>
+          }
+
           <div className="fr-col-12 fr-col-md-6">
             <div className="spinnerCustom">
               <Spinner
@@ -143,6 +176,13 @@ function Informations() {
                 </div>
               }
             </div>
+
+            { candidat?.cv?.file &&
+                <button className="fr-btn fr-mt-3w fr-btn--sm red-background " onClick={deleteCV}>
+                  <span className="fr-fi-delete-line" aria-hidden="true"></span>
+                  Supprimer mon CV
+                </button>
+            }
           </div>
         </div>
       </div>

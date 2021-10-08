@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
+import MonCompte from './MonCompte';
 
 function Informations() {
   const dispatch = useDispatch();
@@ -18,7 +19,15 @@ function Informations() {
   const downloadError = useSelector(state => state.conseiller?.downloadError);
   const deleteError = useSelector(state => state.conseiller?.deleteError);
   const blob = useSelector(state => state.conseiller?.blob);
-
+  const error = useSelector(state => state?.user?.patchError);
+  const [flashMessage, setFlashMessage] = useState(false);
+  const conseiller = useSelector(state => state.conseiller?.conseiller);
+  const [infos, setInfos] = useState({
+    nom: conseiller?.nom,
+    prenom: conseiller?.prenom,
+    email: conseiller?.email,
+    telephone: conseiller?.telephone
+  });
   const errorTab = [{
     key: 'too-many-files',
     label: 'La plateforme n\'accepte qu\'un seul fichier !'
@@ -64,9 +73,8 @@ function Informations() {
 
   return (
     <div className="informations">
-      <div className="fr-container-fluid">
-        <div className="fr-grid-row">
-          { isUploaded &&
+      <div className="">
+        { isUploaded &&
             <div className="fr-col-12 fr-mb-3w">
               <FlashMessage duration={100000} >
                 <div className="flashBag">
@@ -80,9 +88,9 @@ function Informations() {
                 </div>
               </FlashMessage>
             </div>
-          }
+        }
 
-          {!isUploaded && uploadError &&
+        {!isUploaded && uploadError &&
 
             <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
               <FlashMessage duration={100000} >
@@ -93,9 +101,9 @@ function Informations() {
                 </div>
               </FlashMessage>
             </div>
-          }
+        }
 
-          { isDeleted &&
+        { isDeleted &&
             <div className="fr-col-12 fr-mb-3w">
               <FlashMessage duration={100000} >
                 <div className="flashBag">
@@ -105,9 +113,9 @@ function Informations() {
                 </div>
               </FlashMessage>
             </div>
-          }
+        }
 
-          {deleteError &&
+        {deleteError &&
 
           <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
             <FlashMessage duration={100000} >
@@ -118,9 +126,35 @@ function Informations() {
               </div>
             </FlashMessage>
           </div>
-          }
+        }
+        {flashMessage === true ?
+          <div className="">
+            <div style={{ width: '50%' }}>
+              <div>
+                <FlashMessage duration={10000}>
+                  { error && (error !== undefined || error !== false) &&
+                <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
+                  Cet adresse e-mail est déjà utilisée
+                </p>
+                  }
+                  { (error === undefined || error === false) &&
+                 <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
 
-          <div className="fr-col-12 fr-col-md-6">
+                   { infos.email === conseiller?.email ? <> La mise à jour effectué avec succès </> :
+                     <>Nous vous avons envoyé un mail à : <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation</> }
+                  &nbsp;
+                   <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
+                 </p>
+                  }
+                </FlashMessage>
+              </div>
+            </div>
+          </div> : ''
+        }
+      </div>
+      <div className="fr-container-fluid">
+        <div className="fr-grid-row  responsiveBouton">
+          <div className="fr-col-12 fr-col-lg-6">
             <div className="spinnerCustom">
               <Spinner
                 type="Oval"
@@ -130,38 +164,32 @@ function Informations() {
                 visible={downloading === true || uploading === true}
               />
             </div>
-            <h2>Mes informations</h2>
-            <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ candidat?.nom }</strong></p>
-            <p style={{ marginBottom: 'revert' }}>Prénom : { candidat?.prenom }</p>
-            <p style={{ marginBottom: 'revert' }}>Email : { candidat?.email }</p>
-            <p>Téléphone : { candidat?.telephone }</p>
+            <h2 className="fr-mb-7w">Mes informations</h2>
+            <MonCompte setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
           </div>
-          <div className="fr-col-12 fr-col-md-6" >
-            <h2>Mon Curriculum vit&aelig;</h2>
-            { candidat?.cv?.file &&
-            <>
-              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien&nbsp;:<br />
-                <button className="fr-btn fr-mt-3w" onClick={downloadCV}>
-                  <span className="fr-fi-download-line image-download" aria-hidden="true"></span>
-                  Mon Curriculum vit&aelig;
-                </button> </p>
-              <p>Pour mettre à jour votre CV&nbsp;:</p>
-            </>
-            }
+          <div className="fr-col-12 fr-col-lg-6" >
+            <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>
             { !candidat?.cv?.file &&
               <p>Vous n&apos;avez pas encore téléchargé votre Curriculum vit&aelig;, faites le dès maintenant ! </p>
             }
-            <div className={fileRejections.length > 0 ? 'dropZone drop-error' : 'dropZone' } {...getRootProps()}>
-
+            <span>Ajouter ou mettre à jour votre CV&nbsp;:</span>
+            <div className={fileRejections.length > 0 ? 'dropZone drop-error' : 'fr-btn fr-mt-4w fr-mb-5w' } {...getRootProps()}
+              style={{ height: '64px' }}>
               <input {...getInputProps()} />
               { acceptedFiles.length === 0 &&
                 <>
-                  <span className="fr-fi-save-line image-dropZone" aria-hidden="true"></span>
+                  <div className="fr-mb-5v">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
+                      <path fill="none" d="M0 0h24v24H0z"/>
+                      <path fill="white" d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zm9-10v7h-2V9H6l6-6 6 6h-5z"/>
+                    </svg>
+
+                  </div>&ensp;
                   {
                     isDragActive ?
                       <p>Déposez votre CV ici ...</p> :
-                      <p className="texte-dropZone">
-                        Faites glisser votre CV ou cliquez ici pour le sélectionner <strong>(format pdf)</strong>
+                      <p className="texte-dropZone fr-mt-2w">
+                        Faites glisser votre CV ou cliquez pour le sélectionner (<strong>format PDF</strong>).
                       </p>
                   }
                 </>
@@ -176,12 +204,20 @@ function Informations() {
                 </div>
               }
             </div>
-
             { candidat?.cv?.file &&
-                <button className="fr-btn fr-mt-3w fr-btn--sm red-background " onClick={deleteCV}>
-                  <span className="fr-fi-delete-line" aria-hidden="true"></span>
+            <>
+              <span>Voir ou télécharger votre CV&nbsp;:<br/>
+              </span>
+              <button
+                className="dropZone fr-mt-3w fr-mr-3 fr-mt-4w"
+                style={{ width: '-webkit-fill-available', height: '48px' }} onClick={downloadCV}>
+                <span className="fr-fi-file-download-line fr-text mr-3w" style={{ float: 'left' }} aria-hidden="true"/>
+                  Mon CV&nbsp;({candidat?.cv?.file})
+              </button>
+              <button className="fr-link fr-mt-2w" style={{ textDecoration: 'underline' }} onClick={deleteCV} target="_self">
                   Supprimer mon CV
-                </button>
+              </button>
+            </>
             }
           </div>
         </div>

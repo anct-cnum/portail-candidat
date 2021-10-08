@@ -177,6 +177,13 @@ $blue-france:#000091;
   .responsiveHeaderTools {
     display: block!important;
   }
+  .responsiveVisibilityMenu {
+    visibility: hidden;
+    margin: -4rem;
+  }
+  .responsiveBouton {
+    width: 26rem;
+  }
 }
 
 .red-background {

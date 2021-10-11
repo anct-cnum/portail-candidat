@@ -19,7 +19,7 @@ function Informations() {
   const downloadError = useSelector(state => state.conseiller?.downloadError);
   const deleteError = useSelector(state => state.conseiller?.deleteError);
   const blob = useSelector(state => state.conseiller?.blob);
-  const error = useSelector(state => state?.user?.patchError);
+  const updateError = useSelector(state => state?.user?.patchError);
   const [flashMessage, setFlashMessage] = useState(false);
   const conseiller = useSelector(state => state.conseiller?.conseiller);
   const [infos, setInfos] = useState({
@@ -128,26 +128,24 @@ function Informations() {
           </div>
         }
         {flashMessage === true ?
-          <div className="">
-            <div style={{ width: '50%' }}>
-              <div>
-                <FlashMessage duration={10000}>
-                  { error && (error !== undefined || error !== false) &&
+          <div style={{ width: '50%' }}>
+            <div>
+              <FlashMessage duration={10000}>
+                { updateError && (updateError !== undefined || updateError !== false) &&
                 <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
-                  Cet adresse e-mail est déjà utilisée
+                  Cette adresse e-mail est déjà utilisée
                 </p>
-                  }
-                  { (error === undefined || error === false) &&
+                }
+                { (updateError === undefined || updateError === false) &&
                  <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
 
-                   { infos.email === conseiller?.email ? <> La mise à jour effectué avec succès </> :
+                   { infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
                      <>Nous vous avons envoyé un mail à : <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation</> }
                   &nbsp;
                    <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
                  </p>
-                  }
-                </FlashMessage>
-              </div>
+                }
+              </FlashMessage>
             </div>
           </div> : ''
         }
@@ -179,8 +177,7 @@ function Informations() {
               { acceptedFiles.length === 0 &&
                 <>
                   <div className="fr-mb-5v">
-                    <img src="logos/icone-ajouter-cv.svg"></img>
-
+                    <img src="logos/icone-ajouter-cv.svg"/>
                   </div>&ensp;
                   {
                     isDragActive ?

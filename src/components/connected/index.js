@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../common/Header';
-import Informations from './Informations';
+import MonEspace from './MonEspace';
 import Menu from './Menu';
 
 function Connected() {
@@ -16,8 +16,8 @@ function Connected() {
             <Menu />
           </div>
           <div className="fr-col-12 fr-col-sm-7 responsiveBody">
-            <Route path={`/informations`} component={Informations} />
-            <Redirect from="/" to="/informations"/>
+            <Route path={`/mon-espace`} component={MonEspace} />
+            <Redirect from="/" to="/mon-espace"/>
           </div>
           <div className="fr-col-1"></div>
         </div>

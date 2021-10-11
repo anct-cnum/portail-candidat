@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
-import MonCompte from './MonCompte';
+import ModiferInformations from './ModiferInformations';
 
 function Informations() {
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ function Informations() {
 
   return (
     <div className="informations">
-      <div className="">
+      <div>
         { isUploaded &&
             <div className="fr-col-12 fr-mb-3w">
               <FlashMessage duration={100000} >
@@ -128,15 +128,14 @@ function Informations() {
           </div>
         }
         {flashMessage === true ?
-          <div style={{ width: '50%' }}>
-            <div>
-              <FlashMessage duration={10000}>
-                { updateError && (updateError !== undefined || updateError !== false) &&
+          <div>
+            <FlashMessage duration={10000}>
+              { updateError && (updateError !== undefined || updateError !== false) &&
                 <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
                   Cette adresse e-mail est déjà utilisée
                 </p>
-                }
-                { (updateError === undefined || updateError === false) &&
+              }
+              { (updateError === undefined || updateError === false) &&
                  <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
 
                    { infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
@@ -144,9 +143,8 @@ function Informations() {
                   &nbsp;
                    <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
                  </p>
-                }
-              </FlashMessage>
-            </div>
+              }
+            </FlashMessage>
           </div> : ''
         }
       </div>
@@ -163,7 +161,7 @@ function Informations() {
               />
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
-            <MonCompte setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
+            <ModiferInformations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>

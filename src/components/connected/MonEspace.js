@@ -208,7 +208,7 @@ function MonEspace() {
                 <span className="fr-fi-file-download-line fr-text mr-3w" style={{ float: 'left' }} aria-hidden="true"/>
                   Mon CV ({candidat?.cv?.file})
               </button>
-              <button className="fr-link fr-mt-2w" style={{ textDecoration: 'underline' }} onClick={deleteCV} target="_self">
+              <button className="fr-link fr-mt-2w" style={{ textDecoration: 'underline' }} onClick={deleteCV}>
                   Supprimer votre CV
               </button>
             </>

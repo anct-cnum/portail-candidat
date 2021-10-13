@@ -25,16 +25,14 @@ function Header({ connected }) {
             </div>
             { connected &&
                 <div className="fr-header__tools fr-mt-2w rf-col-md-6" style={{ marginBottom: '33px' }}>
-                  {/* <div className="fr-shortcuts"> */}
                   <ul className="fr-shortcuts__list" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                     <h3 className="fr-tile__title mr-5">
-                      <span className="fr-fi-account-fill headerAlignement" /> {user?.name}
+                      <span className="fr-fi-account-fill headerAlignement headerAlignementmd-lg" /> {user?.name}
                     </h3>
                     <li className="fr-shortcuts__item">
                       <Link className="fr-btn fr-btn--sm" to={`/login`}>Se déconnecter&nbsp;<i className="ri-logout-box-r-line"></i></Link>
                     </li>
                   </ul>
-                  {/* </div> */}
                 </div>
             }
           </div>

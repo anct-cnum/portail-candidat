@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions, conseillerActions } from '../../actions';
 import PropTypes from 'prop-types';
@@ -7,6 +7,8 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
   const { _id } = useSelector(state => state.authentication.user?.user);
   const { $id } = useSelector(state => state.authentication.user?.user.entity);
+  const successModifierInfos = useSelector(state => state?.user?.user);
+
   const [form, setForm] = useState(false);
 
   const activeFormulaire = () => {
@@ -30,16 +32,16 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
 
   const updateEmail = () => {
     dispatch(userActions.updateInfosCandidat({ id: _id, infos: infos }));
-    setTimeout(() => {
-      dispatch(conseillerActions.get($id));
-      setFlashMessage(true);
-    }, 0);
-    dispatch(conseillerActions.get($id));
+    setFlashMessage(true);
     setForm(false);
     setTimeout(() => {
       setFlashMessage(false);
     }, 10000);
   };
+
+  useEffect(() => {
+    dispatch(conseillerActions.get($id));
+  }, [successModifierInfos]);
 
   return (
     <div>

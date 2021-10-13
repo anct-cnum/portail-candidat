@@ -139,7 +139,7 @@ function MonEspace() {
                  <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
                    { infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
                      <>
-                        Nous vous avons envoyé un mail à :
+                        Nous vous avons envoyé un mail à :&nbsp;
                        <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
                      </> }
                   &nbsp;
@@ -159,7 +159,7 @@ function MonEspace() {
                 color="#00BFFF"
                 height={100}
                 width={100}
-                visible={downloading === true || uploading === true}
+                visible={downloading || uploading }
               />
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>

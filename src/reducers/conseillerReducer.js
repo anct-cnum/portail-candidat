@@ -1,4 +1,6 @@
-export default function conseiller(state = null, action) {
+const initialState = { uploading: false };
+
+export default function conseiller(state = initialState, action) {
   switch (action.type) {
     case 'GET_CONSEILLER_REQUEST':
       return {

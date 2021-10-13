@@ -10,6 +10,7 @@ export const conseillerService = {
   createSexeAge,
   uploadCurriculumVitae,
   getCurriculumVitae,
+  deleteCurriculumVitae,
 };
 
 function get(id) {
@@ -56,6 +57,15 @@ function uploadCurriculumVitae(fileCV) {
 function getCurriculumVitae(id) {
   const requestOptions = {
     method: 'GET',
+    headers: authHeader()
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleFileResponse);
+}
+
+function deleteCurriculumVitae(id) {
+  const requestOptions = {
+    method: 'DELETE',
     headers: authHeader()
   };
 

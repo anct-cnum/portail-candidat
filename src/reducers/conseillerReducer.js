@@ -67,6 +67,17 @@ export default function conseiller(state = null, action) {
         downloading: false,
         isDownloaded: false
       };
+    case 'DELETE_CURRICULUM_VITAE_SUCCESS':
+      return {
+        ...state,
+        isDeleted: true,
+        deleteError: false
+      };
+    case 'DELETE_CURRICULUM_VITAE_FAILURE':
+      return {
+        ...state,
+        deleteError: action.error,
+      };
     case 'RESET_FILE':
       return {
         blob: null,

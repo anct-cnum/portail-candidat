@@ -5,6 +5,7 @@ export const conseillerActions = {
   get,
   uploadCurriculumVitae,
   getCurriculumVitae,
+  deleteCurriculumVitae,
   resetCVFile
 };
 
@@ -73,6 +74,27 @@ function getCurriculumVitae(id, candidat) {
   }
   function failure(error) {
     return { type: 'GET_CURRICULUM_VITAE_FAILURE', error };
+  }
+}
+
+function deleteCurriculumVitae(id) {
+  return dispatch => {
+    dispatch(request());
+
+    conseillerService.deleteCurriculumVitae(id)
+    .then(
+      data => dispatch(success(data)),
+      error => dispatch(failure(error))
+    );
+  };
+  function request() {
+    return { type: 'DELETE_CURRICULUM_VITAE_REQUEST' };
+  }
+  function success(data) {
+    return { type: 'DELETE_CURRICULUM_VITAE_SUCCESS', data };
+  }
+  function failure(error) {
+    return { type: 'DELETE_CURRICULUM_VITAE_FAILURE', error };
   }
 }
 

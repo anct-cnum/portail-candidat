@@ -15,7 +15,7 @@ function Connected() {
           <div className="fr-col-12 fr-col-sm-3 rf-col-xs-1 responsiveVisibilityMenu">
             <Menu />
           </div>
-          <div className="fr-col-12 fr-col-sm-7 responsiveBody">
+          <div className="fr-col-12 fr-col-sm-7">
             <Route path={`/mon-espace`} component={MonEspace} />
             <Redirect from="/" to="/mon-espace"/>
           </div>

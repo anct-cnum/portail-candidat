@@ -4,9 +4,9 @@ import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
-import ModiferInformations from './ModiferInformations';
+import Informations from './Informations';
 
-function Informations() {
+function MonEspace() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.authentication.user.user);
   const candidat = useSelector(state => state.conseiller?.conseiller);
@@ -127,25 +127,27 @@ function Informations() {
             </FlashMessage>
           </div>
         }
-        {flashMessage === true ?
+        {flashMessage === true &&
           <div>
             <FlashMessage duration={10000}>
               { updateError && (updateError !== undefined || updateError !== false) &&
                 <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
-                  Cette adresse e-mail est déjà utilisée
+                  {updateError}
                 </p>
               }
               { (updateError === undefined || updateError === false) &&
                  <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
-
                    { infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
-                     <>Nous vous avons envoyé un mail à : <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation</> }
+                     <>
+                        Nous vous avons envoyé un mail à :
+                       <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
+                     </> }
                   &nbsp;
                    <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
                  </p>
               }
             </FlashMessage>
-          </div> : ''
+          </div>
         }
       </div>
       <div className="fr-container-fluid">
@@ -161,7 +163,7 @@ function Informations() {
               />
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
-            <ModiferInformations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
+            <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>
@@ -204,10 +206,10 @@ function Informations() {
                 className="dropZone fr-mt-3w fr-mr-3 fr-mt-4w"
                 style={{ width: '-webkit-fill-available', height: '48px' }} onClick={downloadCV}>
                 <span className="fr-fi-file-download-line fr-text mr-3w" style={{ float: 'left' }} aria-hidden="true"/>
-                  Mon CV&nbsp;({candidat?.cv?.file})
+                  Mon CV ({candidat?.cv?.file})
               </button>
               <button className="fr-link fr-mt-2w" style={{ textDecoration: 'underline' }} onClick={deleteCV} target="_self">
-                  Supprimer mon CV
+                  Supprimer votre CV
               </button>
             </>
             }
@@ -218,4 +220,4 @@ function Informations() {
   );
 }
 
-export default Informations;
+export default MonEspace;

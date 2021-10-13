@@ -16,7 +16,7 @@ function Header({ connected }) {
               <div className="fr-header__service">
                 <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique France Services" style={{ height: '50px' }}/>
               </div>
-              <div className="fr-header__service">
+              <div className="fr-header__service responsiveTextHeader">
                 <a title="Portail Candidat">
                   <p className="fr-header__service-title">Portail Candidat</p>
                 </a>
@@ -25,16 +25,16 @@ function Header({ connected }) {
             </div>
             { connected &&
                 <div className="fr-header__tools fr-mt-2w rf-col-md-6" style={{ marginBottom: '33px' }}>
-                  <div className="fr-shortcuts">
-                    <ul className="fr-shortcuts__list" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                      <h3 className="fr-tile__title mr-5">
-                        <span className="fr-fi-account-fill fr-ml-10v" /> {user?.name}
-                      </h3>
-                      <li className="fr-shortcuts__item">
-                        <Link className="fr-btn fr-btn--sm" to={`/login`}>Se déconnecter&nbsp;<i className="ri-logout-box-r-line"></i></Link>
-                      </li>
-                    </ul>
-                  </div>
+                  {/* <div className="fr-shortcuts"> */}
+                  <ul className="fr-shortcuts__list" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <h3 className="fr-tile__title mr-5">
+                      <span className="fr-fi-account-fill headerAlignement" /> {user?.name}
+                    </h3>
+                    <li className="fr-shortcuts__item">
+                      <Link className="fr-btn fr-btn--sm" to={`/login`}>Se déconnecter&nbsp;<i className="ri-logout-box-r-line"></i></Link>
+                    </li>
+                  </ul>
+                  {/* </div> */}
                 </div>
             }
           </div>

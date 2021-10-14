@@ -177,6 +177,25 @@ $blue-france:#000091;
   .responsiveHeaderTools {
     display: block!important;
   }
+  .responsiveVisibilityMenu {
+    visibility: hidden;
+    margin: -3.5rem;
+  }
+  .responsiveBouton {
+    width: 26rem;
+  }
+  .responsiveTextHeader {
+    text-align: end;
+  }
+  .headerAlignement {
+    margin-left: 1rem;
+  }
+}
+@media (min-width: 769px) {
+
+.headerAlignementmd-lg {
+  margin-left: 2.5rem!important;
+}
 }
 
 .red-background {

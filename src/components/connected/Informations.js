@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions, conseillerActions } from '../../actions';
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
+import DatePicker from 'react-datepicker';
 
 function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       email: conseiller?.email,
       telephone: conseiller?.telephone,
       distanceMax: conseiller?.distanceMax,
-      codePostal: conseiller?.codePostal
+      dateDisponibilite: new Date(conseiller?.dateDisponibilite),
     });
   };
 
@@ -54,7 +56,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
           <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
           <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
           <p>Distance Max&nbsp;: { conseiller?.distanceMax } km </p>
-          <p>Code postal&nbsp;: { conseiller?.codePostal }</p>
+          <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
           <button className="fr-btn" onClick={activeFormulaire}>
             <span style={{ color: 'white' }} className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
               Modifier mes informations &ensp;
@@ -83,6 +85,15 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
               <option value="100" >100 km</option>
               <option value="2000">2000 km (Toute la France)</option>
             </select>
+            <label className="fr-label">Disponible à partir du</label>
+            <DatePicker
+              name="dateDisponibilite"
+              className="fr-input fr-my-2w fr-mr-6w"
+              dateFormat="dd/MM/yyyy"
+              locale="fr"
+              selected={infos?.dateDisponibilite ?? ''}
+              onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
+            />
           </form>
           <div className="fr-col-lg-8 fr-col-md-8 fr-col-8 fr-col-sm-8">
             <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>

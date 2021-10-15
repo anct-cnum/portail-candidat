@@ -18,12 +18,14 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       nom: conseiller?.nom,
       prenom: conseiller?.prenom,
       email: conseiller?.email,
-      telephone: conseiller?.telephone
+      telephone: conseiller?.telephone,
+      distanceMax: conseiller?.distanceMax
     });
   };
 
   const handleForm = event => {
     let { name, value } = event.target;
+    console.log('okkkkkkkkkk', name);
     setInfos({
       ...infos,
       [name]: value
@@ -47,10 +49,11 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
     <div>
       {form === false ?
         <div className="fr-my-3w">
-          <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ conseiller?.nom }</strong></p>
-          <p style={{ marginBottom: 'revert' }}>Prénom : { conseiller?.prenom }</p>
-          <p style={{ marginBottom: 'revert' }}>Email : { conseiller?.email }</p>
-          <p>Téléphone : { conseiller?.telephone }</p>
+          <p style={{ marginBottom: 'revert' }}>Nom&nbsp;: <strong>{ conseiller?.nom }</strong></p>
+          <p style={{ marginBottom: 'revert' }}>Prénom&nbsp;: { conseiller?.prenom }</p>
+          <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
+          <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
+          <p>Distance Max&nbsp;: { conseiller?.distanceMax } km </p>
           <button className="fr-btn" onClick={activeFormulaire}>
             <span style={{ color: 'white' }} className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
               Modifier mes informations &ensp;
@@ -66,6 +69,19 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
             <input className="fr-input" type="text" id="text-input-text" name="email" value={infos?.email} onChange={handleForm}/>
             <label className="fr-label">Téléphone</label>
             <input className="fr-input" type="text" id="text-input-text" maxLength="20" name="telephone" value={infos?.telephone} onChange={handleForm}/>
+            <label className="fr-label" htmlFor="select">
+            Distance Max&nbsp;:
+            </label>
+            <select className="fr-select" id="select"name="distanceMax" onChange={handleForm} >
+              <option value={infos?.distanceMax} disabled hidden>{infos?.distanceMax} km</option>
+              <option value="5">5 km</option>
+              <option value="10">10 km</option>
+              <option value="15">15 km</option>
+              <option value="20">20 km</option>
+              <option value="40">40 km</option>
+              <option value="100" >100 km</option>
+              <option value="2000">2000 km (Toute la France)</option>
+            </select>
           </form>
           <div className="fr-col-lg-8 fr-col-md-8 fr-col-8 fr-col-sm-8">
             <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>

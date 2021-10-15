@@ -19,13 +19,13 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       prenom: conseiller?.prenom,
       email: conseiller?.email,
       telephone: conseiller?.telephone,
-      distanceMax: conseiller?.distanceMax
+      distanceMax: conseiller?.distanceMax,
+      codePostal: conseiller?.codePostal
     });
   };
 
   const handleForm = event => {
     let { name, value } = event.target;
-    console.log('okkkkkkkkkk', name);
     setInfos({
       ...infos,
       [name]: value
@@ -54,6 +54,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
           <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
           <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
           <p>Distance Max&nbsp;: { conseiller?.distanceMax } km </p>
+          <p>Code postal&nbsp;: { conseiller?.codePostal }</p>
           <button className="fr-btn" onClick={activeFormulaire}>
             <span style={{ color: 'white' }} className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
               Modifier mes informations &ensp;
@@ -73,7 +74,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
             Distance Max&nbsp;:
             </label>
             <select className="fr-select" id="select"name="distanceMax" onChange={handleForm} >
-              <option value={infos?.distanceMax} disabled hidden>{infos?.distanceMax} km</option>
+              <option value={infos?.distanceMax}>{infos?.distanceMax}km</option>
               <option value="5">5 km</option>
               <option value="10">10 km</option>
               <option value="15">15 km</option>

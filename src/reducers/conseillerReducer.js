@@ -1,4 +1,4 @@
-const initialState = { uploading: false };
+const initialState = { uploading: false, downloadError: false, loading: false };
 
 export default function conseiller(state = initialState, action) {
   switch (action.type) {
@@ -18,12 +18,14 @@ export default function conseiller(state = initialState, action) {
       };
     case 'POST_SEXE_AGE_REQUEST':
       return {
+        ...state,
         loading: true
       };
     case 'POST_SEXE_AGE_SUCCESS':
       return {
         ...state,
-        isUpdated: action.isUpdated
+        isUpdated: action.isUpdated,
+        loading: false
       };
     case 'POST_SEXE_AGE_FAILURE':
       return {

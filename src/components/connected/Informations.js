@@ -1,17 +1,24 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions, conseillerActions } from '../../actions';
+import { userActions, conseillerActions, getGeoActions } from '../../actions';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import DatePicker from 'react-datepicker';
+import AsyncSelect from 'react-select/async';
 
 function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
   const { _id } = useSelector(state => state.authentication.user?.user);
   const { $id } = useSelector(state => state.authentication.user?.user.entity);
+  const geo = useSelector(state => state?.geoDonneesCodePostal?.successGeo);
   const successModifierInfos = useSelector(state => state?.user?.user);
-
   const [form, setForm] = useState(false);
+
+  useEffect(() => {
+    dispatch(conseillerActions.get($id));
+    dispatch(getGeoActions.getDonneesCodePostal(conseiller?.codePostal));
+  }, [successModifierInfos]);
 
   const activeFormulaire = () => {
     setForm(true);
@@ -23,9 +30,17 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       telephone: conseiller?.telephone,
       distanceMax: conseiller?.distanceMax,
       dateDisponibilite: new Date(conseiller?.dateDisponibilite),
+      codePostal: conseiller?.codePostal,
+      nomCommune: conseiller?.nomCommune,
+      codeCommune: conseiller?.codeCommune,
+      codeDepartement: conseiller?.codeDepartement,
+      codeRegion: conseiller?.codeRegion
     });
   };
-
+  const [inputOptions, setinputOptions] = useState({
+    value: conseiller?.nomCommune,
+    label: conseiller?.codePostal,
+  });
   const handleForm = event => {
     let { name, value } = event.target;
     setInfos({
@@ -43,10 +58,43 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
     }, 10000);
   };
 
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-  }, [successModifierInfos]);
+  const handleSelectGeo = selectedOption => {
+    const { value, label } = selectedOption;
+    setinputOptions({
+      ...inputOptions,
+      value: value[0],
+      label
+    });
+    const result = geo && geo.find(i => {
+      const ok = i.codesPostaux[0].includes(inputOptions?.value) && i.nom.includes(inputOptions?.label);
+      return ok;
+    });
+    console.log('inputOptions:', inputOptions);
+    setInfos({
+      ...infos,
+      codePostal: result?.codesPostaux[0],
+      nomCommune: result?.nom,
+      codeCommune: result?.code,
+      codeDepartement: result?.codeDepartement,
+      codeRegion: result?.codeRegion
+    });
+  };
+  const options = geo && geo.map(c => {
+    return { value: c.codesPostaux, label: `${c.nom}` };
+  });
+  const filtre = value => {
+    return options.filter(i => i.value[0].includes(value));
+  };
 
+  const loadOptions = async (valeur, call) => {
+    const value = valeur.trim();
+    if (value.length === 5) {
+      await dispatch(getGeoActions.getDonneesCodePostal(value));
+    }
+    setTimeout(() => {
+      call(filtre(value));
+    }, 1000);
+  };
   return (
     <div>
       {form === false ?
@@ -55,6 +103,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
           <p style={{ marginBottom: 'revert' }}>Prénom&nbsp;: { conseiller?.prenom }</p>
           <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
           <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
+          <p>Code postal&nbsp;: { conseiller?.codePostal }</p>
           <p>Distance Max&nbsp;: { conseiller?.distanceMax } km </p>
           <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
           <button className="fr-btn" onClick={activeFormulaire}>
@@ -72,6 +121,16 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
             <input className="fr-input" type="text" id="text-input-text" name="email" value={infos?.email} onChange={handleForm}/>
             <label className="fr-label">Téléphone</label>
             <input className="fr-input" type="text" id="text-input-text" maxLength="20" name="telephone" value={infos?.telephone} onChange={handleForm}/>
+            <div>
+              <label className="fr-label">Code postal</label>
+              <AsyncSelect
+                cacheOptions={options}
+                loadOptions={loadOptions}
+                defaultOptions={options}
+                value={inputOptions.value ? { label: `${inputOptions.value} ${inputOptions.label}` } : { label: 'Recherche...' }}
+                onChange={e => handleSelectGeo(e)}
+              />
+            </div>
             <label className="fr-label" htmlFor="select">
             Distance Max&nbsp;:
             </label>

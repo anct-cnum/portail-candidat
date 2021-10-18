@@ -24,7 +24,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install modules
-      run: yarn
+      run: yarn install --frozen-lockfile
     - name: Override .env
       uses: SpicyPizza/create-envfile@v1
       with:

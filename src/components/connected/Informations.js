@@ -14,13 +14,10 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   const geo = useSelector(state => state?.geoDonneesCodePostal?.successGeo);
   const successModifierInfos = useSelector(state => state?.user?.user);
   const [form, setForm] = useState(false);
-
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-    dispatch(getGeoActions.getDonneesCodePostal(conseiller?.codePostal));
-  }, [successModifierInfos]);
+  // const [listOptions, setListOptions] = useState(true);
 
   const activeFormulaire = () => {
+    dispatch(getGeoActions.getDonneesCodePostal(conseiller?.codePostal));
     setForm(true);
     setFlashMessage(false);
     setInfos({
@@ -50,6 +47,7 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   };
 
   const updateEmail = () => {
+    console.log('infos:', infos);
     dispatch(userActions.updateInfosCandidat({ id: _id, infos: infos }));
     setFlashMessage(true);
     setForm(false);
@@ -59,17 +57,14 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
   };
 
   const handleSelectGeo = selectedOption => {
+    console.log('selectedOption:', selectedOption);
     const { value, label } = selectedOption;
     setinputOptions({
       ...inputOptions,
       value: value[0],
       label
     });
-    const result = geo && geo.find(i => {
-      const ok = i.codesPostaux[0].includes(inputOptions?.value) && i.nom.includes(inputOptions?.label);
-      return ok;
-    });
-    console.log('inputOptions:', inputOptions);
+    const result = geo && geo.find(i => i.codesPostaux[0].includes(value[0]) && i.nom.includes(label));
     setInfos({
       ...infos,
       codePostal: result?.codesPostaux[0],
@@ -79,22 +74,38 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       codeRegion: result?.codeRegion
     });
   };
-  const options = geo && geo.map(c => {
+  let options = geo && geo.map(c => {
+    console.log('geo:', geo);
     return { value: c.codesPostaux, label: `${c.nom}` };
   });
   const filtre = value => {
     return options.filter(i => i.value[0].includes(value));
   };
 
-  const loadOptions = async (valeur, call) => {
-    const value = valeur.trim();
-    if (value.length === 5) {
-      await dispatch(getGeoActions.getDonneesCodePostal(value));
-    }
-    setTimeout(() => {
-      call(filtre(value));
-    }, 1000);
-  };
+  // const loadOptions = async (valeur, call) => {
+  //   console.log('valeur:', valeur);
+  //   const value = valeur.trim();
+  //   if (value.length === 5) {
+  //     await dispatch(getGeoActions.getDonneesCodePostal(value));
+  //   }
+  //   setTimeout(() => {
+  //     call(filtre(value));
+  //   }, 1000);
+  // };
+
+  const loadOptions = value =>
+    new Promise(async resolve => {
+      if (value.length === 5) {
+        await dispatch(getGeoActions.getDonneesCodePostal(value));
+      }
+      setTimeout(() => {
+        resolve(filtre(value));
+      }, 1000);
+    });
+
+  useEffect(() => {
+    dispatch(conseillerActions.get($id));
+  }, [successModifierInfos]);
   return (
     <div>
       {form === false ?
@@ -124,11 +135,13 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
             <div>
               <label className="fr-label">Code postal</label>
               <AsyncSelect
-                cacheOptions={options}
+                // cacheOptions={options}
                 loadOptions={loadOptions}
                 defaultOptions={options}
                 value={inputOptions.value ? { label: `${inputOptions.value} ${inputOptions.label}` } : { label: 'Recherche...' }}
                 onChange={e => handleSelectGeo(e)}
+                noOptionsMessage={() => 'Aucun résultat'}
+                noLoadMessage={() => 'Recherche...'}
               />
             </div>
             <label className="fr-label" htmlFor="select">

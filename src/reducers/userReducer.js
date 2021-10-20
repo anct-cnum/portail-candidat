@@ -4,7 +4,8 @@ export default function user(state = null, action) {
       return {
         ...state,
         loading: true,
-        flashMessage: true
+        flashMessage: true,
+        patchError: undefined
       };
     case 'UPDATE_USER_EMAIL_SUCCESS':
       return {

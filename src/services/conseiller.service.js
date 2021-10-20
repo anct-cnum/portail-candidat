@@ -10,8 +10,7 @@ export const conseillerService = {
   createSexeAge,
   uploadCurriculumVitae,
   getCurriculumVitae,
-  deleteCurriculumVitae,
-  getDonneesCodePostal
+  deleteCurriculumVitae
 };
 
 function get(id) {
@@ -71,14 +70,6 @@ function deleteCurriculumVitae(id) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleFileResponse);
-}
-function getDonneesCodePostal(cp) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  };
-
-  return fetch(`https://geo.api.gouv.fr/communes?codePostal=${cp}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -5,7 +5,6 @@ import { combineReducers } from 'redux';
 import conseiller from './conseillerReducer';
 import user from './userReducer';
 import motDePasseOublieReducer from './motDePasseOublieReducer';
-import geoReducer from './geoReducer';
 
 const rootReducer = combineReducers({
   authentication: authenticationReducer,
@@ -13,8 +12,7 @@ const rootReducer = combineReducers({
   menu: menu,
   conseiller: conseiller,
   user: user,
-  motDePasseOublie: motDePasseOublieReducer,
-  geoDonneesCodePostal: geoReducer
+  motDePasseOublie: motDePasseOublieReducer
 });
 
 export default rootReducer;

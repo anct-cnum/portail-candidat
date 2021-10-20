@@ -1,14 +1,16 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions, conseillerActions } from '../../actions';
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
+import DatePicker from 'react-datepicker';
 
-function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
+function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
   const { _id } = useSelector(state => state.authentication.user?.user);
   const { $id } = useSelector(state => state.authentication.user?.user.entity);
   const successModifierInfos = useSelector(state => state?.user?.user);
-
   const [form, setForm] = useState(false);
 
   const activeFormulaire = () => {
@@ -18,7 +20,8 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
       nom: conseiller?.nom,
       prenom: conseiller?.prenom,
       email: conseiller?.email,
-      telephone: conseiller?.telephone
+      telephone: conseiller?.telephone,
+      dateDisponibilite: new Date(conseiller?.dateDisponibilite),
     });
   };
 
@@ -47,10 +50,11 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
     <div>
       {form === false ?
         <div className="fr-my-3w">
-          <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ conseiller?.nom }</strong></p>
-          <p style={{ marginBottom: 'revert' }}>Prénom : { conseiller?.prenom }</p>
-          <p style={{ marginBottom: 'revert' }}>Email : { conseiller?.email }</p>
-          <p>Téléphone : { conseiller?.telephone }</p>
+          <p style={{ marginBottom: 'revert' }}>Nom&nbsp;: <strong>{ conseiller?.nom }</strong></p>
+          <p style={{ marginBottom: 'revert' }}>Prénom&nbsp;: { conseiller?.prenom }</p>
+          <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
+          <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
+          <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
           <button className="fr-btn" onClick={activeFormulaire}>
             <span style={{ color: 'white' }} className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
               Modifier mes informations &ensp;
@@ -66,6 +70,16 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
             <input className="fr-input" type="text" id="text-input-text" name="email" value={infos?.email} onChange={handleForm}/>
             <label className="fr-label">Téléphone</label>
             <input className="fr-input" type="text" id="text-input-text" maxLength="20" name="telephone" value={infos?.telephone} onChange={handleForm}/>
+            <label className="fr-label">Disponible à partir du</label>
+            <DatePicker
+              name="dateDisponibilite"
+              className="fr-input fr-my-2w fr-mr-6w"
+              dateFormat="dd/MM/yyyy"
+              locale="fr"
+              selected={infos?.dateDisponibilite ?? ''}
+              onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
+              minDate={new Date()}
+            />
           </form>
           <div className="fr-col-lg-8 fr-col-md-8 fr-col-8 fr-col-sm-8">
             <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>
@@ -76,10 +90,10 @@ function MonCompte({ setFlashMessage, infos, setInfos, conseiller }) {
     </div>
   );
 }
-MonCompte.propTypes = {
+Informations.propTypes = {
   setFlashMessage: PropTypes.func,
   infos: PropTypes.object,
   setInfos: PropTypes.func,
   conseiller: PropTypes.object
 };
-export default MonCompte;
+export default Informations;

@@ -78,6 +78,7 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
               locale="fr"
               selected={infos?.dateDisponibilite ?? ''}
               onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
+              minDate={new Date()}
             />
           </form>
           <div className="fr-col-lg-8 fr-col-md-8 fr-col-8 fr-col-sm-8">

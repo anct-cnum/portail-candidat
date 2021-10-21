@@ -84,6 +84,7 @@ export default function conseiller(state = initialState, action) {
       };
     case 'RESET_FILE':
       return {
+        ...state,
         blob: null,
       };
     default:

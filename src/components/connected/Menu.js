@@ -21,20 +21,11 @@ function Menu() {
         </button>
         <div className={`${menu.expandNav ? '' : 'fr-collapse'}`} id="fr-sidemenu-wrapper">
           <ul className="fr-sidemenu__list">
-            <li className={`fr-sidemenu__item ${location.pathname.startsWith('/accueil') ? 'fr-sidemenu__item--active' : ''}`}>
-              <Link className="fr-sidemenu__link" to="/accueil" style={{ padding: '0.5rem 0' }}>
-                <div className="fr-container">
-                  <div className="fr-grid-row fr-grid-row--end">
-                    Accueil
-                  </div>
-                </div>
-              </Link>
-            </li>
             <li className={`fr-sidemenu__item ${location.pathname.startsWith('/informations') ? 'fr-sidemenu__item--active' : ''}`}>
-              <Link className="fr-sidemenu__link" to="/informations" style={{ padding: '0.5rem 0' }}>
+              <Link className="fr-sidemenu__link" to="/mon-espace">
                 <div className="fr-container">
                   <div className="fr-grid-row fr-grid-row--end">
-                    Mes informations
+                    Mon espace
                   </div>
                 </div>
               </Link>

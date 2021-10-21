@@ -1,10 +1,8 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Header from '../common/Header';
-import Informations from './Informations';
+import MonEspace from './MonEspace';
 import Menu from './Menu';
-import MonCompte from './MonCompte';
-import Welcome from './Welcome';
 
 function Connected() {
 
@@ -14,13 +12,12 @@ function Connected() {
       <div className="fr-container-fluid fr-mt-8w">
         <div className="fr-grid-row">
           <div className="fr-col-1"></div>
-          <div className="fr-col-12 fr-col-sm-3">
+          <div className="fr-col-12 fr-col-sm-3 rf-col-xs-1 responsiveVisibilityMenu">
             <Menu />
           </div>
           <div className="fr-col-12 fr-col-sm-7">
-            <Route path={`/accueil`} component={Welcome} />
-            <Route path={`/informations`} component={Informations} />
-            <Route path={`/mon-compte`} component={MonCompte} />
+            <Route path={`/mon-espace`} component={MonEspace} />
+            <Redirect from="/" to="/mon-espace"/>
           </div>
           <div className="fr-col-1"></div>
         </div>

@@ -10,7 +10,7 @@ export const conseillerService = {
   createSexeAge,
   uploadCurriculumVitae,
   getCurriculumVitae,
-  deleteCurriculumVitae,
+  deleteCurriculumVitae
 };
 
 function get(id) {

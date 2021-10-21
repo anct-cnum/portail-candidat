@@ -154,7 +154,6 @@ function MonEspace() {
         <div className="fr-grid-row  responsiveBouton">
           <div className="fr-col-12 fr-col-lg-6">
             <div className="spinnerCustom">
-              { (downloading || uploading) &&
               <Spinner
                 type="Oval"
                 color="#00BFFF"
@@ -162,7 +161,6 @@ function MonEspace() {
                 width={100}
                 visible={downloading || uploading }
               />
-              }
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
             <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>

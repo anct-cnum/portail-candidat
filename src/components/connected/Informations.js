@@ -1,153 +1,99 @@
-import React, { useCallback, useEffect } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDropzone } from 'react-dropzone';
-import { conseillerActions } from '../../actions';
-import FlashMessage from 'react-flash-message';
-import Spinner from 'react-loader-spinner';
+import { userActions, conseillerActions } from '../../actions';
+import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
+import DatePicker from 'react-datepicker';
 
-function Informations() {
+function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.authentication.user.user);
-  const candidat = useSelector(state => state.conseiller?.conseiller);
-  const isUploaded = useSelector(state => state.conseiller?.isUploaded);
-  const uploading = useSelector(state => state.conseiller?.uploading);
-  const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
-  const downloading = useSelector(state => state.conseiller?.downloading);
-  const error = useSelector(state => state.conseiller?.uploadError);
-  const downloadError = useSelector(state => state.conseiller?.downloadError);
-  const blob = useSelector(state => state.conseiller?.blob);
+  const { _id } = useSelector(state => state.authentication.user?.user);
+  const { $id } = useSelector(state => state.authentication.user?.user.entity);
+  const successModifierInfos = useSelector(state => state?.user?.user);
+  const [form, setForm] = useState(false);
 
-  const errorTab = [{
-    key: 'too-many-files',
-    label: 'La plateforme n\'accepte qu\'un seul fichier !'
-  }, {
-    key: 'file-invalid-type',
-    label: 'Le type de fichier doit obligatoirement être un .pdf !'
-  }, {
-    key: 'file-too-large',
-    label: 'La taille du fichier ne doit pas excéder 10Mo !'
-  }];
-
-  const onDrop = useCallback(acceptedFiles => {
-    if (acceptedFiles.length > 0) {
-      const formData = new FormData();
-      formData.append('file', acceptedFiles[0], acceptedFiles[0].name);
-      dispatch(conseillerActions.uploadCurriculumVitae(formData));
-    }
-  }, []);
-
-
-  useEffect(() => {
-    if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
-      dispatch(conseillerActions.resetCVFile());
-    }
-  }, [blob, downloadError]);
-
-  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
-    { onDrop, accept: '.pdf', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
-
-  const downloadCV = () => {
-    dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
+  const activeFormulaire = () => {
+    setForm(true);
+    setFlashMessage(false);
+    setInfos({
+      nom: conseiller?.nom,
+      prenom: conseiller?.prenom,
+      email: conseiller?.email,
+      telephone: conseiller?.telephone,
+      dateDisponibilite: new Date(conseiller?.dateDisponibilite),
+    });
   };
+
+  const handleForm = event => {
+    let { name, value } = event.target;
+    setInfos({
+      ...infos,
+      [name]: value
+    });
+  };
+
+  const updateEmail = () => {
+    dispatch(userActions.updateInfosCandidat({ id: _id, infos: infos }));
+    setFlashMessage(true);
+    setForm(false);
+    setTimeout(() => {
+      setFlashMessage(false);
+    }, 10000);
+  };
+
   useEffect(() => {
-    if (isDownloaded || isUploaded) {
-      dispatch(conseillerActions.get(user?.entity?.$id));
-    }
-  }, [isDownloaded, isUploaded]);
+    dispatch(conseillerActions.get($id));
+  }, [successModifierInfos]);
 
   return (
-    <div className="informations">
-      <div className="fr-container-fluid">
-        <div className="fr-grid-row">
-          { isUploaded &&
-            <div className="fr-col-12 fr-mb-3w">
-              <FlashMessage duration={100000} >
-                <div className="flashBag">
-                  <span>
-                    Votre Curriculum Vit&aelig; a été ajouté avec succès !
-                  </span>
-                  <br/><br/>
-                  <span style={{ color: 'initial' }}>
-                    Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
-                  </span>
-                </div>
-              </FlashMessage>
-            </div>
-          }
-
-          {!isUploaded && error &&
-
-            <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-              <FlashMessage duration={100000} >
-                <div className="flashBag labelError">
-                  <span>
-                    {error}
-                  </span>
-                </div>
-              </FlashMessage>
-            </div>
-          }
-          <div className="fr-col-12 fr-col-md-6">
-            <div className="spinnerCustom">
-              <Spinner
-                type="Oval"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                visible={downloading === true || uploading === true}
-              />
-            </div>
-            <h2>Mes informations</h2>
-            <p style={{ marginBottom: 'revert' }}>Nom : <strong>{ candidat?.nom }</strong></p>
-            <p style={{ marginBottom: 'revert' }}>Prénom : { candidat?.prenom }</p>
-            <p style={{ marginBottom: 'revert' }}>Email : { candidat?.email }</p>
-            <p>Téléphone : { candidat?.telephone }</p>
-          </div>
-          <div className="fr-col-12 fr-col-md-6" >
-            <h2>Mon Curriculum vit&aelig;</h2>
-            { candidat?.cv?.file &&
-            <>
-              <p>Vous pouvez voir ou télécharger votre CV en cliquant sur ce lien&nbsp;:<br />
-                <button className="fr-btn fr-mt-3w" onClick={downloadCV}>
-                  <span className="fr-fi-download-line image-download" aria-hidden="true"></span>
-                  Mon Curriculum vit&aelig;
-                </button> </p>
-              <p>Pour mettre à jour votre CV&nbsp;:</p>
-            </>
-            }
-            { !candidat?.cv?.file &&
-              <p>Vous n&apos;avez pas encore téléchargé votre Curriculum vit&aelig;, faites le dès maintenant ! </p>
-            }
-            <div className={fileRejections.length > 0 ? 'dropZone drop-error' : 'dropZone' } {...getRootProps()}>
-
-              <input {...getInputProps()} />
-              { acceptedFiles.length === 0 &&
-                <>
-                  <span className="fr-fi-save-line image-dropZone" aria-hidden="true"></span>
-                  {
-                    isDragActive ?
-                      <p>Déposez votre CV ici ...</p> :
-                      <p className="texte-dropZone">
-                        Faites glisser votre CV ou cliquez ici pour le sélectionner <strong>(format pdf)</strong>
-                      </p>
-                  }
-                </>
-              }
-              { acceptedFiles.length > 0 &&
-                <p>{acceptedFiles[0].name}</p>
-              }
-              { fileRejections?.length > 0 &&
-                <div className="drop-error-message">{
-                  errorTab.find(item => item.key === fileRejections[0].errors[0].code).label
-                }
-                </div>
-              }
-            </div>
+    <div>
+      {form === false ?
+        <div className="fr-my-3w">
+          <p style={{ marginBottom: 'revert' }}>Nom&nbsp;: <strong>{ conseiller?.nom }</strong></p>
+          <p style={{ marginBottom: 'revert' }}>Prénom&nbsp;: { conseiller?.prenom }</p>
+          <p style={{ marginBottom: 'revert' }}>Email&nbsp;: { conseiller?.email }</p>
+          <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
+          <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
+          <button className="fr-btn" onClick={activeFormulaire}>
+            <span style={{ color: 'white' }} className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
+              Modifier mes informations &ensp;
+          </button>
+        </div> :
+        <div className="fr-container--fluid">
+          <form className="fr-my-3w fr-col-md-8 fr-col-lg-8 fr-col-8 fr-col-sm-8">
+            <label className="fr-label">Nom</label>
+            <input className="fr-input" type="text" id="text-input-text" name="nom" value={infos?.nom} onChange={handleForm}/>
+            <label className="fr-label">Prénom</label>
+            <input className="fr-input" type="text" id="text-input-text" name="prenom" value={infos?.prenom} onChange={handleForm}/>
+            <label className="fr-label">E-mail</label>
+            <input className="fr-input" type="text" id="text-input-text" name="email" value={infos?.email} onChange={handleForm}/>
+            <label className="fr-label">Téléphone</label>
+            <input className="fr-input" type="text" id="text-input-text" maxLength="20" name="telephone" value={infos?.telephone} onChange={handleForm}/>
+            <label className="fr-label">Disponible à partir du</label>
+            <DatePicker
+              name="dateDisponibilite"
+              className="fr-input fr-my-2w fr-mr-6w"
+              dateFormat="dd/MM/yyyy"
+              locale="fr"
+              selected={infos?.dateDisponibilite ?? ''}
+              onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
+              minDate={new Date()}
+            />
+          </form>
+          <div className="fr-col-lg-8 fr-col-md-8 fr-col-8 fr-col-sm-8">
+            <button onClick={() => setForm(false)} className="fr-btn">Annuler</button>
+            <button className="fr-btn fr-m-auto" style={{ float: 'right' }} onClick={updateEmail}>Valider</button>
           </div>
         </div>
-      </div>
+      }
     </div>
   );
 }
-
+Informations.propTypes = {
+  setFlashMessage: PropTypes.func,
+  infos: PropTypes.object,
+  setInfos: PropTypes.func,
+  conseiller: PropTypes.object
+};
 export default Informations;

@@ -1,4 +1,6 @@
-export default function conseiller(state = null, action) {
+const initialState = { uploading: false, downloadError: false, loading: false };
+
+export default function conseiller(state = initialState, action) {
   switch (action.type) {
     case 'GET_CONSEILLER_REQUEST':
       return {
@@ -16,12 +18,14 @@ export default function conseiller(state = null, action) {
       };
     case 'POST_SEXE_AGE_REQUEST':
       return {
+        ...state,
         loading: true
       };
     case 'POST_SEXE_AGE_SUCCESS':
       return {
         ...state,
-        isUpdated: action.isUpdated
+        isUpdated: action.isUpdated,
+        loading: false
       };
     case 'POST_SEXE_AGE_FAILURE':
       return {
@@ -66,6 +70,17 @@ export default function conseiller(state = null, action) {
         downloadError: action.error,
         downloading: false,
         isDownloaded: false
+      };
+    case 'DELETE_CURRICULUM_VITAE_SUCCESS':
+      return {
+        ...state,
+        isDeleted: true,
+        deleteError: false
+      };
+    case 'DELETE_CURRICULUM_VITAE_FAILURE':
+      return {
+        ...state,
+        deleteError: action.error,
       };
     case 'RESET_FILE':
       return {

@@ -88,6 +88,17 @@ $blue-france:#000091;
   color: #383838!important;
 }
 
+/* Modal Gestion */
+.modalOpened {
+  opacity: 1;
+  visibility: visible;
+}
+#fr-modal-supprimer-candidat {
+  .fr-modal__body {
+    width: 130%;
+  }
+}
+
 /** Icones menu gauche **/
 .Menu .fr-sidemenu__item--active [class^="fr-fi"] {
     color: $blue-france;
@@ -134,6 +145,29 @@ $blue-france:#000091;
 
 .valid {
   color: #008941;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.supprimer-candidat-btn {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.suppression-btn {
+  background-color: #e10600;
+  padding: .5rem 1.5rem;
+  text-align: center;
+  color: #e7e7e7;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #d30000;
+  }
+}
+.desactiver-btn {
+  padding: .5rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
 }
 
 /** Header **/

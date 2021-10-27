@@ -13,6 +13,9 @@ $blue-france:#000091;
 .labelError {
   color: #FF3333;
 }
+.red-background {
+  background-color: #E10600;
+}
 
 .spinnerCustom {
   position: absolute;
@@ -135,12 +138,25 @@ $blue-france:#000091;
 .valid {
   color: #008941;
 }
-
+.sansBoxShadow {
+  box-shadow: none;
+}
 /** Header **/
+.logo {
+  height: 50px;
+  margin-top: -10px;
+}
 .fr-header__tools-links {
   display: block!important;
 }
-
+.menu-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.user-header {
+  margin: 0 2.5rem;
+}
 .informations p {
   margin: 0 0 1.5rem;
 }
@@ -173,6 +189,30 @@ $blue-france:#000091;
   border: 1px solid #ff6961;
 }
 
+@media (min-width: 769px) {
+  .headerAlignementmd-lg {
+    margin-left: 2.5rem!important;
+  }
+}
+
+@media (max-width: 1254px) {
+  .menu-flex {
+  justify-content: flex-end;
+  }
+}
+@media (max-width: 992px) {
+  .hide-deconnexion {
+    display: none;
+  }
+  .user-header {
+    margin: 0 2.5rem;
+  }
+}
+@media (max-width: 960px) {
+  .user-header {
+    margin: 0 1rem 0 0 ;
+  }
+}
 @media (max-width: 768px) {
   .responsiveHeaderTools {
     display: block!important;
@@ -188,16 +228,17 @@ $blue-france:#000091;
     text-align: end;
   }
   .headerAlignement {
-    margin-left: 1rem;
+    margin-left: 0.6rem;
   }
 }
-@media (min-width: 769px) {
+@media (max-width: 420px) {
 
-.headerAlignementmd-lg {
-  margin-left: 2.5rem!important;
 }
-}
-
-.red-background {
-  background-color: #E10600;
+@media (max-width: 360px) {
+  .responsiveHeaderTools {
+    margin-left: 0px !important;
+  }
+  .user-header {
+    font-size: 12px;
+  }
 }

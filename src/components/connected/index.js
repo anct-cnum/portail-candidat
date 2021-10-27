@@ -9,10 +9,10 @@ function Connected() {
   return (
     <>
       <Header connected/>
-      <div className="fr-container-fluid fr-mt-8w">
+      <div className="fr-container-fluid fr-mt-8w fr-ml-n3v">
         <div className="fr-grid-row">
           <div className="fr-col-1"></div>
-          <div className="fr-col-12 fr-col-sm-3 rf-col-xs-1 responsiveVisibilityMenu">
+          <div className="fr-col-12 fr-col-sm-3 fr-col-xs-1 responsiveVisibilityMenu">
             <Menu />
           </div>
           <div className="fr-col-12 fr-col-sm-7">

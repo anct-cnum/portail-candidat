@@ -8,7 +8,6 @@ function SupprimerCandidature({ conseiller }) {
 
   const dispatch = useDispatch();
   let user = JSON.parse(localStorage.getItem('user'));
-  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,199})/);
 
   const [displaySupprimerCandidatureForm, setDisplaySupprimerCandidatureForm] = useState(false);
   const [autre, setAutre] = useState(false);
@@ -16,27 +15,16 @@ function SupprimerCandidature({ conseiller }) {
   const [inputs, setInputs] = useState({
     errorInputs: false,
     motif: '',
+    password: '',
   });
 
-  const deleteError = useSelector(state => state.conseiller?.deleteError);
+  let deleteError = useSelector(state => state.conseiller?.deleteCandidatureError);
   const deleteSuccess = useSelector(state => state.conseiller?.deleteSuccess);
 
   function handleChange(e) {
     if (e?.target) {
       const { name, value } = e.target;
       setInputs(inputs => ({ ...inputs, [name]: value }));
-      setActive(!!value && !!inputs.password);
-    }
-  }
-
-  function checkPassword(e) {
-    if (checkComplexity.test(e?.target.value)) {
-      const { name, value } = e.target;
-      setInputs(inputs => ({ ...inputs, [name]: value }));
-      setActive(!!value && !!inputs.motif);
-    } else {
-      setInputs(inputs => ({ ...inputs, password: '' }));
-      setActive(false);
     }
   }
 
@@ -53,9 +41,12 @@ function SupprimerCandidature({ conseiller }) {
   useEffect(() => {
     if (deleteSuccess) {
       dispatch(userActions.logout());
-      window.location = '/candidature-supprimee';
     }
   }, [deleteSuccess]);
+
+  useEffect(() => {
+    setActive(!!inputs.password && !!inputs.motif);
+  }, [inputs]);
 
   return (
     <>
@@ -83,7 +74,7 @@ function SupprimerCandidature({ conseiller }) {
                   {deleteError &&
                     <FlashMessage duration={5000}>
                       <p className="flashBag invalid">
-                        { deleteError?.error ? 'Une erreur est survenue : ' + deleteError?.error :
+                        { deleteError ? 'Une erreur est survenue : ' + deleteError :
                           'Une erreur est survenue lors de la suppression de votre candidature. Veuillez réessayer'}.
                       </p>
                     </FlashMessage>
@@ -94,7 +85,7 @@ function SupprimerCandidature({ conseiller }) {
                       Supprimer ma candidature et mes informations
                     </h1>
                     <p className="fr-mb-7w">
-                      En cliquant sur « supprimer mes informations », votre candidature ainsi que vos donn&eacute;es de compte candidat
+                      En cliquant sur &laquo;&nbsp;supprimer mes informations&nbsp;&raquo;, votre candidature ainsi que vos donn&eacute;es de compte candidat
                       (mail, t&eacute;l&eacute;phone, etc) seront int&eacute;gralement supprim&eacute;es de la base de donn&eacute;es
                       Conseiller num&eacute;rique France Services.
                       <b>Cette action est irr&eacute;versible.</b>
@@ -128,6 +119,7 @@ function SupprimerCandidature({ conseiller }) {
                           <div className = "fr-radio-group">
                             <input name="motif" value="Autre" type="radio" id="Autre" onClick={() => {
                               setAutre(true);
+                              setInputs(inputs => ({ ...inputs, motif: '' }));
                             }}/>
                             <label className="fr-label" htmlFor="Autre">Autre.</label>
                           </div>
@@ -135,7 +127,7 @@ function SupprimerCandidature({ conseiller }) {
                         {autre &&
                         <div className="fr-ml-4w">
                           <label>
-                          Vous Pouvez préciser si vous le souhaitez :
+                          Vous pouvez préciser si vous le souhaitez :
                           </label>
                           <input name="motif" type="text" className="fr-input fr-mt-1w" style={{ width: '322px' }} onChange={handleChange}/>
                         </div>
@@ -145,7 +137,7 @@ function SupprimerCandidature({ conseiller }) {
 
                     <div className="fr-col-6">
                       <label htmlFor="password">Votre mot de passe :</label>
-                      <input type="password" className="fr-input fr-mt-1w" name="password" id="password" onChange={checkPassword}/>
+                      <input type="password" className="fr-input fr-mt-1w" name="password" id="password" onChange={handleChange}/>
                     </div>
 
                     <div className="fr-mt-7w">

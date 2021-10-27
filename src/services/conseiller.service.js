@@ -83,7 +83,7 @@ function deleteCandidature(motif, idConseiller) {
     })
   };
 
-  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature`, requestOptions).then(handleFileResponse);
+  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

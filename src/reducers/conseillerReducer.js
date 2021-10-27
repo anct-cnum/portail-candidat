@@ -1,16 +1,17 @@
-const initialState = { uploading: false, downloadError: false, loading: false, deleteError: false };
+const initialState = { uploading: false, downloadError: false, loading: false, deleteError: false, deleteCandidatureError: false };
 
 export default function conseiller(state = initialState, action) {
   switch (action.type) {
     case 'GET_CONSEILLER_REQUEST':
       return {
         ...state,
-        loading: true
+        loading: true,
+        deleteCandidatureError: false
       };
     case 'GET_CONSEILLER_SUCCESS':
       return {
         ...state,
-        conseiller: action.conseiller
+        conseiller: action.conseiller,
       };
     case 'GET_CONSEILLER_FAILURE':
       return {
@@ -90,7 +91,8 @@ export default function conseiller(state = initialState, action) {
     case 'DELETE_CANDIDATURE_REQUEST':
       return {
         ...state,
-        loading: true
+        loading: true,
+        deleteCandidatureError: false
       };
     case 'DELETE_CANDIDATURE_SUCCESS':
       return {
@@ -99,10 +101,9 @@ export default function conseiller(state = initialState, action) {
         loading: false
       };
     case 'DELETE_CANDIDATURE_FAILURE':
-      console.log(action.error);
       return {
         ...state,
-        deleteError: action.error,
+        deleteCandidatureError: action.error,
         loading: false
       };
     default:

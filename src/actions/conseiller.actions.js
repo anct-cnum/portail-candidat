@@ -122,7 +122,7 @@ function deleteCandidature(motif, conseiller, username, password) {
         );
       },
       error => {
-        dispatch(failure(error));
+        dispatch(failure(error.error));
         history.push('/login');
       }
     );

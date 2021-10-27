@@ -73,7 +73,7 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
             <label className="fr-label">Disponible à partir du</label>
             <DatePicker
               name="dateDisponibilite"
-              className="fr-input fr-my-2w fr-mr-6w"
+              className="fr-input fr-my-2w"
               dateFormat="dd/MM/yyyy"
               locale="fr"
               selected={infos?.dateDisponibilite ?? ''}

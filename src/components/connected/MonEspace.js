@@ -5,29 +5,33 @@ import { conseillerActions } from '../../actions';
 import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
 import Informations from './Informations';
+import SupprimerCandidature from './SupprimerCandidature';
 
 function MonEspace() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.authentication.user.user);
-  const candidat = useSelector(state => state.conseiller?.conseiller);
-  const isUploaded = useSelector(state => state.conseiller?.isUploaded);
-  const isDeleted = useSelector(state => state.conseiller?.isDeleted);
-  const uploading = useSelector(state => state.conseiller?.uploading);
+
+  const downloadError = useSelector(state => state.conseiller?.downloadError);
   const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
+  const deleteError = useSelector(state => state.conseiller?.deleteError);
   const downloading = useSelector(state => state.conseiller?.downloading);
   const uploadError = useSelector(state => state.conseiller?.uploadError);
-  const downloadError = useSelector(state => state.conseiller?.downloadError);
-  const deleteError = useSelector(state => state.conseiller?.deleteError);
-  const blob = useSelector(state => state.conseiller?.blob);
-  const updateError = useSelector(state => state?.user?.patchError);
-  const [flashMessage, setFlashMessage] = useState(false);
   const conseiller = useSelector(state => state.conseiller?.conseiller);
+  const isUploaded = useSelector(state => state.conseiller?.isUploaded);
+  const candidat = useSelector(state => state.conseiller?.conseiller);
+  const isDeleted = useSelector(state => state.conseiller?.isDeleted);
+  const uploading = useSelector(state => state.conseiller?.uploading);
+  const updateError = useSelector(state => state?.user?.patchError);
+  const user = useSelector(state => state.authentication.user.user);
+  const blob = useSelector(state => state.conseiller?.blob);
+
+  const [flashMessage, setFlashMessage] = useState(false);
   const [infos, setInfos] = useState({
     nom: conseiller?.nom,
     prenom: conseiller?.prenom,
     email: conseiller?.email,
     telephone: conseiller?.telephone
   });
+
   const errorTab = [{
     key: 'too-many-files',
     label: 'La plateforme n\'accepte qu\'un seul fichier !'
@@ -47,13 +51,6 @@ function MonEspace() {
     }
   }, []);
 
-
-  useEffect(() => {
-    if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
-      dispatch(conseillerActions.resetCVFile());
-    }
-  }, [blob, downloadError]);
-
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
     { onDrop, accept: '.pdf', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
 
@@ -64,6 +61,12 @@ function MonEspace() {
   const deleteCV = () => {
     dispatch(conseillerActions.deleteCurriculumVitae(user?.entity?.$id, candidat));
   };
+
+  useEffect(() => {
+    if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
+      dispatch(conseillerActions.resetCVFile());
+    }
+  }, [blob, downloadError]);
 
   useEffect(() => {
     if (isDownloaded || isUploaded || isDeleted) {
@@ -164,6 +167,9 @@ function MonEspace() {
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
             <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
+
+            <SupprimerCandidature conseiller={conseiller} />
+
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>

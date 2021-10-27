@@ -10,7 +10,8 @@ export const conseillerService = {
   createSexeAge,
   uploadCurriculumVitae,
   getCurriculumVitae,
-  deleteCurriculumVitae
+  deleteCurriculumVitae,
+  deleteCandidature
 };
 
 function get(id) {
@@ -70,6 +71,19 @@ function deleteCurriculumVitae(id) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/${id}/cv`, requestOptions).then(handleFileResponse);
+}
+
+function deleteCandidature(motif, idConseiller) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: authHeader(),
+    body: JSON.stringify({
+      motif,
+      actionUser: 'candidat',
+    })
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

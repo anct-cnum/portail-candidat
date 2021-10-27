@@ -15,6 +15,8 @@ function Login() {
   const { username, password } = inputs;
   const loggingIn = useSelector(state => state.authentication.loggingIn);
   const error = useSelector(state => state.authentication.error);
+  const deleteError = useSelector(state => state.conseiller?.deleteCandidatureError);
+
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -48,6 +50,7 @@ function Login() {
             <div>
               <div>
                 {error && <span style={{ color: 'red' }}>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
+                {deleteError && <span style={{ color: 'red' }}>{ 'Une erreur est survenue : ' + deleteError }</span>}
               </div>
 
               <div className="fr-my-3w">

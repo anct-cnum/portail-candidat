@@ -1,12 +1,15 @@
 import download from 'downloadjs';
 import { conseillerService } from '../services/conseiller.service.js';
+import { userService } from '../services/user.service.js';
+import { history } from '../helpers';
 
 export const conseillerActions = {
   get,
   uploadCurriculumVitae,
   getCurriculumVitae,
   deleteCurriculumVitae,
-  resetCVFile
+  resetCVFile,
+  deleteCandidature,
 };
 
 function get(id) {
@@ -100,4 +103,39 @@ function deleteCurriculumVitae(id) {
 
 function resetCVFile() {
   return { type: 'RESET_FILE' };
+}
+
+function deleteCandidature(motif, conseiller, username, password) {
+  return dispatch => {
+    dispatch(request());
+
+    userService.login(username, password).then(
+      () => {
+        conseillerService.deleteCandidature(motif, conseiller).then(
+          data => {
+            dispatch(success(data));
+            history.push('/candidature-supprimee');
+          },
+          error => {
+            dispatch(failure(error));
+          }
+        );
+      },
+      error => {
+        dispatch(failure(error.error));
+        history.push('/login');
+      }
+    );
+
+  };
+
+  function request() {
+    return { type: 'DELETE_CANDIDATURE_REQUEST' };
+  }
+  function success(data) {
+    return { type: 'DELETE_CANDIDATURE_SUCCESS', data };
+  }
+  function failure(error) {
+    return { type: 'DELETE_CANDIDATURE_FAILURE', error };
+  }
 }

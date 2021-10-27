@@ -10,6 +10,7 @@ import PrivateRoute from './components/connected/PrivateRoute';
 import Footer from './components/common/Footer';
 import EmailConfirmer from './components/anonymous/ConfirmationEmail';
 import ForgottenPassword from './components/anonymous/ForgottenPassword';
+import CandidatureSupprimee from './components/anonymous/CandidatureSupprimee';
 import { useSelector } from 'react-redux';
 
 require('dotenv').config();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/candidat/confirmation-email/:token" component={EmailConfirmer} />
           <Route path="/mot-de-passe-oublie" component={ForgottenPassword} />
           <Route path="/renouveler-mot-de-passe/:token" component={ForgottenPassword} />
+          <Route path="/candidature-supprimee" component={CandidatureSupprimee} />
           <PrivateRoute exact path="*" component={Home} />
         </Switch>
       </Router>

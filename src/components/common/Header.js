@@ -17,7 +17,7 @@ function Header({ connected }) {
                   <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique France Services" className="logo"/>
                 </a>
               </div>
-              <div className="fr-header__service responsiveTextHeader sansBoxShadow fr-mt-2w">
+              <div className="fr-header__service responsiveTextHeader sansBoxShadow fr-mt-2w placement-droite">
                 <a href="/" title="Portail Candidat">
                   <p className="fr-header__service-title">Portail Candidat</p>
                 </a>
@@ -29,10 +29,10 @@ function Header({ connected }) {
                 <ul className="fr-shortcuts__list menu-flex">
                   <li className="fr-shortcuts__item">
                     <h3 className="fr-tile__title user-header">
-                      <span className="fr-fi-account-fill" /> {user?.name}
+                      <span className="fr-fi-account-fill user-img"/> {user?.name}
                     </h3>
                   </li>
-                  <li className="fr-shortcuts__item">
+                  <li className="fr-shortcuts__item placement-droite">
                     <Link className="fr-btn fr-btn--sm" to={`/login`}>
                       <span className="hide-deconnexion">Se déconnecter&nbsp;</span>
                       <i className="ri-logout-box-r-line"></i>
@@ -43,7 +43,6 @@ function Header({ connected }) {
             }
           </div>
         </div>
-        <div className="fr-col-1"></div>
       </div>
     </header>
   );

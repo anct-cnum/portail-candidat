@@ -50,8 +50,8 @@ function SupprimerCandidature({ conseiller }) {
 
   return (
     <>
-      <div className="fr-mb-15w">
-        <p className="supprimer-candidat-btn" onClick={ () => {
+      <div className="fr-mb-md-15w">
+        <p className="supprimer-link" onClick={ () => {
           setDisplaySupprimerCandidatureForm(true);
           setActive(false);
           setAutre(false);
@@ -63,7 +63,7 @@ function SupprimerCandidature({ conseiller }) {
         <dialog aria-labelledby="fr-modal-supprimer-candidat" role="dialog" id="fr-modal-supprimer-candidat" className="fr-modal modalOpened">
           <div className="fr-container fr-container--fluid fr-container-md">
             <div className="fr-grid-row fr-grid-row--center">
-              <div className="fr-col-12 fr-col-md-8 fr-col-lg-6">
+              <div className="fr-col-11 fr-col-md-10 fr-col-lg-6">
                 <div className="fr-modal__body">
                   <div className="fr-modal__header">
                     <button className="fr-link--close fr-link" title="Fermer la fenêtre" onClick={ () => {
@@ -93,20 +93,19 @@ function SupprimerCandidature({ conseiller }) {
 
 
                     <div className="fr-form-group">
-                      <fieldset className="fr-fieldset fr-fieldset--inline">
+                      <fieldset className="fr-fieldset">
                         <div className="fr-mb-3w"><b>Pour quelle raison souhaitez-vous vous retirer du dispositif ?&nbsp;
                           <span className="important">*</span></b>
                         </div>
                         <div className="fr-fieldset__content">
-                          <div className = "fr-radio-group fr-mr-12w">
+                          <div className = "fr-radio-group">
                             <input name="motif" value="Trouvé un emploi" type="radio" id="emploi" onClick={e => {
                               handleChange(e);
                               setAutre(false);
                             }}/>
                             <label className="fr-label" htmlFor="emploi">J&rsquo;ai trouv&eacute; un emploi.</label>
                           </div>
-
-                          <div className = "fr-radio-group fr-mr-15w">
+                          <div className = "fr-radio-group">
                             <input name="motif" value="Recruté en tant que CnFs" type="radio" id="recruter" onClick={e => {
                               handleChange(e);
                               setAutre(false);
@@ -115,7 +114,6 @@ function SupprimerCandidature({ conseiller }) {
                               J&rsquo;ai &eacute;t&eacute; recrut&eacute; en tant que conseiller num&eacute;rique.
                             </label>
                           </div>
-                          <div className = "fr-radio-group fr-mr-15w"></div>
                           <div className = "fr-radio-group">
                             <input name="motif" value="Autre" type="radio" id="Autre" onClick={() => {
                               setAutre(true);
@@ -129,7 +127,7 @@ function SupprimerCandidature({ conseiller }) {
                           <label>
                           Vous pouvez préciser si vous le souhaitez :
                           </label>
-                          <input name="motif" type="text" className="fr-input fr-mt-1w" style={{ width: '322px' }} onChange={handleChange}/>
+                          <input name="motif" type="text" className="fr-input input-autre fr-mt-1w" onChange={handleChange}/>
                         </div>
                         }
                       </fieldset>
@@ -145,7 +143,7 @@ function SupprimerCandidature({ conseiller }) {
                         setDisplaySupprimerCandidatureForm(false);
                         setActive(false);
                       } }>Annuler</button>
-                      <button className={active ? 'suppression-btn fr-col-offset-2 fr-col-5 ' : 'desactiver-btn fr-col-offset-2 fr-col-5'}
+                      <button className={active ? 'red-btn fr-col-offset-2 fr-col-5 ' : 'desactiver-btn fr-col-offset-2 fr-col-5'}
                         disabled={!active} onClick={handleSubmit}>
                         Supprimer mes informations
                       </button>

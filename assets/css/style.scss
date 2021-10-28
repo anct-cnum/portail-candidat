@@ -106,6 +106,9 @@ $blue-france:#000091;
 .Menu .fr-sidemenu__item--active [class^="fr-fi"] {
     color: $blue-france;
 }
+.fr-sidemenu__inner {
+  padding: 0 1rem 0 .25rem;
+}
 
 /** style custom **/
 .alignRight {
@@ -155,11 +158,23 @@ $blue-france:#000091;
 .react-datepicker-wrapper {
   width: 100%;
 }
-.supprimer-candidat-btn {
+.supprimer-link {
   text-decoration: underline;
   cursor: pointer;
 }
-.suppression-btn {
+.upload-btn {
+  height: 64px;
+  cursor: pointer;
+}
+.download-btn {
+  padding: 1em 1.8em;
+  width: 100%;
+  text-align: left;
+}
+.download-img {
+  margin-right: 0.8em;
+}
+.red-btn {
   background-color: #e10600;
   padding: .5rem 1.5rem;
   text-align: center;
@@ -174,6 +189,9 @@ $blue-france:#000091;
   padding: .5rem 1.5rem;
   text-align: center;
   font-size: 1rem;
+}
+.info-candidat {
+  margin-bottom: 'revert';
 }
 
 /** Header **/
@@ -190,7 +208,11 @@ $blue-france:#000091;
   align-items: baseline;
 }
 .user-header {
-  margin: 0 2.5rem;
+  margin: 0 2.5em 0 0.7em;
+}
+.user-img {
+  position: relative;
+  top: 3px;
 }
 .informations p {
   margin: 0 0 1.5rem;
@@ -217,11 +239,22 @@ $blue-france:#000091;
   .texte-dropZone {
     margin: 0 10px 1.5rem 54px;
   }
+  img {
+    margin-right: 15px;
+  }
 }
-
 .drop-error {
   background-color: #ffb4bf;
   border: 1px solid #ff6961;
+}
+.contenu-droite {
+  float: right;
+}
+.marge-radio {
+  margin-right: 7.5rem;
+}
+.input-autre {
+  width: 322px;
 }
 
 @media (min-width: 769px) {
@@ -230,9 +263,16 @@ $blue-france:#000091;
   }
 }
 
-@media (max-width: 1254px) {
-  .menu-flex {
-  justify-content: flex-end;
+@media (max-width: 1092) and (min-width: 992px) {
+  .info-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0 35%;
+  }
+}
+@media (max-width: 1177px) and (min-width: 992px) {
+  .upload-btn {
+    height: 80px;
   }
 }
 @media (max-width: 992px) {
@@ -240,15 +280,23 @@ $blue-france:#000091;
     display: none;
   }
   .user-header {
-    margin: 0 2.5rem;
+    margin: 0 2.5rem 0 0.7em;
+  }
+  #fr-modal-supprimer-candidat {
+    .fr-modal__body {
+      width: 100%;
+    }
   }
 }
-@media (max-width: 960px) {
+@media (max-width: 963px) {
   .user-header {
-    margin: 0 1rem 0 0 ;
+    margin: 0 1rem 0 0.7em;
+  }
+  .marge-radio {
+    margin-right: 1rem;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .responsiveHeaderTools {
     display: block!important;
   }
@@ -261,19 +309,39 @@ $blue-france:#000091;
   }
   .responsiveTextHeader {
     text-align: end;
+    margin-right: 0px;
   }
   .headerAlignement {
     margin-left: 0.6rem;
   }
-}
-@media (max-width: 420px) {
-
-}
-@media (max-width: 360px) {
   .responsiveHeaderTools {
     margin-left: 0px !important;
   }
+  .marge-contenu {
+    margin: 0.7em;
+  }
+}
+@media (min-width: 460px) and (max-width: 767px) {
+  .placement-droite {
+    position: absolute;
+    right: 0;
+    margin: 0 30px;
+  }
+}
+@media (max-width: 460px) {
+
   .user-header {
     font-size: 12px;
+  }
+  .marge-contenu {
+    margin: 0 10px;
+  }
+  .input-autre {
+    width: 80%;
+  }
+}
+@media (max-width: 411px) {
+  .upload-btn {
+    height: 80px;
   }
 }

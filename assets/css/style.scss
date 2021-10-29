@@ -13,6 +13,9 @@ $blue-france:#000091;
 .labelError {
   color: #FF3333;
 }
+.red-background {
+  background-color: #E10600;
+}
 
 .spinnerCustom {
   position: absolute;
@@ -88,9 +91,23 @@ $blue-france:#000091;
   color: #383838!important;
 }
 
+/* Modal Gestion */
+.modalOpened {
+  opacity: 1;
+  visibility: visible;
+}
+#fr-modal-supprimer-candidat {
+  .fr-modal__body {
+    width: 130%;
+  }
+}
+
 /** Icones menu gauche **/
 .Menu .fr-sidemenu__item--active [class^="fr-fi"] {
     color: $blue-france;
+}
+.fr-sidemenu__inner {
+  padding: 0 1rem 0 .25rem;
 }
 
 /** style custom **/
@@ -135,12 +152,68 @@ $blue-france:#000091;
 .valid {
   color: #008941;
 }
+.sansBoxShadow {
+  box-shadow: none;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.supprimer-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.upload-btn {
+  height: 64px;
+  cursor: pointer;
+}
+.download-btn {
+  padding: 1em 1.8em;
+  width: 100%;
+  text-align: left;
+}
+.download-img {
+  margin-right: 0.8em;
+}
+.red-btn {
+  background-color: #e10600;
+  padding: .5rem 1.5rem;
+  text-align: center;
+  color: #e7e7e7;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #d30000;
+  }
+}
+.desactiver-btn {
+  padding: .5rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
+.info-candidat {
+  margin-bottom: 'revert';
+}
 
 /** Header **/
+.logo {
+  height: 50px;
+  margin-top: -10px;
+}
 .fr-header__tools-links {
   display: block!important;
 }
-
+.menu-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.user-header {
+  margin: 0 2.5rem 0 0.7rem;
+}
+.user-img {
+  position: relative;
+  top: 3px;
+}
 .informations p {
   margin: 0 0 1.5rem;
 }
@@ -166,14 +239,64 @@ $blue-france:#000091;
   .texte-dropZone {
     margin: 0 10px 1.5rem 54px;
   }
+  img {
+    margin-right: 15px;
+  }
 }
-
 .drop-error {
   background-color: #ffb4bf;
   border: 1px solid #ff6961;
 }
+.contenu-droite {
+  float: right;
+}
+.marge-radio {
+  margin-right: 7.5rem;
+}
+.input-autre {
+  width: 322px;
+}
 
-@media (max-width: 768px) {
+@media (min-width: 769px) {
+  .headerAlignementmd-lg {
+    margin-left: 2.5rem!important;
+  }
+}
+
+@media (max-width: 1092) and (min-width: 992px) {
+  .info-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0 35%;
+  }
+}
+@media (max-width: 1177px) and (min-width: 992px) {
+  .upload-btn {
+    height: 80px;
+  }
+}
+@media (max-width: 992px) {
+  .hide-deconnexion {
+    display: none;
+  }
+  .user-header {
+    margin: 0 2.5rem 0 0.7rem;
+  }
+  #fr-modal-supprimer-candidat {
+    .fr-modal__body {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 963px) {
+  .user-header {
+    margin: 0 1rem 0 0.7rem;
+  }
+  .marge-radio {
+    margin-right: 1rem;
+  }
+}
+@media (max-width: 767px) {
   .responsiveHeaderTools {
     display: block!important;
   }
@@ -186,18 +309,39 @@ $blue-france:#000091;
   }
   .responsiveTextHeader {
     text-align: end;
+    margin-right: 0px;
   }
   .headerAlignement {
-    margin-left: 1rem;
+    margin-left: 0.6rem;
+  }
+  .responsiveHeaderTools {
+    margin-left: 0px !important;
+  }
+  .marge-contenu {
+    margin: 0.7em;
   }
 }
-@media (min-width: 769px) {
-
-.headerAlignementmd-lg {
-  margin-left: 2.5rem!important;
+@media (min-width: 460px) and (max-width: 767px) {
+  .placement-droite {
+    position: absolute;
+    right: 0;
+    margin: 0 30px;
+  }
 }
-}
+@media (max-width: 460px) {
 
-.red-background {
-  background-color: #E10600;
+  .user-header {
+    font-size: 12px;
+  }
+  .marge-contenu {
+    margin: 0 10px;
+  }
+  .input-autre {
+    width: 80%;
+  }
+}
+@media (max-width: 411px) {
+  .upload-btn {
+    height: 80px;
+  }
 }

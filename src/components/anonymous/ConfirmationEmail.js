@@ -26,7 +26,7 @@ function EmailConfirmer({ match }) {
     <div>
       <Header/>
       <div className="">
-        <div className="fr-grid-row rf-grid-row--center fr-mt-3w">
+        <div className="fr-grid-row fr-grid-row--center fr-mt-3w">
           <div className="fr-col-offset-3"/>
           <div style={{ width: '50%', textAlign: 'center' }}>
             {tokenVerified === true &&
@@ -40,7 +40,7 @@ function EmailConfirmer({ match }) {
             </div>
             }
             {tokenVerified === false &&
-                  <p className="rf-label flashBag labelError" style={{ fontSize: '16px' }}>
+                  <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
                   La confirmation de votre e-mail a échoué, <br/>
                   veuillez réessayer plus tard
                   </p>

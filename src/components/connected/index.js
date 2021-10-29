@@ -11,15 +11,13 @@ function Connected() {
       <Header connected/>
       <div className="fr-container-fluid fr-mt-8w">
         <div className="fr-grid-row">
-          <div className="fr-col-1"></div>
-          <div className="fr-col-12 fr-col-sm-3 rf-col-xs-1 responsiveVisibilityMenu">
+          <div className="fr-col-0 fr-col-md-3 responsiveVisibilityMenu">
             <Menu />
           </div>
-          <div className="fr-col-12 fr-col-sm-7">
+          <div className="fr-col-10 fr-col-md-7 marge-contenu">
             <Route path={`/mon-espace`} component={MonEspace} />
             <Redirect from="/" to="/mon-espace"/>
           </div>
-          <div className="fr-col-1"></div>
         </div>
       </div>
     </>

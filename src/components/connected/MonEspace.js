@@ -74,9 +74,6 @@ function MonEspace() {
     }
   }, [isDownloaded, isUploaded, isDeleted]);
 
-  console.log(downloadError);
-  console.log(uploadError);
-
   return (
     <div className="informations">
       { isUploaded &&
@@ -96,7 +93,6 @@ function MonEspace() {
       }
 
       {!isUploaded && uploadError &&
-
           <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
             <FlashMessage duration={100000} >
               <div className="flashBag labelError">
@@ -121,7 +117,6 @@ function MonEspace() {
       }
 
       {deleteError &&
-
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
           <FlashMessage duration={100000} >
             <div className="flashBag labelError">
@@ -132,6 +127,7 @@ function MonEspace() {
           </FlashMessage>
         </div>
       }
+
       {flashMessage === true &&
         <div>
           <FlashMessage duration={10000}>

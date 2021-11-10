@@ -23,9 +23,11 @@ function Menu() {
           <ul className="fr-sidemenu__list">
             <li className={`fr-sidemenu__item ${location.pathname.startsWith('/informations') ? 'fr-sidemenu__item--active' : ''}`}>
               <Link className="fr-sidemenu__link" to="/mon-espace">
-                <div className="fr-container">
+                <div className="fr-container-fluid">
                   <div className="fr-grid-row fr-grid-row--end">
+                    <div className="fr-col-12">
                     Mon espace
+                    </div>
                   </div>
                 </div>
               </Link>

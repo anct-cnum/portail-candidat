@@ -31,3 +31,4 @@ yarn-error.log*
 .eslintcache
 
 assets/fonts
+/.idea

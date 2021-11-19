@@ -76,7 +76,7 @@ function deleteCurriculumVitae(id) {
 function deleteCandidature(motif, idConseiller) {
   const requestOptions = {
     method: 'DELETE',
-    headers: authHeader(),
+    headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
     body: JSON.stringify({
       motif,
       actionUser: 'candidat',

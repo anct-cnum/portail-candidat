@@ -76,14 +76,10 @@ function deleteCurriculumVitae(id) {
 function deleteCandidature(motif, idConseiller) {
   const requestOptions = {
     method: 'DELETE',
-    headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
-    body: JSON.stringify({
-      motif,
-      actionUser: 'candidat',
-    })
+    headers: authHeader(),
   };
 
-  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature`, requestOptions).then(handleResponse);
+  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature?motif=${motif}&actionUser=candidat`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

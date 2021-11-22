@@ -77,13 +77,9 @@ function deleteCandidature(motif, idConseiller) {
   const requestOptions = {
     method: 'DELETE',
     headers: authHeader(),
-    body: JSON.stringify({
-      motif,
-      actionUser: 'candidat',
-    })
   };
 
-  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature`, requestOptions).then(handleResponse);
+  return fetch(`${apiUrlRoot}/conseillers/${idConseiller}/candidature?motif=${motif}&actionUser=candidat`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

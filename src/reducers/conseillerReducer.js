@@ -76,6 +76,7 @@ export default function conseiller(state = initialState, action) {
     case 'DELETE_CURRICULUM_VITAE_REQUEST':
       return {
         ...state,
+        isUploaded: false,
         isDeleted: false,
         deleteError: false,
         loadingDeleteCv: true

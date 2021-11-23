@@ -15,6 +15,7 @@ export default function conseiller(state = initialState, action) {
       };
     case 'GET_CONSEILLER_FAILURE':
       return {
+        ...state,
         error: action.error
       };
     case 'POST_SEXE_AGE_REQUEST':
@@ -72,16 +73,26 @@ export default function conseiller(state = initialState, action) {
         downloading: false,
         isDownloaded: false
       };
+    case 'DELETE_CURRICULUM_VITAE_REQUEST':
+      return {
+        ...state,
+        isUploaded: false,
+        isDeleted: false,
+        deleteError: false,
+        loadingDeleteCv: true
+      };
     case 'DELETE_CURRICULUM_VITAE_SUCCESS':
       return {
         ...state,
         isDeleted: true,
-        deleteError: false
+        deleteError: false,
+        loadingDeleteCv: false
       };
     case 'DELETE_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
         deleteError: action.error,
+        loadingDeleteCv: false
       };
     case 'RESET_FILE':
       return {

@@ -19,6 +19,7 @@ function MonEspace() {
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isDeleted = useSelector(state => state.conseiller?.isDeleted);
+  const loadingDeleteCv = useSelector(state => state.conseiller?.loadingDeleteCv);
   const uploading = useSelector(state => state.conseiller?.uploading);
   const updateError = useSelector(state => state?.user?.patchError);
   const user = useSelector(state => state.authentication.user.user);
@@ -76,9 +77,15 @@ function MonEspace() {
 
   return (
     <div className="informations">
+      <Spinner
+        style={{ textAlign: 'center' }}
+        type="Oval"
+        color="#00BFFF"
+        visible={loadingDeleteCv === true}
+      />
       { isUploaded &&
           <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag">
                 <span>
                   Votre Curriculum Vit&aelig; a été ajouté avec succès !
@@ -94,7 +101,7 @@ function MonEspace() {
 
       {!isUploaded && uploadError &&
           <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag labelError">
                 <span>
                   {uploadError}
@@ -106,7 +113,7 @@ function MonEspace() {
 
       { isDeleted &&
           <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag">
                 <span>
                   Votre Curriculum Vit&aelig; a été supprimé avec succès !
@@ -118,7 +125,7 @@ function MonEspace() {
 
       {deleteError &&
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-          <FlashMessage duration={100000} >
+          <FlashMessage duration={10000} >
             <div className="flashBag labelError">
               <span>
                 Une erreur s&apos;est produite pendant la suppression
@@ -174,7 +181,8 @@ function MonEspace() {
               <p>Vous n&apos;avez pas encore téléchargé votre Curriculum vit&aelig;, faites le dès maintenant ! </p>
             }
             <span>Ajouter ou mettre à jour votre CV&nbsp;:</span>
-            <div className={fileRejections.length > 0 ? 'dropZone drop-error fr-mt-4w fr-mb-5w' : 'fr-btn fr-mt-4w fr-mb-5w upload-btn' }
+            <div style={{ display: 'flex' }}
+              className={fileRejections.length > 0 ? 'dropZone drop-error fr-mt-4w fr-mb-5w' : 'fr-btn fr-mt-4w fr-mb-5w upload-btn' }
               {...getRootProps()}>
               <input {...getInputProps()} />
               { acceptedFiles.length === 0 &&
@@ -208,9 +216,14 @@ function MonEspace() {
                 <span className="fr-fi-file-download-line download-img" aria-hidden="true"></span>
                 Mon CV ({candidat?.cv?.file})
               </button>
-              <p className="supprimer-link fr-mt-2w" onClick={deleteCV}>
+              { loadingDeleteCv === true ?
+                <p className="supprimer-link fr-mt-2w" style={{ color: '#eeeeee' }}>
                   Supprimer votre CV
-              </p>
+                </p> :
+                <p className="supprimer-link fr-mt-2w" onClick={deleteCV}>
+                  Supprimer votre CV
+                </p>
+              }
             </>
             }
           </div>

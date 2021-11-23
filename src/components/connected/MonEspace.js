@@ -85,7 +85,7 @@ function MonEspace() {
       />
       { isUploaded &&
           <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag">
                 <span>
                   Votre Curriculum Vit&aelig; a été ajouté avec succès !
@@ -101,7 +101,7 @@ function MonEspace() {
 
       {!isUploaded && uploadError &&
           <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag labelError">
                 <span>
                   {uploadError}
@@ -113,7 +113,7 @@ function MonEspace() {
 
       { isDeleted &&
           <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={100000} >
+            <FlashMessage duration={10000} >
               <div className="flashBag">
                 <span>
                   Votre Curriculum Vit&aelig; a été supprimé avec succès !
@@ -125,7 +125,7 @@ function MonEspace() {
 
       {deleteError &&
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-          <FlashMessage duration={100000} >
+          <FlashMessage duration={10000} >
             <div className="flashBag labelError">
               <span>
                 Une erreur s&apos;est produite pendant la suppression

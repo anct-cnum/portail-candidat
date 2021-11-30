@@ -64,16 +64,18 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: bundle
-          path: ./*
+          path: build/*
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Retrieve bundle React
         uses: actions/download-artifact@v2
         with:
           name: bundle
+          path: build
       - name: Deploy on clever cloud
         uses: s0/git-publish-subdir-action@develop
         env:

@@ -40,6 +40,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Retrieve cached dependencies
+        uses: actions/cache@v2
+        with:
+          key: node_modules-${{ hashFiles('yarn.lock') }}
+          path: node_modules
       - name: Override .env
         uses: SpicyPizza/create-envfile@v1
         with:
@@ -59,20 +64,22 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: bundle
-          path: ./*
+          path: build/*
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Retrieve bundle React
         uses: actions/download-artifact@v2
         with:
           name: bundle
+          path: build
       - name: Deploy on clever cloud
         uses: s0/git-publish-subdir-action@develop
         env:
-          REPO: ${{ secrets.CLEVER_CLOUD_GIT_PORTAIL_CANDIDAT_DEMOSEB }}
+          REPO: ${{ secrets.CLEVER_CLOUD_GIT_PORTAIL_CANDIDAT_DEMO }}
           BRANCH: master
           FOLDER: build
           SSH_PRIVATE_KEY: ${{ secrets.CLEVER_CLOUD_DEPLOY_PRIVATE_KEY }}

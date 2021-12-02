@@ -232,10 +232,11 @@ function MonEspace() {
             <a href={lienCampagnePix}
               target="blank"
               rel="noreferrer"
-              title="Accéder à son test Pix"
+              title="Accéder à votre test Pix"
               className="fr-link">
-                Accéder à son test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px"/>
+                Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px"/>
             </a>
+            (lien personnel à ne pas partager)
           </div>
         </div>
       </div>

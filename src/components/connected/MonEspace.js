@@ -24,6 +24,7 @@ function MonEspace() {
   const updateError = useSelector(state => state?.user?.patchError);
   const user = useSelector(state => state.authentication.user.user);
   const blob = useSelector(state => state.conseiller?.blob);
+  const lienCampagnePix = `${process.env.REACT_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
 
   const [flashMessage, setFlashMessage] = useState(false);
   const [infos, setInfos] = useState({
@@ -226,6 +227,15 @@ function MonEspace() {
               }
             </>
             }
+
+            <h2 className="fr-mt-8w ">Lien du test PIX</h2>
+            <a href={lienCampagnePix}
+              target="blank"
+              rel="noreferrer"
+              title="Accéder à son test Pix"
+              className="fr-link">
+                Accéder à son test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px"/>
+            </a>
           </div>
         </div>
       </div>

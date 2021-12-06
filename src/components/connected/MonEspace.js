@@ -228,15 +228,15 @@ function MonEspace() {
             </>
             }
 
-            <h2 className="fr-mt-8w ">Lien du test PIX</h2>
+            <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Lien du test PIX</h2>
             <a href={lienCampagnePix}
               target="blank"
               rel="noreferrer"
               title="Accéder à votre test Pix"
-              className="fr-link">
+              className="fr-link" style={{ padding: '0.25rem 0' }}>
                 Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px"/>
             </a>
-            (lien personnel à ne pas partager)
+            <br/>(lien personnel à ne pas partager)
           </div>
         </div>
       </div>

@@ -13,8 +13,6 @@ import ForgottenPassword from './components/anonymous/ForgottenPassword';
 import CandidatureSupprimee from './components/anonymous/CandidatureSupprimee';
 import { useSelector } from 'react-redux';
 
-require('dotenv').config();
-
 function App() {
 
   const downloading = useSelector(state => state.conseiller?.downloading);

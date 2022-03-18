@@ -86,7 +86,7 @@ function ForgottenPassword({ match = null }) {
               }
               {submittedEmail && errorEmail === 'Error access forgottenPassword espace candidat' &&
                 <div className="invalid fr-mb-3w">
-                  L&apos;espace candidat lié à cette adresse mail a été cloturé car l&apos;adresse figure dans la liste des conseillers numériques.
+                  L&apos;espace candidat lié à cette adresse mail a été cloturé car un mail d’activation de votre compte professionnel conseiller numérique vous a été envoyé.
                   Pour effectuer votre changement de mot de passe, veuillez vous rendre sur <a href="https://coop.conseiller-numerique.gouv.fr/">l&apos;espace Coop</a>.
                 </div>
               }

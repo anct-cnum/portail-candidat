@@ -97,7 +97,8 @@ function sendForgottenPasswordEmail(username) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'username': username
+      'username': username,
+      'espace': 'candidat'
     })
   };
 

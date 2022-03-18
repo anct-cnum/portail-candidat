@@ -84,6 +84,12 @@ function ForgottenPassword({ match = null }) {
                   L&#39;e-mail de renouvellement de mot de passe n&#39;a pas pu être envoyé, vérifiez votre adresse e-mail !
                 </div>
               }
+              {submittedEmail && errorEmail === 'Error access forgottenPassword espace candidat' &&
+                <div className="invalid fr-mb-3w">
+                  L&apos;espace candidat lié à cette adresse mail a été cloturé car l&apos;adresse figure dans la liste des conseillers numériques.
+                  Pour effectuer votre changement de mot de passe, veuillez vous rendre sur <a href="https://coop.conseiller-numerique.gouv.fr/">l&apos;espace Coop</a>.
+                </div>
+              }
               {submittedEmail && !username &&
                 <div className="invalid fr-mb-3w">Adresse email requise</div>
               }

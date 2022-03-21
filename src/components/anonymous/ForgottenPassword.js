@@ -86,10 +86,7 @@ function ForgottenPassword({ match = null }) {
               }
               {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
                 <div className="invalid fr-mb-3w">
-                    L&rsquo;espace candidat lié à cette adresse mail a été cloturé car un mail 
-                    d&rsquo;activation de votre compte professionnel conseiller numérique vous a été envoyé.
-                    Pour effectuer votre changement de mot de passe, veuillez vous rendre sur
-                    <a href="https://coop.conseiller-numerique.gouv.fr/">l&rsquo;espace Coop</a>.
+                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation reçue sur {username}
                 </div>
               }
               {submittedEmail && !username &&

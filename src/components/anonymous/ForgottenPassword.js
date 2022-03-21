@@ -86,7 +86,7 @@ function ForgottenPassword({ match = null }) {
               }
               {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
                 <div className="invalid fr-mb-3w">
-                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation reçue sur {username}
+                  Veuillez dr&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation reçue sur {username}
                 </div>
               }
               {submittedEmail && !username &&

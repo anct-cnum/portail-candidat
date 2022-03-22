@@ -84,6 +84,11 @@ function ForgottenPassword({ match = null }) {
                   L&#39;e-mail de renouvellement de mot de passe n&#39;a pas pu être envoyé, vérifiez votre adresse e-mail !
                 </div>
               }
+              {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
+                <div className="invalid fr-mb-3w">
+                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation reçu sur {username}
+                </div>
+              }
               {submittedEmail && !username &&
                 <div className="invalid fr-mb-3w">Adresse email requise</div>
               }

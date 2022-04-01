@@ -6,6 +6,7 @@ import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
 import Informations from './Informations';
 import SupprimerCandidature from './SupprimerCandidature';
+import AnnulerDisponibiliter from './AnnulerDisponibiliter';
 
 function MonEspace() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function MonEspace() {
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isDeleted = useSelector(state => state.conseiller?.isDeleted);
+  const isCancelAvailable = useSelector(state => state.conseiller?.isCancelAvailable);
   const loadingDeleteCv = useSelector(state => state.conseiller?.loadingDeleteCv);
   const uploading = useSelector(state => state.conseiller?.uploading);
   const updateError = useSelector(state => state?.user?.patchError);
@@ -84,44 +86,55 @@ function MonEspace() {
         color="#00BFFF"
         visible={loadingDeleteCv === true}
       />
-      { isUploaded &&
-          <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={10000} >
-              <div className="flashBag">
-                <span>
-                  Votre Curriculum Vit&aelig; a été ajouté avec succès !
-                </span>
-                <br/><br/>
-                <span style={{ color: 'initial' }}>
-                  Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
-                </span>
-              </div>
-            </FlashMessage>
-          </div>
+      {isUploaded &&
+        <div className="fr-col-12 fr-mb-3w">
+          <FlashMessage duration={10000} >
+            <div className="flashBag">
+              <span>
+                Votre Curriculum Vit&aelig; a été ajouté avec succès !
+              </span>
+              <br /><br />
+              <span style={{ color: 'initial' }}>
+                Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
+              </span>
+            </div>
+          </FlashMessage>
+        </div>
       }
 
       {!isUploaded && uploadError &&
-          <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-            <FlashMessage duration={10000} >
-              <div className="flashBag labelError">
-                <span>
-                  {uploadError}
-                </span>
-              </div>
-            </FlashMessage>
-          </div>
+        <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
+          <FlashMessage duration={10000} >
+            <div className="flashBag labelError">
+              <span>
+                {uploadError}
+              </span>
+            </div>
+          </FlashMessage>
+        </div>
       }
 
-      { isDeleted &&
-          <div className="fr-col-12 fr-mb-3w">
-            <FlashMessage duration={10000} >
-              <div className="flashBag">
-                <span>
-                  Votre Curriculum Vit&aelig; a été supprimé avec succès !
-                </span>
-              </div>
-            </FlashMessage>
-          </div>
+      {isCancelAvailable &&
+        <div className="fr-col-12 fr-mb-3w">
+          <FlashMessage duration={6000} >
+            <div className=" flashBag">
+              <span>
+                Vous avez été désinscrits avec succès.
+              </span>
+            </div>
+          </FlashMessage>
+        </div>
+      }
+      {isDeleted &&
+        <div className="fr-col-12 fr-mb-3w">
+          <FlashMessage duration={10000} >
+            <div className="flashBag">
+              <span>
+                Votre Curriculum Vit&aelig; a été supprimé avec succès !
+              </span>
+            </div>
+          </FlashMessage>
+        </div>
       }
 
       {deleteError &&
@@ -139,21 +152,21 @@ function MonEspace() {
       {flashMessage === true &&
         <div>
           <FlashMessage duration={10000}>
-            { updateError && (updateError !== undefined || updateError !== false) &&
+            {updateError && (updateError !== undefined || updateError !== false) &&
               <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
                 {updateError}
               </p>
             }
-            { (updateError === undefined || updateError === false) &&
-                <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
-                  { infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
-                    <>
-                      Nous vous avons envoyé un mail à :&nbsp;
-                      <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
-                    </> }
+            {(updateError === undefined || updateError === false) &&
+              <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
+                {infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
+                  <>
+                    Nous vous avons envoyé un mail à :&nbsp;
+                    <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
+                  </>}
                 &nbsp;
-                  <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
-                </p>
+                <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
+              </p>
             }
           </FlashMessage>
         </div>
@@ -167,29 +180,30 @@ function MonEspace() {
                 color="#00BFFF"
                 height={100}
                 width={100}
-                visible={downloading || uploading }
+                visible={downloading || uploading}
               />
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
-            <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller}/>
-
+            <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller} />
             <SupprimerCandidature conseiller={conseiller} />
-
+            {/* {conseiller.disponible && */}
+            <AnnulerDisponibiliter conseiller={conseiller} />
+            {/* } */}
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>
-            { !candidat?.cv?.file &&
+            {!candidat?.cv?.file &&
               <p>Vous n&apos;avez pas encore téléchargé votre Curriculum vit&aelig;, faites le dès maintenant ! </p>
             }
             <span>Ajouter ou mettre à jour votre CV&nbsp;:</span>
             <div style={{ display: 'flex' }}
-              className={fileRejections.length > 0 ? 'dropZone drop-error fr-mt-4w fr-mb-5w' : 'fr-btn fr-mt-4w fr-mb-5w upload-btn' }
+              className={fileRejections.length > 0 ? 'dropZone drop-error fr-mt-4w fr-mb-5w' : 'fr-btn fr-mt-4w fr-mb-5w upload-btn'}
               {...getRootProps()}>
               <input {...getInputProps()} />
-              { acceptedFiles.length === 0 &&
+              {acceptedFiles.length === 0 &&
                 <>
                   <div className="fr-mb-5v fr-mr-2v">
-                    <img src="logos/icone-ajouter-cv.svg"/>
+                    <img src="logos/icone-ajouter-cv.svg" />
                   </div>
                   {
                     isDragActive ?
@@ -200,32 +214,32 @@ function MonEspace() {
                   }
                 </>
               }
-              { acceptedFiles.length > 0 &&
+              {acceptedFiles.length > 0 &&
                 <p>{acceptedFiles[0].name}</p>
               }
-              { fileRejections?.length > 0 &&
+              {fileRejections?.length > 0 &&
                 <div className="drop-error-message">{
                   errorTab.find(item => item.key === fileRejections[0].errors[0].code).label
                 }
                 </div>
               }
             </div>
-            { candidat?.cv?.file &&
-            <>
-              <span>Voir ou télécharger votre CV&nbsp;:<br/></span>
-              <button className="fr-mt-3w download-btn" onClick={downloadCV}>
-                <span className="fr-fi-file-download-line download-img" aria-hidden="true"></span>
-                Mon CV ({candidat?.cv?.file})
-              </button>
-              { loadingDeleteCv === true ?
-                <p className="supprimer-link fr-mt-2w" style={{ color: '#eeeeee' }}>
-                  Supprimer votre CV
-                </p> :
-                <p className="supprimer-link fr-mt-2w" onClick={deleteCV}>
-                  Supprimer votre CV
-                </p>
-              }
-            </>
+            {candidat?.cv?.file &&
+              <>
+                <span>Voir ou télécharger votre CV&nbsp;:<br /></span>
+                <button className="fr-mt-3w download-btn" onClick={downloadCV}>
+                  <span className="fr-fi-file-download-line download-img" aria-hidden="true"></span>
+                  Mon CV ({candidat?.cv?.file})
+                </button>
+                {loadingDeleteCv === true ?
+                  <p className="supprimer-link fr-mt-2w" style={{ color: '#eeeeee' }}>
+                    Supprimer votre CV
+                  </p> :
+                  <p className="supprimer-link fr-mt-2w" onClick={deleteCV}>
+                    Supprimer votre CV
+                  </p>
+                }
+              </>
             }
 
             <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Lien du test PIX</h2>
@@ -234,9 +248,9 @@ function MonEspace() {
               rel="noreferrer"
               title="Accéder à votre test Pix"
               className="fr-link" style={{ padding: '0.25rem 0' }}>
-                Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px"/>
+              Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
             </a>
-            <br/>(lien personnel à ne pas partager)
+            <br />(lien personnel à ne pas partager)
           </div>
         </div>
       </div>

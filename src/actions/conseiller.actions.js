@@ -81,11 +81,11 @@ function getCurriculumVitae(id, candidat) {
   }
 }
 
-function updateDisponibiliterCandidat(idConseiller) {
+function updateDisponibiliterCandidat(idConseiller, disponible) {
 
   return dispatch => {
     dispatch(request());
-    conseillerService.updateDisponibiliterCandidat(idConseiller)
+    conseillerService.updateDisponibiliterCandidat(idConseiller, disponible)
     .then(
       result => {
         dispatch(success(result));

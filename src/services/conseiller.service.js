@@ -37,16 +37,16 @@ function createSexeAge(user) {
   return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
 }
 
-function updateDisponibiliterCandidat(idConseiller) {
+function updateDisponibiliterCandidat(idConseiller, disponible) {
   const requestOptions = {
     method: 'PATCH',
     headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
     body: JSON.stringify({
-      disponible: false,
+      disponible: disponible,
     })
   };
 
-  return fetch(`${apiUrlRoot}/conseillers/desinscription/${idConseiller}`, requestOptions).then(handleResponse);
+  return fetch(`${apiUrlRoot}/conseillers/update_disponibilite/${idConseiller}`, requestOptions).then(handleResponse);
 }
 
 function uploadCurriculumVitae(fileCV) {

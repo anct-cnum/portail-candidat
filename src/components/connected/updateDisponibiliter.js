@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { conseillerActions } from '../../actions/conseiller.actions';
-import FlashMessage from 'react-flash-message';
 
-function AnnulerDisponibiliter({ conseiller }) {
+function UpdateDisponibiliter({ conseiller }) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   function handleValideModification() {
-    // conseiller.disponible = false;
-    dispatch(conseillerActions.updateDisponibiliterCandidat(conseiller._id));
+    let disponible = true;
+    if (conseiller.disponible) {
+      disponible = false;
+    }
+    dispatch(conseillerActions.updateDisponibiliterCandidat(conseiller._id, disponible));
     setShowModal(false);
   }
   return (
@@ -18,8 +20,8 @@ function AnnulerDisponibiliter({ conseiller }) {
       <button className="fr-btn fr-mb-4w" onClick={() => {
         setShowModal(true);
       }}>
-        <span className="fr-fi-edit-line fr-mr-3v" aria-hidden="true" />
-        Me désinscrire
+        <span className="fr-fi-refresh-line fr-mr-3v" aria-hidden="true" />
+        {conseiller?.disponible ? 'Me désinscrire' : 'Me réinscrire'}
       </button>
       {showModal &&
         <dialog aria-labelledby="fr-modal-supprimer-candidat" role="dialog" id="fr-modal-supprimer-candidat" className="fr-modal modalOpened">
@@ -33,14 +35,29 @@ function AnnulerDisponibiliter({ conseiller }) {
                     }}>Fermer</button>
                   </div>
                   <div className="fr-modal__content">
-                    <h1 id="fr-modal-2-title" className="fr-modal__title">
-                      <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
-                      Confirmer votre désinscription
-                    </h1>
-                    <p>
-                      L&apos;envoi de cette demande annulera votre candidature sur la plateforme conseiller numerique.
-                      Vous ne serez désormais plus visible par les structures employeuses.
-                    </p>
+                    {conseiller?.disponible ?
+                      <>
+                        <h1 id="fr-modal-2-title" className="fr-modal__title">
+                          <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
+                          Confirmer votre désinscription
+                        </h1>
+                        <p>
+                          L&apos;envoi de cette demande annulera votre candidature sur la plateforme conseiller numerique.
+                          Vous ne serez désormais plus visible par les structures employeuses.
+                        </p>
+                      </> :
+                      <>
+                        <h1 id="fr-modal-2-title" className="fr-modal__title">
+                          <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
+                          Confirmer votre réinscription
+                        </h1>
+                        <p>
+                          L&apos;envoi de cette demande rétablira votre candidature sur la plateforme conseiller numerique.
+                          Vous serez désormais visible par les structures employeuses.
+                        </p>
+                      </>
+                    }
+
                   </div>
                   <div className="fr-modal__footer">
                     <ul className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left">
@@ -68,8 +85,8 @@ function AnnulerDisponibiliter({ conseiller }) {
   );
 }
 
-AnnulerDisponibiliter.propTypes = {
+UpdateDisponibiliter.propTypes = {
   conseiller: PropTypes.object
 };
 
-export default AnnulerDisponibiliter;
+export default UpdateDisponibiliter;

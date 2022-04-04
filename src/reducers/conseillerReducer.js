@@ -26,20 +26,21 @@ export default function conseiller(state = initialState, action) {
     case 'POST_DISPO_CANDIDAT_REQUEST':
       return {
         ...state,
-        loading: true
+        loading: true,
+        isUpdateStatutDispo: false
       };
     case 'POST_DISPO_CANDIDAT_SUCCESS':
       return {
         ...state,
         'conseiller.disponible': action.conseiller.disponible,
-        'conseiller.dateDisponibilite': action.conseiller.dateDisponibilite,
         'loading': false,
-        'isCancelAvailable': true
+        'isUpdateStatutDispo': true
       };
     case 'POST_DISPO_CANDIDAT_FAILURE':
       return {
         error: action.error,
-        isCancelAvailable: false
+        loading: false,
+        isUpdateStatutDispo: false
       };
     case 'POST_SEXE_AGE_SUCCESS':
       return {

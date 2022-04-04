@@ -6,7 +6,7 @@ import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
 import Informations from './Informations';
 import SupprimerCandidature from './SupprimerCandidature';
-import AnnulerDisponibiliter from './AnnulerDisponibiliter';
+import UpdateDisponibiliter from './updateDisponibiliter';
 
 function MonEspace() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function MonEspace() {
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isDeleted = useSelector(state => state.conseiller?.isDeleted);
-  const isCancelAvailable = useSelector(state => state.conseiller?.isCancelAvailable);
+  const isUpdateStatutDispo = useSelector(state => state.conseiller?.isUpdateStatutDispo);
   const loadingDeleteCv = useSelector(state => state.conseiller?.loadingDeleteCv);
   const uploading = useSelector(state => state.conseiller?.uploading);
   const updateError = useSelector(state => state?.user?.patchError);
@@ -73,10 +73,10 @@ function MonEspace() {
   }, [blob, downloadError]);
 
   useEffect(() => {
-    if (isDownloaded || isUploaded || isDeleted) {
+    if (isDownloaded || isUploaded || isDeleted || isUpdateStatutDispo) {
       dispatch(conseillerActions.get(user?.entity?.$id));
     }
-  }, [isDownloaded, isUploaded, isDeleted]);
+  }, [isDownloaded, isUploaded, isDeleted, isUpdateStatutDispo]);
 
   return (
     <div className="informations">
@@ -114,12 +114,12 @@ function MonEspace() {
         </div>
       }
 
-      {isCancelAvailable &&
+      {isUpdateStatutDispo &&
         <div className="fr-col-12 fr-mb-3w">
           <FlashMessage duration={6000} >
             <div className=" flashBag">
               <span>
-                Vous avez été désinscrits avec succès.
+                {conseiller.disponible ? 'Vous avez été réinscrits avec succès.' : 'Vous avez été désinscrits avec succès.'}
               </span>
             </div>
           </FlashMessage>
@@ -185,10 +185,8 @@ function MonEspace() {
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
             <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller} />
+            <UpdateDisponibiliter conseiller={conseiller} />
             <SupprimerCandidature conseiller={conseiller} />
-            {/* {conseiller.disponible && */}
-            <AnnulerDisponibiliter conseiller={conseiller} />
-            {/* } */}
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>

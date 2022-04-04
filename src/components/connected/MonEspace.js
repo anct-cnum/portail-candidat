@@ -6,7 +6,7 @@ import FlashMessage from 'react-flash-message';
 import Spinner from 'react-loader-spinner';
 import Informations from './Informations';
 import SupprimerCandidature from './SupprimerCandidature';
-import UpdateDisponibiliter from './updateDisponibiliter';
+import UpdateDisponibilite from './updateDisponibilite';
 
 function MonEspace() {
   const dispatch = useDispatch();
@@ -185,7 +185,7 @@ function MonEspace() {
             </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
             <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller} />
-            <UpdateDisponibiliter conseiller={conseiller} />
+            <UpdateDisponibilite conseiller={conseiller} />
             <SupprimerCandidature conseiller={conseiller} />
           </div>
           <div className="fr-col-12 fr-col-lg-6" >

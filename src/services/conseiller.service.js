@@ -12,7 +12,7 @@ export const conseillerService = {
   getCurriculumVitae,
   deleteCurriculumVitae,
   deleteCandidature,
-  updateDisponibiliterCandidat
+  updateDisponibiliteCandidat
 };
 
 function get(id) {
@@ -37,7 +37,7 @@ function createSexeAge(user) {
   return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
 }
 
-function updateDisponibiliterCandidat(idConseiller, disponible) {
+function updateDisponibiliteCandidat(idConseiller, disponible) {
   const requestOptions = {
     method: 'PATCH',
     headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),

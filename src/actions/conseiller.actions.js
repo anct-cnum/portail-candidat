@@ -10,7 +10,7 @@ export const conseillerActions = {
   deleteCurriculumVitae,
   resetCVFile,
   deleteCandidature,
-  updateDisponibiliterCandidat
+  updateDisponibiliteCandidat
 };
 
 function get(id) {
@@ -81,11 +81,11 @@ function getCurriculumVitae(id, candidat) {
   }
 }
 
-function updateDisponibiliterCandidat(idConseiller, disponible) {
+function updateDisponibiliteCandidat(idConseiller, disponible) {
 
   return dispatch => {
     dispatch(request());
-    conseillerService.updateDisponibiliterCandidat(idConseiller, disponible)
+    conseillerService.updateDisponibiliteCandidat(idConseiller, disponible)
     .then(
       result => {
         dispatch(success(result));

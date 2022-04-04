@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { conseillerActions } from '../../actions/conseiller.actions';
 
-function UpdateDisponibiliter({ conseiller }) {
+function UpdateDisponibilite({ conseiller }) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
@@ -42,7 +42,7 @@ function UpdateDisponibiliter({ conseiller }) {
                           Confirmer votre d&eacute;sinscription
                         </h1>
                         <p>
-                          L&apos;envoi de cette demande annulera votre candidature sur la plateforme conseiller numerique.
+                          L&apos;envoi de cette demande annulera votre candidature sur la plateforme conseiller num&eacute;rique.
                           Vous ne serez d&eacute;sormais plus visible par les structures employeuses.
                         </p>
                       </> :
@@ -52,7 +52,7 @@ function UpdateDisponibiliter({ conseiller }) {
                           Confirmer votre r&eacute;inscription
                         </h1>
                         <p>
-                          L&apos;envoi de cette demande r&eacute;tablira votre candidature sur la plateforme conseiller numerique.
+                          L&apos;envoi de cette demande r&eacute;tablira votre candidature sur la plateforme conseiller num&eacute;rique.
                           Vous serez d&eacute;sormais visible par les structures employeuses.
                         </p>
                       </>
@@ -85,8 +85,8 @@ function UpdateDisponibiliter({ conseiller }) {
   );
 }
 
-UpdateDisponibiliter.propTypes = {
+UpdateDisponibilite.propTypes = {
   conseiller: PropTypes.object
 };
 
-export default UpdateDisponibiliter;
+export default UpdateDisponibilite;

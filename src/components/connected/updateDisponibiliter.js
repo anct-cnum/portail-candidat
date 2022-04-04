@@ -21,7 +21,7 @@ function UpdateDisponibiliter({ conseiller }) {
         setShowModal(true);
       }}>
         <span className="fr-fi-refresh-line fr-mr-3v" aria-hidden="true" />
-        {conseiller?.disponible ? 'Me désinscrire' : 'Me réinscrire'}
+        {conseiller?.disponible ? 'Me rendre indisponible' : 'Me rendre disponible'}
       </button>
       {showModal &&
         <dialog aria-labelledby="fr-modal-supprimer-candidat" role="dialog" id="fr-modal-supprimer-candidat" className="fr-modal modalOpened">
@@ -39,21 +39,21 @@ function UpdateDisponibiliter({ conseiller }) {
                       <>
                         <h1 id="fr-modal-2-title" className="fr-modal__title">
                           <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
-                          Confirmer votre désinscription
+                          Confirmer votre d&eacute;sinscription
                         </h1>
                         <p>
                           L&apos;envoi de cette demande annulera votre candidature sur la plateforme conseiller numerique.
-                          Vous ne serez désormais plus visible par les structures employeuses.
+                          Vous ne serez d&eacute;sormais plus visible par les structures employeuses.
                         </p>
                       </> :
                       <>
                         <h1 id="fr-modal-2-title" className="fr-modal__title">
                           <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
-                          Confirmer votre réinscription
+                          Confirmer votre r&eacute;inscription
                         </h1>
                         <p>
-                          L&apos;envoi de cette demande rétablira votre candidature sur la plateforme conseiller numerique.
-                          Vous serez désormais visible par les structures employeuses.
+                          L&apos;envoi de cette demande r&eacute;tablira votre candidature sur la plateforme conseiller numerique.
+                          Vous serez d&eacute;sormais visible par les structures employeuses.
                         </p>
                       </>
                     }

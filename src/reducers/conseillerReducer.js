@@ -41,7 +41,7 @@ export default function conseiller(state = initialState, action) {
       return {
         ...state,
         error: action.error,
-        isUpdateStatutDispo: false
+        loading: false
       };
     case 'POST_SEXE_AGE_SUCCESS':
       return {

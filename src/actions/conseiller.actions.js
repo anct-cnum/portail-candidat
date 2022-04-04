@@ -18,12 +18,12 @@ function get(id) {
     dispatch(request());
 
     conseillerService.get(id)
-      .then(
-        conseiller => dispatch(success(conseiller)),
-        error => {
-          dispatch(failure(error));
-        }
-      );
+    .then(
+      conseiller => dispatch(success(conseiller)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
   };
 
   function request() {
@@ -43,10 +43,10 @@ function uploadCurriculumVitae(fileCV) {
     dispatch(request());
 
     conseillerService.uploadCurriculumVitae(fileCV)
-      .then(
-        data => dispatch(success(data.isUploaded)),
-        error => dispatch(failure(error))
-      );
+    .then(
+      data => dispatch(success(data.isUploaded)),
+      error => dispatch(failure(error))
+    );
   };
   function request() {
     return { type: 'POST_CURRICULUM_VITAE_REQUEST' };
@@ -65,10 +65,10 @@ function getCurriculumVitae(id, candidat) {
     dispatch(request());
 
     conseillerService.getCurriculumVitae(id)
-      .then(
-        data => dispatch(success(data, download(data, candidat?.nom + '_' + candidat?.prenom + '.' + candidat?.cv?.extension))),
-        error => dispatch(failure(error))
-      );
+    .then(
+      data => dispatch(success(data, download(data, candidat?.nom + '_' + candidat?.prenom + '.' + candidat?.cv?.extension))),
+      error => dispatch(failure(error))
+    );
   };
   function request() {
     return { type: 'GET_CURRICULUM_VITAE_REQUEST' };
@@ -111,10 +111,10 @@ function deleteCurriculumVitae(id) {
     dispatch(request());
 
     conseillerService.deleteCurriculumVitae(id)
-      .then(
-        data => dispatch(success(data)),
-        error => dispatch(failure(error))
-      );
+    .then(
+      data => dispatch(success(data)),
+      error => dispatch(failure(error))
+    );
   };
   function request() {
     return { type: 'DELETE_CURRICULUM_VITAE_REQUEST' };

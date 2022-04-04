@@ -12,7 +12,7 @@ function UpdateDisponibilite({ conseiller }) {
     if (conseiller.disponible) {
       disponible = false;
     }
-    dispatch(conseillerActions.updateDisponibiliterCandidat(conseiller._id, disponible));
+    dispatch(conseillerActions.updateDisponibiliteCandidat(conseiller._id, disponible));
     setShowModal(false);
   }
   return (

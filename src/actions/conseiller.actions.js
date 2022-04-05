@@ -10,6 +10,7 @@ export const conseillerActions = {
   deleteCurriculumVitae,
   resetCVFile,
   deleteCandidature,
+  updateDisponibiliteCandidat
 };
 
 function get(id) {
@@ -77,6 +78,31 @@ function getCurriculumVitae(id, candidat) {
   }
   function failure(error) {
     return { type: 'GET_CURRICULUM_VITAE_FAILURE', error };
+  }
+}
+
+function updateDisponibiliteCandidat(idConseiller, disponible) {
+
+  return dispatch => {
+    dispatch(request());
+    conseillerService.updateDisponibiliteCandidat(idConseiller, disponible)
+    .then(
+      result => {
+        dispatch(success(result));
+      },
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+  function request() {
+    return { type: 'POST_DISPO_CANDIDAT_REQUEST' };
+  }
+  function success(conseiller) {
+    return { type: 'POST_DISPO_CANDIDAT_SUCCESS', conseiller };
+  }
+  function failure(error) {
+    return { type: 'POST_DISPO_CANDIDAT_FAILURE', error };
   }
 }
 

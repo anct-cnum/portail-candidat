@@ -21,7 +21,7 @@ function UpdateDisponibilite({ conseiller }) {
         setShowModal(true);
       }}>
         <span className="fr-fi-refresh-line fr-mr-3v" aria-hidden="true" />
-        {conseiller?.disponible ? 'Me rendre indisponible' : 'Me rendre disponible'}
+        {conseiller?.disponible ? 'Je souhaite me désinscrire' : 'Je souhaite me réinscrire'}
       </button>
       {showModal &&
         <dialog aria-labelledby="fr-modal-supprimer-candidat" role="dialog" id="fr-modal-supprimer-candidat" className="fr-modal modalOpened">

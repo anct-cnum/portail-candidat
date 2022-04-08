@@ -11,7 +11,8 @@ export const conseillerService = {
   uploadCurriculumVitae,
   getCurriculumVitae,
   deleteCurriculumVitae,
-  deleteCandidature
+  deleteCandidature,
+  updateDisponibiliteCandidat
 };
 
 function get(id) {
@@ -34,6 +35,18 @@ function createSexeAge(user) {
   };
 
   return fetch(`${apiUrlRoot}/conseillers/createSexeAge`, requestOptions).then(handleResponse);
+}
+
+function updateDisponibiliteCandidat(idConseiller, disponible) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: Object.assign(authHeader(), { 'Content-Type': 'application/json' }),
+    body: JSON.stringify({
+      disponible: disponible,
+    })
+  };
+
+  return fetch(`${apiUrlRoot}/conseillers/update_disponibilite/${idConseiller}`, requestOptions).then(handleResponse);
 }
 
 function uploadCurriculumVitae(fileCV) {

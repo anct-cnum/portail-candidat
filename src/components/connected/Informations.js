@@ -55,7 +55,7 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
           <p className="info-candidat">Email&nbsp;: { conseiller?.email }</p>
           <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
           <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
-          <button className="fr-btn fr-mt-6w fr-mb-4w" onClick={activeFormulaire}>
+          <button className="fr-btn fr-mt-6w fr-mb-1w" onClick={activeFormulaire}>
             <span className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
               Modifier mes informations
           </button>

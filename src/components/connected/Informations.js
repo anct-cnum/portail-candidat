@@ -80,7 +80,7 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
                 selected={infos?.dateDisponibilite ?? ''}
                 onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
                 minDate={new Date()}
-                onKeyDown={(e) => e.preventDefault()}
+                onKeyDown={e => e.preventDefault()}
               />
             </form>
             <div className="fr-col-5">

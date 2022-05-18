@@ -63,7 +63,9 @@ function MonEspace() {
   };
 
   const deleteCV = () => {
-    dispatch(conseillerActions.deleteCurriculumVitae(user?.entity?.$id, candidat));
+    if (candidat?.cv?.file) {
+      dispatch(conseillerActions.deleteCurriculumVitae(user?.entity?.$id, candidat));
+    }
   };
 
   useEffect(() => {

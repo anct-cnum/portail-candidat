@@ -20,7 +20,7 @@ function FormulaireSexeAge() {
   });
 
   const todayDate = new Date();
-  const maxDate = todayDate.getFullYear() - 18;
+  const maxDate = todayDate.getFullYear() - 16;
   const minDate = todayDate.getFullYear() - 99;
 
   const { date, sexe, errorInputs } = inputs;

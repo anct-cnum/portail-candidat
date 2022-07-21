@@ -21,6 +21,7 @@ function MonEspace() {
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isDeleted = useSelector(state => state.conseiller?.isDeleted);
   const isUpdateStatutDispo = useSelector(state => state.conseiller?.isUpdateStatutDispo);
+  const isUpdateStatutDispoError = useSelector(state => state.conseiller?.error);
   const loadingDeleteCv = useSelector(state => state.conseiller?.loadingDeleteCv);
   const uploading = useSelector(state => state.conseiller?.uploading);
   const updateError = useSelector(state => state?.user?.patchError);
@@ -133,6 +134,17 @@ function MonEspace() {
             <div className="flashBag">
               <span>
                 Votre Curriculum Vit&aelig; a été supprimé avec succès !
+              </span>
+            </div>
+          </FlashMessage>
+        </div>
+      }
+      {isUpdateStatutDispoError &&
+        <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
+          <FlashMessage duration={10000} >
+            <div className="flashBag labelError">
+              <span>
+                Une erreur s&apos;est produite pendant votre actualisation.
               </span>
             </div>
           </FlashMessage>

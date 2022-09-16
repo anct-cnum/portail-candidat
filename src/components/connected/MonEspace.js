@@ -48,6 +48,37 @@ function MonEspace() {
     label: 'La taille du fichier ne doit pas excéder 10Mo !'
   }];
 
+  const renderStars = palier => {
+    switch (palier) {
+      case 1:
+        return <p>Degré de maîtrise :&nbsp;
+          <span style={{ verticalAlign: 'sub' }}>
+            <i className="ri-star-fill ri-xl" title="Débutant"></i>
+            <i className="ri-star-line ri-xl" title="Débutant"></i>
+            <i className="ri-star-line ri-xl" title="Débutant"></i>
+          </span>
+        </p>;
+      case 2:
+        return <p>Degré de maîtrise :&nbsp;
+          <span style={{ verticalAlign: 'sub' }}>
+            <i className="ri-star-fill ri-xl" title="Intermédiaire"></i>
+            <i className="ri-star-fill ri-xl" title="Intermédiaire"></i>
+            <i className="ri-star-line ri-xl" title="Intermédiaire"></i>
+          </span>
+        </p>;
+      case 3:
+        return <p>Degré de maîtrise :&nbsp;
+          <span style={{ verticalAlign: 'sub' }}>
+            <i className="ri-star-fill ri-xl" title="Avancé"></i>
+            <i className="ri-star-fill ri-xl" title="Avancé"></i>
+            <i className="ri-star-fill ri-xl" title="Avancé"></i>
+          </span>
+        </p>;
+      default:
+        return <p>Degré de maîtrise non communiqué</p>;
+    }
+  };
+
   const onDrop = useCallback(acceptedFiles => {
     if (acceptedFiles.length > 0) {
       const formData = new FormData();
@@ -253,7 +284,6 @@ function MonEspace() {
                 }
               </>
             }
-
             <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Lien du test PIX</h2>
             <a href={lienCampagnePix}
               target="blank"
@@ -263,6 +293,38 @@ function MonEspace() {
               Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
             </a>
             <br />(lien personnel à ne pas partager)
+            { candidat?.pix?.partage &&
+              <div className="fr-col-12 fr-mt-1w">
+                <span style={{ padding: '0.25rem 0', display: 'inline-flex', alignItems: 'center' }} >
+                  <strong>Mes Résultats&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" /></strong>
+                </span>
+                {renderStars(candidat?.pix?.palier)}
+                <p>
+                  { candidat?.pix?.competence1 &&
+                    <img src="/logos/pix-utilisation.png"
+                      alt="Utilisation du numérique"
+                      title="Utilisation du numérique dans la vie professionnelle"
+                      className="fr-mr-2w"
+                    />
+                  }
+                  { candidat?.pix?.competence2 &&
+                    <img src="/logos/pix-ressources.png"
+                      alt="Production de ressources"
+                      title="Production de ressources"
+                      className="fr-mr-2w"
+                    />
+                  }
+                  { candidat?.pix?.competence3 &&
+                  <img src="/logos/pix-citoyen.png"
+                    alt="Compétences numériques en lien avec la e-citoyenneté"
+                    title="Compétences numériques en lien avec la e-citoyenneté"
+                    className="fr-mr-2w"
+                  />
+                  }
+                </p>
+              </div>
+            }
+
           </div>
         </div>
       </div>

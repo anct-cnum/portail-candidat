@@ -257,7 +257,7 @@ function MonEspace() {
             <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Lien du test PIX</h2>
             <a href={lienCampagnePix}
               target="blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               title="Accéder à votre test Pix"
               className="fr-link" style={{ padding: '0.25rem 0' }}>
               Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
@@ -265,14 +265,14 @@ function MonEspace() {
             <br />(lien personnel à ne pas partager)
             <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Comment consulter mes r&eacute;sultats PIX ?</h2>
             <p>
-              Pour consulter vos r&eacute;sultats, il vous suffit de vous connecter à votre compte personnel Pix,
+              Pour consulter vos r&eacute;sultats, il vous suffit de vous connecter &agrave; votre compte personnel Pix,
               vous pourrez alors retrouver vos r&eacute;sultats depuis la page <strong>&quot;Mes certifications&quot;</strong>.
               Elle est accessible depuis la rubrique <strong>&quot;Certification&quot;</strong>
               en cliquant sur <strong>&quot;Voir mes certifications&quot;</strong>.
             </p>
             <a href={lienPix}
               target="blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               title="Je me connecte à mon compte Pix"
               className="fr-link">
               Je me connecte

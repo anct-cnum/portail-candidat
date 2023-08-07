@@ -3,7 +3,7 @@ name: Déploiement sur l'espace de recette
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [recette]
 
 jobs:
   dependencies:

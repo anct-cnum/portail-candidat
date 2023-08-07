@@ -9,7 +9,6 @@ export default function Alerte() {
   const dispatch = useDispatch();
 
   const alerte = useSelector(state => state.alerteEtSpinner?.alerte);
-  console.log('alerte', alerte);
   const messageType = codeAlertes.find(alert => alert.code === alerte?.type)?.correspondance;
 
   useEffect(() => {

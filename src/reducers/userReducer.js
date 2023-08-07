@@ -4,38 +4,38 @@ export default function user(state = null, action) {
       return {
         ...state,
         loading: true,
-        flashMessage: true,
-        patchError: false
+        patchError: false,
+        userUpdated: false
       };
     case 'UPDATE_USER_EMAIL_SUCCESS':
       return {
         ...state,
-        user: action.user,
-        flashMessage: true
+        userUpdated: true,
+        loading: false,
       };
     case 'UPDATE_USER_EMAIL_FAILURE':
       return {
         ...state,
         patchError: action.error,
-        flashMessage: true
+        loading: false
       };
     case 'CONFIRMATION_UPDATE_USER_EMAIL_REQUEST':
       return {
         ...state,
         loading: true,
-        flashMessage: true
+        patchError: false
       };
     case 'CONFIRMATION_UPDATE_USER_EMAIL_SUCCESS':
       return {
         ...state,
         userConnected: action.user,
-        flashMessage: true
+        loading: false,
       };
     case 'CONFIRMATION_UPDATE_USER_EMAIL_FAILURE':
       return {
         ...state,
         patchError: action.error,
-        flashMessage: true
+        loading: false
       };
     default:
       return state;

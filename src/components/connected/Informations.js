@@ -1,21 +1,17 @@
-/* eslint-disable array-callback-return */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions, conseillerActions } from '../../actions';
+import { userActions } from '../../actions';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import DatePicker from 'react-datepicker';
 
-function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
+function Informations({ infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
   const { _id } = useSelector(state => state.authentication.user?.user);
-  const { $id } = useSelector(state => state.authentication.user?.user.entity);
-  const successModifierInfos = useSelector(state => state?.user?.user);
   const [form, setForm] = useState(false);
 
   const activeFormulaire = () => {
     setForm(true);
-    setFlashMessage(false);
     setInfos({
       nom: conseiller?.nom,
       prenom: conseiller?.prenom,
@@ -35,16 +31,8 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
 
   const updateEmail = () => {
     dispatch(userActions.updateInfosCandidat({ id: _id, infos: infos }));
-    setFlashMessage(true);
     setForm(false);
-    setTimeout(() => {
-      setFlashMessage(false);
-    }, 10000);
   };
-
-  useEffect(() => {
-    dispatch(conseillerActions.get($id));
-  }, [successModifierInfos]);
 
   return (
     <div>
@@ -97,7 +85,6 @@ function Informations({ setFlashMessage, infos, setInfos, conseiller }) {
   );
 }
 Informations.propTypes = {
-  setFlashMessage: PropTypes.func,
   infos: PropTypes.object,
   setInfos: PropTypes.func,
   conseiller: PropTypes.object

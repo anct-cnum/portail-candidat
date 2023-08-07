@@ -29,7 +29,7 @@ function Header({ connected }) {
                 <ul className="fr-shortcuts__list menu-flex">
                   <li className="fr-shortcuts__item">
                     <h3 className="fr-tile__title user-header">
-                      <span className="fr-fi-account-fill user-img"/> {user?.name}
+                      <span className="fr-icon-account-circle-fill"/> {user?.name}
                     </h3>
                   </li>
                   <li className="fr-shortcuts__item placement-droite">

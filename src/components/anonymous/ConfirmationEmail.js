@@ -3,24 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
 import PropTypes from 'prop-types';
 import Header from '../common/Header';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function EmailConfirmer({ match }) {
-  let history = useHistory();
+  // const navigate = useNavigate();
   const token = match.params.token;
   const dispatch = useDispatch();
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
   useEffect(() => {
     dispatch(userActions.verifyToken(token));
   }, []);
-  setTimeout(() => {
-    if (tokenVerified === true) {
-      dispatch(userActions.confirmUserEmail(token));
-    }
-    setTimeout(() => {
-      history.push(`/login`);
-    }, 7000);
-  }, 0);
+  // setTimeout(() => {
+  //   if (tokenVerified === true) {
+  //     dispatch(userActions.confirmUserEmail(token));
+  //   }
+  //   setTimeout(() => {
+  //     navigate('/login');
+  //   }, 7000);
+  // }, 0);
 
   return (
     <div>

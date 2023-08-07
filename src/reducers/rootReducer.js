@@ -6,6 +6,7 @@ import conseiller from './conseillerReducer';
 import user from './userReducer';
 import motDePasseOublieReducer from './motDePasseOublieReducer';
 import alerteEtSpinnerReducer from './alerteEtSpinnerReducer';
+
 const rootReducer = combineReducers({
   authentication: authenticationReducer,
   createAccount: createAccountReducer,

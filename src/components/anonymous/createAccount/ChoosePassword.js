@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, useParams } from 'react-router-dom';
 import { userActions } from '../../../actions';
 import Header from '../../common/Header';
 
-function ChoosePassword({ match }) {
+function ChoosePassword() {
 
   const [inputs, setInputs] = useState({
     password: '',
@@ -14,7 +13,7 @@ function ChoosePassword({ match }) {
 
   const [submitted, setSubmitted] = useState(false);
   const { password, confirmPassword } = inputs;
-  const token = match.params.token;
+  const { token } = useParams();
   const verifyingToken = useSelector(state => state.createAccount.verifyingToken);
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
   const resultVerifyToken = useSelector(state => state.createAccount.resultVerifyToken);
@@ -50,7 +49,7 @@ function ChoosePassword({ match }) {
         <div className="fr-grid-row">
           <div className="fr-col-3"></div>
           <div className="Login fr-col-6 fr-p-5w">
-            <h2>Choisissez votre mot de passe<br />de votre portail candidat<br /><span className="fr-fi-account-fill fr-fi--xl" /></h2>
+            <h2>Choisissez votre mot de passe<br />de votre portail candidat<br /><span className="fr-fi-account-fill fr-icon--lg" /></h2>
 
             { verifyingToken &&
               <span>Chargement...</span>
@@ -114,9 +113,5 @@ function ChoosePassword({ match }) {
     </div>
   );
 }
-
-ChoosePassword.propTypes = {
-  match: PropTypes.object
-};
 
 export default ChoosePassword;

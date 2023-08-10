@@ -1,5 +1,4 @@
 import { userService } from '../services/user.service.js';
-import { history } from '../helpers';
 
 export const userActions = {
   login,
@@ -24,11 +23,11 @@ function login(username, password) {
         delete data.user.roles;
         dispatch(success(data));
         if (data.user.role !== 'candidat') {
-          history.push('/login');
+          window.location.pathname = '/login';
         } else {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(data));
-          history.push('/accueil');
+          window.location.pathname = '/mon-espace';
         }
       },
       error => {

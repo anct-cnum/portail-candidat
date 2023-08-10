@@ -1,7 +1,6 @@
 import download from 'downloadjs';
 import { conseillerService } from '../services/conseiller.service.js';
 import { userService } from '../services/user.service.js';
-import { history } from '../helpers';
 
 export const conseillerActions = {
   get,

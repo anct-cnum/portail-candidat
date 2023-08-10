@@ -2,35 +2,34 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 import { conseillerActions } from '../../actions';
-import FlashMessage from 'react-flash-message';
-import Spinner from 'react-loader-spinner';
 import Informations from './Informations';
 import SupprimerCandidature from './SupprimerCandidature';
 import UpdateDisponibilite from './updateDisponibilite';
+import Spinner from '../common/Spinner';
+import Alerte from '../common/Alerte';
 
 function MonEspace() {
   const dispatch = useDispatch();
 
   const downloadError = useSelector(state => state.conseiller?.downloadError);
-  const isDownloaded = useSelector(state => state.conseiller?.isDownloaded);
   const deleteError = useSelector(state => state.conseiller?.deleteError);
-  const downloading = useSelector(state => state.conseiller?.downloading);
   const uploadError = useSelector(state => state.conseiller?.uploadError);
   const conseiller = useSelector(state => state.conseiller?.conseiller);
+  const loading = useSelector(state => state.conseiller?.loading);
+  const loadingUser = useSelector(state => state.user?.loading);
+  const loadingDeleteCv = useSelector(state => state.user?.loadingDeleteCv);
   const isUploaded = useSelector(state => state.conseiller?.isUploaded);
   const candidat = useSelector(state => state.conseiller?.conseiller);
   const isDeleted = useSelector(state => state.conseiller?.isDeleted);
   const isUpdateStatutDispo = useSelector(state => state.conseiller?.isUpdateStatutDispo);
   const isUpdateStatutDispoError = useSelector(state => state.conseiller?.error);
-  const loadingDeleteCv = useSelector(state => state.conseiller?.loadingDeleteCv);
-  const uploading = useSelector(state => state.conseiller?.uploading);
   const updateError = useSelector(state => state?.user?.patchError);
   const user = useSelector(state => state.authentication.user.user);
+  const userUpdated = useSelector(state => state?.user?.userUpdated);
   const blob = useSelector(state => state.conseiller?.blob);
   const lienCampagnePix = `${process.env.REACT_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
   const lienPix = `${process.env.REACT_APP_PIX_URL}`;
 
-  const [flashMessage, setFlashMessage] = useState(false);
   const [infos, setInfos] = useState({
     nom: conseiller?.nom,
     prenom: conseiller?.prenom,
@@ -58,7 +57,14 @@ function MonEspace() {
   }, []);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone(
-    { onDrop, accept: '.pdf', maxFiles: 1, maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE });
+    {
+      onDrop,
+      accept: {
+        'text/pdf': ['.pdf']
+      },
+      maxFiles: 1,
+      maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE
+    });
 
   const downloadCV = () => {
     dispatch(conseillerActions.getCurriculumVitae(user?.entity?.$id, candidat));
@@ -69,6 +75,15 @@ function MonEspace() {
       dispatch(conseillerActions.deleteCurriculumVitae(user?.entity?.$id, candidat));
     }
   };
+  useEffect(() => {
+    if (isUploaded === true) {
+      dispatch(conseillerActions.get(user?.entity?.$id));
+      acceptedFiles.splice(0, 1);
+    }
+    if (userUpdated === true) {
+      dispatch(conseillerActions.get(user?.entity?.$id));
+    }
+  }, [isUploaded, userUpdated]);
 
   useEffect(() => {
     if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
@@ -76,130 +91,84 @@ function MonEspace() {
     }
   }, [blob, downloadError]);
 
-  useEffect(() => {
-    if (isDownloaded || isUploaded || isDeleted || isUpdateStatutDispo) {
-      dispatch(conseillerActions.get(user?.entity?.$id));
-    }
-  }, [isDownloaded, isUploaded, isDeleted, isUpdateStatutDispo]);
-
   return (
     <div className="informations">
-      <Spinner
-        style={{ textAlign: 'center' }}
-        type="Oval"
-        color="#00BFFF"
-        visible={loadingDeleteCv === true}
-      />
+      <Alerte />
+      <Spinner loading={loadingUser || loading || loadingDeleteCv} />
       {isUploaded &&
         <div className="fr-col-12 fr-mb-3w">
-          <FlashMessage duration={10000} >
-            <div className="flashBag">
-              <span>
-                Votre Curriculum Vit&aelig; a été ajouté avec succès !
-              </span>
-              <br /><br />
-              <span style={{ color: 'initial' }}>
-                Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
-              </span>
-            </div>
-          </FlashMessage>
+          <div className="fr-alert fr-alert--success">
+            <span>
+              Votre Curriculum Vit&aelig; a été ajouté avec succès !
+            </span>
+            <br /><br />
+            <span style={{ color: 'initial' }}>
+              Important : il sera conservé seulement 6 mois sur votre espace candidat. Au delà, il vous sera recommandé de le télécharger de nouveau.
+            </span>
+          </div>
         </div>
       }
 
       {!isUploaded && uploadError &&
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-          <FlashMessage duration={10000} >
-            <div className="flashBag labelError">
-              <span>
-                {uploadError}
-              </span>
-            </div>
-          </FlashMessage>
+          <p className="fr-alert fr-alert--error">
+            {uploadError}
+          </p>
         </div>
       }
 
       {isUpdateStatutDispo &&
         <div className="fr-col-12 fr-mb-3w">
-          <FlashMessage duration={6000} >
-            <div className=" flashBag">
-              <span>
-                {conseiller.disponible ? 'Vous avez été réinscrits avec succès.' : 'Vous avez été désinscrits avec succès.'}
-              </span>
-            </div>
-          </FlashMessage>
+          <p className="fr-alert fr-alert--success">
+            {conseiller.disponible ? 'Vous avez été réinscrits avec succès.' : 'Vous avez été désinscrits avec succès.'}
+          </p>
         </div>
       }
       {isDeleted &&
         <div className="fr-col-12 fr-mb-3w">
-          <FlashMessage duration={10000} >
-            <div className="flashBag">
-              <span>
-                Votre Curriculum Vit&aelig; a été supprimé avec succès !
-              </span>
-            </div>
-          </FlashMessage>
+          <p className="fr-alert fr-alert--success">
+            Votre Curriculum Vit&aelig; a été supprimé avec succès !
+          </p>
         </div>
       }
       {isUpdateStatutDispoError &&
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-          <FlashMessage duration={10000} >
-            <div className="flashBag labelError">
-              <span>
-                Une erreur s&apos;est produite pendant votre actualisation.
-              </span>
-            </div>
-          </FlashMessage>
+          <p className="fr-alert fr-alert--error">
+            Une erreur s&apos;est produite pendant votre actualisation.
+          </p>
         </div>
       }
 
       {deleteError &&
         <div className="fr-col-offset-2  fr-col-8 fr-mb-3w">
-          <FlashMessage duration={10000} >
-            <div className="flashBag labelError">
-              <span>
-                Une erreur s&apos;est produite pendant la suppression
-              </span>
-            </div>
-          </FlashMessage>
+          <p className="fr-alert fr-alert--error">
+            Une erreur s&apos;est produite pendant la suppression
+          </p>
         </div>
       }
-
-      {flashMessage === true &&
+      {updateError && (updateError !== undefined || updateError !== false) &&
+        <p className="fr-alert fr-alert--error" style={{ fontSize: '16px' }}>
+          {updateError}
+        </p>
+      }
+      {updateError && (updateError === undefined || updateError === false) &&
         <div>
-          <FlashMessage duration={10000}>
-            {updateError && (updateError !== undefined || updateError !== false) &&
-              <p className="fr-label flashBag labelError" style={{ fontSize: '16px' }}>
-                {updateError}
-              </p>
-            }
-            {(updateError === undefined || updateError === false) &&
-              <p className="fr-label flashBag" style={{ fontSize: '16px' }}>
-                {infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
-                  <>
-                    Nous vous avons envoyé un mail à :&nbsp;
-                    <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
-                  </>}
-                &nbsp;
-                <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
-              </p>
-            }
-          </FlashMessage>
+          <p className="fr-alert fr-alert--success" style={{ fontSize: '16px' }}>
+            {infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
+              <>
+                Nous vous avons envoyé un mail à :&nbsp;
+                <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
+              </>}
+            &nbsp;
+            <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle' }}></i>
+          </p>
         </div>
       }
       <div className="fr-container-fluid">
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-lg-6">
-            <div className="spinnerCustom">
-              <Spinner
-                type="Oval"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                visible={downloading || uploading}
-              />
-            </div>
             <h2 className="fr-mb-7w">Mes informations</h2>
-            <Informations setFlashMessage={setFlashMessage} infos={infos} setInfos={setInfos} conseiller={conseiller} />
+            <Informations infos={infos} setInfos={setInfos} conseiller={conseiller} />
             <UpdateDisponibilite conseiller={conseiller} />
             <SupprimerCandidature conseiller={conseiller} />
           </div>
@@ -244,8 +213,8 @@ function MonEspace() {
                   <span className="fr-fi-file-download-line download-img" aria-hidden="true"></span>
                   Mon CV ({candidat?.cv?.file})
                 </button>
-                {loadingDeleteCv === true ?
-                  <p className="supprimer-link fr-mt-2w" style={{ color: '#eeeeee' }}>
+                {loadingDeleteCv ?
+                  <p className="supprimer-link fr-mt-2w" disabled style={{ color: '#eeeeee' }}>
                     Supprimer votre CV
                   </p> :
                   <p className="supprimer-link fr-mt-2w" onClick={deleteCV}>
@@ -258,9 +227,13 @@ function MonEspace() {
             <a href={lienCampagnePix}
               target="blank"
               rel="noopener noreferrer"
-              title="Accéder à votre test Pix"
-              className="fr-link" style={{ padding: '0.25rem 0' }}>
-              Accéder à votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
+              title="Accéder &agrave; votre test Pix"
+              className="fr-link" style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '41%'
+              }}>
+              Accéder &agrave; votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
             </a>
             <br />(lien personnel à ne pas partager)
             <h2 className="fr-mt-8w" style={{ marginLeft: '-2px' }}>Comment consulter mes r&eacute;sultats PIX ?</h2>

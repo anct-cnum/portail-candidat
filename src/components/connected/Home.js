@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { conseillerActions } from '../../actions';
+import { alerteEtSpinnerActions, conseillerActions } from '../../actions';
 import Connected from '../connected';
 import FormulaireSexeAge from './FormulaireSexeAge';
 
@@ -16,6 +16,12 @@ function Home() {
       if (candidat?._id !== user?.entity?.$id) {
         dispatch(conseillerActions.get(user?.entity?.$id));
       }
+    } else {
+      dispatch(alerteEtSpinnerActions.getMessageAlerte({
+        type: 'error',
+        message: 'Vos données n\'ont pas pu être chargées !',
+        status: null, description: null
+      }));
     }
   }, [error]);
 

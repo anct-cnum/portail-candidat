@@ -1,4 +1,10 @@
-const initialState = { uploading: false, downloadError: false, loading: false, deleteError: false, deleteCandidatureError: false };
+const initialState = {
+  uploading: false,
+  downloadError: false,
+  deleteError: false,
+  deleteCandidatureError: false,
+  error: false,
+};
 
 export default function conseiller(state = initialState, action) {
   switch (action.type) {
@@ -6,22 +12,25 @@ export default function conseiller(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        deleteCandidatureError: false
+        error: false
       };
     case 'GET_CONSEILLER_SUCCESS':
       return {
         ...state,
         conseiller: action.conseiller,
+        loading: false
       };
     case 'GET_CONSEILLER_FAILURE':
       return {
         ...state,
+        loading: false,
         error: action.error
       };
     case 'POST_SEXE_AGE_REQUEST':
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: false
       };
     case 'POST_DISPO_CANDIDAT_REQUEST':
       return {
@@ -52,31 +61,32 @@ export default function conseiller(state = initialState, action) {
     case 'POST_SEXE_AGE_FAILURE':
       return {
         error: action.error,
-        isUpdated: false
+        isUpdated: false,
+        loading: false
       };
     case 'POST_CURRICULUM_VITAE_REQUEST':
       return {
         ...state,
-        uploading: true,
+        loading: true,
         isUploaded: false,
       };
     case 'POST_CURRICULUM_VITAE_SUCCESS':
       return {
         ...state,
         isUploaded: action.isUploaded,
-        uploading: false
+        loading: false
       };
     case 'POST_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
         uploadError: action.error,
         isUploaded: false,
-        uploading: false
+        loading: false
       };
     case 'GET_CURRICULUM_VITAE_REQUEST':
       return {
         ...state,
-        downloading: true,
+        loading: true,
         isDownloaded: false
       };
     case 'GET_CURRICULUM_VITAE_SUCCESS':
@@ -84,13 +94,13 @@ export default function conseiller(state = initialState, action) {
         ...state,
         blob: action.data,
         isDownloaded: action.download,
-        downloading: false,
+        loading: false,
       };
     case 'GET_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
         downloadError: action.error,
-        downloading: false,
+        loading: false,
         isDownloaded: false
       };
     case 'DELETE_CURRICULUM_VITAE_REQUEST':
@@ -99,20 +109,21 @@ export default function conseiller(state = initialState, action) {
         isUploaded: false,
         isDeleted: false,
         deleteError: false,
-        loadingDeleteCv: true
+        loading: true
       };
     case 'DELETE_CURRICULUM_VITAE_SUCCESS':
       return {
         ...state,
         isDeleted: true,
         deleteError: false,
-        loadingDeleteCv: false
+        conseiller: { ...state.conseiller, cv: null },
+        loading: false
       };
     case 'DELETE_CURRICULUM_VITAE_FAILURE':
       return {
         ...state,
         deleteError: action.error,
-        loadingDeleteCv: false
+        loading: false
       };
     case 'RESET_FILE':
       return {

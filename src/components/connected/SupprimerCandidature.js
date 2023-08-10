@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { conseillerActions, userActions } from '../../actions';
-import FlashMessage from 'react-flash-message';
+import { alerteEtSpinnerActions, conseillerActions, userActions } from '../../actions';
 
 function SupprimerCandidature({ conseiller }) {
 
@@ -13,7 +12,6 @@ function SupprimerCandidature({ conseiller }) {
   const [autre, setAutre] = useState(false);
   const [active, setActive] = useState(false);
   const [inputs, setInputs] = useState({
-    errorInputs: false,
     motif: '',
     password: '',
   });
@@ -34,7 +32,11 @@ function SupprimerCandidature({ conseiller }) {
       dispatch(conseillerActions.deleteCandidature(inputs.motif, conseiller?._id, user?.user?.name, inputs.password));
     } else {
       window.scrollTo(0, 0);
-      setInputs(inputs => ({ ...inputs, errorInputs: true }));
+      dispatch(alerteEtSpinnerActions.getMessageAlerte({
+        type: 'error',
+        message: 'Une erreur est survenue lors de la suppression de votre candidature. Veuillez réessayer.',
+        status: null, description: null
+      }));
     }
   }
 
@@ -47,6 +49,16 @@ function SupprimerCandidature({ conseiller }) {
   useEffect(() => {
     setActive(!!inputs.password && !!inputs.motif);
   }, [inputs]);
+
+  useEffect(() => {
+    if (deleteError) {
+      dispatch(alerteEtSpinnerActions.getMessageAlerte({
+        type: 'error',
+        message: 'Une erreur est survenue lors de la suppression de votre candidature. Veuillez réessayer.',
+        status: null, description: null
+      }));
+    }
+  }, [deleteError]);
 
   return (
     <>
@@ -71,14 +83,6 @@ function SupprimerCandidature({ conseiller }) {
                       setActive(false);
                     } }>Fermer</button>
                   </div>
-                  {deleteError &&
-                    <FlashMessage duration={5000}>
-                      <p className="flashBag invalid">
-                        { deleteError ? 'Une erreur est survenue : ' + deleteError :
-                          'Une erreur est survenue lors de la suppression de votre candidature. Veuillez réessayer'}.
-                      </p>
-                    </FlashMessage>
-                  }
                   <div className="fr-modal__content">
                     <h1 id="fr-modal-supprimer-candidat" className="fr-modal__title">
                       <span className="fr-fi-arrow-right-line fr-fi--lg"></span>

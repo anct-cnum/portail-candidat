@@ -1,7 +1,7 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import { history } from './helpers';
-
+import { Routes, Route, Navigate } from 'react-router-dom';
+import './assets/js/app.js';
+import './assets/css/app.scss';
 import Login from './components/anonymous/Login.js';
 import Home from './components/connected/Home.js';
 import ChoosePassword from './components/anonymous/createAccount/ChoosePassword';
@@ -15,25 +15,24 @@ import { useSelector } from 'react-redux';
 
 function App() {
 
-  const downloading = useSelector(state => state.conseiller?.downloading);
-  const uploading = useSelector(state => state.conseiller?.uploading);
-
+  const isLoading = useSelector(state => state.alerteEtSpinner?.isLoading);
   return (
     <div className="App">
-      { (downloading === true || uploading === true) &&
+      {isLoading &&
         <div className="wrapperModal"></div>
       }
-      <Router history={history}>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/inscription/:token" component={ChoosePassword} />
-          <Route path="/candidat/confirmation-email/:token" component={EmailConfirmer} />
-          <Route path="/mot-de-passe-oublie" component={ForgottenPassword} />
-          <Route path="/renouveler-mot-de-passe/:token" component={ForgottenPassword} />
-          <Route path="/candidature-supprimee" component={CandidatureSupprimee} />
-          <PrivateRoute exact path="*" component={Home} />
-        </Switch>
-      </Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/inscription/:token" element={<ChoosePassword />} />
+        <Route path="/candidat/confirmation-email/:token" element={<EmailConfirmer />} />
+        <Route path="/mot-de-passe-oublie" element={<ForgottenPassword />} />
+        <Route path="/renouveler-mot-de-passe/:token" element={<ForgottenPassword />} />
+        <Route path="/candidature-supprimee" element={<CandidatureSupprimee />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route index element={<Navigate to="/mon-espace" />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+      </Routes>
       <Footer />
     </div>
   );

@@ -154,7 +154,7 @@ function MonEspace() {
       {updateError && (updateError === undefined || updateError === false) &&
         <div>
           <p className="fr-alert fr-alert--success" style={{ fontSize: '16px' }}>
-            {infos.email === conseiller?.email ? <> La mise à jour effectuée avec succès </> :
+            {infos.email === conseiller?.email ? <> La mise à jour a été effectuée avec succès </> :
               <>
                 Nous vous avons envoyé un mail à :&nbsp;
                 <strong style={{ color: 'black' }}>{infos?.email}</strong> pour confirmation
@@ -228,11 +228,7 @@ function MonEspace() {
               target="blank"
               rel="noopener noreferrer"
               title="Accéder &agrave; votre test Pix"
-              className="fr-link" style={{
-                display: 'flex',
-                alignItems: 'center',
-                width: '41%'
-              }}>
+              className="fr-link link-test-pix">
               Accéder &agrave; votre test&nbsp;<img src="/logos/logo-pix.svg" alt="Pix" height="30px" />
             </a>
             <br />(lien personnel à ne pas partager)

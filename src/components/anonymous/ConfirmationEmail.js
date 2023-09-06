@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../actions';
-import PropTypes from 'prop-types';
 import Header from '../common/Header';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function EmailConfirmer({ match }) {
-  let history = useHistory();
-  const token = match.params.token;
+function EmailConfirmer() {
+  const navigate = useNavigate();
+  const { token } = useParams();
   const dispatch = useDispatch();
   const tokenVerified = useSelector(state => state.createAccount.tokenVerified);
+
   useEffect(() => {
     dispatch(userActions.verifyToken(token));
   }, []);
+
   setTimeout(() => {
     if (tokenVerified === true) {
       dispatch(userActions.confirmUserEmail(token));
     }
     setTimeout(() => {
-      history.push(`/login`);
+      navigate('/login');
     }, 7000);
   }, 0);
 
@@ -26,8 +27,7 @@ function EmailConfirmer({ match }) {
     <div>
       <Header/>
       <div className="">
-        <div className="fr-grid-row fr-grid-row--center fr-mt-3w">
-          <div className="fr-col-offset-3"/>
+        <div className="fr-grid-row fr-grid-row--center fr-mt-8w">
           <div style={{ width: '50%', textAlign: 'center' }}>
             {tokenVerified === true &&
             <div>
@@ -51,8 +51,5 @@ function EmailConfirmer({ match }) {
     </div>
   );
 }
-EmailConfirmer.propTypes = {
-  match: PropTypes.object
-};
 
 export default EmailConfirmer;

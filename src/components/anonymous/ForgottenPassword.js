@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../common/Header';
 import { userActions } from '../../actions';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function ForgottenPassword({ match = null }) {
+function ForgottenPassword() {
   const dispatch = useDispatch();
-  const token = match.params.token;
+  const { token } = useParams();
   /* Etape 1*/
   const [inputEmail, setInputsEmail] = useState({
     username: ''
@@ -177,9 +176,5 @@ function ForgottenPassword({ match = null }) {
 
 
 }
-
-ForgottenPassword.propTypes = {
-  match: PropTypes.object
-};
 
 export default ForgottenPassword;

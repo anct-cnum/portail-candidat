@@ -1,52 +1,87 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Déploiement en production
+name: Déploiement sur l'espace de production
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
-
+  dependencies:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [16.4.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        node-version: [19.7.0]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install modules
-      run: yarn
-    - name: Override .env
-      uses: SpicyPizza/create-envfile@v1
-      with:
-        envkey_REACT_APP_STRATEGYAUTH: "local"
-        envkey_REACT_APP_VERSION: "1.0"
-        envkey_REACT_APP_API: ${{ secrets.REACT_APP_API_PRODUCTION }}
-        envkey_REACT_APP_CV_FILE_MAX_SIZE: 10485760
-        envkey_REACT_APP_PIX_CAMPAGNE_URL: ${{ secrets.REACT_APP_PIX_CAMPAGNE_URL }}
-        envkey_REACT_APP_PIX_URL: "https://app.pix.fr/connexion"
-        file_name: .env
-    - name: Build application
-      run: yarn run build
-    - name: copy .htaccess
-      uses: canastro/copy-file-action@master
-      with:
-        source: ".htaccess"
-        target: "build/.htaccess"
-    - name: Deploy on clever cloud
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: ${{ secrets.CLEVER_CLOUD_GIT_PORTAIL_CANDIDAT_PRODUCTION }}
-        BRANCH: master
-        FOLDER: build
-        SSH_PRIVATE_KEY: ${{ secrets.CLEVER_CLOUD_DEPLOY_PRIVATE_KEY }}
-        KNOWN_HOSTS_FILE: resources/known_hosts
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Retrieve cached dependencies
+        id: retrieve-dependencies
+        uses: actions/cache@v2
+        with:
+          key: node_modules-${{ hashFiles('package-lock.json') }}
+          path: node_modules
+      - name: Install dependencies
+        if: steps.retrieve-dependencies.outputs.cache-hit == false
+        run: npm ci --omit=dev
+      - name: Cache dependencies if not present
+        if: steps.retrieve-dependencies.outputs.cache-hit == false
+        uses: actions/cache@v2
+        with:
+          key: node_modules.-${{ hashFiles('package-lock.json') }}
+          path: node_modules
+
+  build:
+    needs: dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Retrieve cached dependencies
+        uses: actions/cache@v2
+        with:
+          key: node_modules-${{ hashFiles('package-lock.json') }}
+          path: node_modules
+      - name: Override .env
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_REACT_APP_STRATEGYAUTH: "local"
+          envkey_REACT_APP_VERSION: "1.0"
+          envkey_REACT_APP_API: ${{ secrets.REACT_APP_API_PRODUCTION }}
+          envkey_REACT_APP_CV_FILE_MAX_SIZE: 10485760
+          envkey_REACT_APP_PIX_CAMPAGNE_URL: ${{ secrets.REACT_APP_PIX_CAMPAGNE_URL }}
+          envkey_REACT_APP_PIX_URL: "https://app.pix.fr/connexion"
+          file_name: .env
+      - name: Build application
+        run: npm run build
+      - name: copy .htaccess
+        uses: canastro/copy-file-action@master
+        with:
+          source: ".htaccess"
+          target: "build/.htaccess"
+      - name: Upload release bundle as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: build/*
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Retrieve bundle React
+        uses: actions/download-artifact@v2
+        with:
+          name: bundle
+          path: build
+      - name: Deploy on clever cloud
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: ${{ secrets.CLEVER_CLOUD_GIT_PORTAIL_CANDIDAT_PRODUCTION }}
+          BRANCH: master
+          FOLDER: build
+          SSH_PRIVATE_KEY: ${{ secrets.CLEVER_CLOUD_DEPLOY_PRIVATE_KEY }}
+          KNOWN_HOSTS_FILE: resources/known_hosts

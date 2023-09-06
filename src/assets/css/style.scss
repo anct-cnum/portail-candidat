@@ -260,6 +260,12 @@ $blue-france:#000091;
   z-index: 2;
 }
 
+.link-test-pix {
+  display: 'flex';
+  align-items: center;
+  width: 41%;
+}
+
 
 @media (min-width: 769px) {
   .headerAlignementmd-lg {

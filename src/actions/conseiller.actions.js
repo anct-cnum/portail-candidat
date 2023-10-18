@@ -133,13 +133,12 @@ function resetCVFile() {
 function deleteCandidature(motif, conseiller, username, password) {
   return dispatch => {
     dispatch(request());
-
     userService.login(username, password).then(
       () => {
         conseillerService.deleteCandidature(motif, conseiller).then(
           data => {
             dispatch(success(data));
-            history.push('/candidature-supprimee');
+            window.location.pathname = '/candidature-supprimee';
           },
           error => {
             dispatch(failure(error));
@@ -148,7 +147,6 @@ function deleteCandidature(motif, conseiller, username, password) {
       },
       error => {
         dispatch(failure(error.error));
-        history.push('/login');
       }
     );
 

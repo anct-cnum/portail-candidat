@@ -11,6 +11,7 @@ function SupprimerCandidature({ conseiller }) {
   const [displaySupprimerCandidatureForm, setDisplaySupprimerCandidatureForm] = useState(false);
   const [autre, setAutre] = useState(false);
   const [active, setActive] = useState(false);
+  const [clickDisabled, setClickDisabled] = useState(false);
   const [inputs, setInputs] = useState({
     motif: '',
     password: '',
@@ -148,7 +149,13 @@ function SupprimerCandidature({ conseiller }) {
                         setActive(false);
                       } }>Annuler</button>
                       <button className={active ? 'red-btn fr-col-offset-2 fr-col-5 ' : 'desactiver-btn fr-col-offset-2 fr-col-5'}
-                        disabled={!active} onClick={handleSubmit}>
+                        style={clickDisabled ? { cursor: 'not-allowed' } : {}}
+                        disabled={!active || clickDisabled} onClick={e => {
+                          if (e.detail === 1 && !clickDisabled) {
+                            setClickDisabled(true);
+                            handleSubmit();
+                          }
+                        }}>
                         Supprimer mes informations
                       </button>
                     </div>

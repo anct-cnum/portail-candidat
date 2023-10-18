@@ -26,7 +26,7 @@ function Login() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setInputs(inputs => ({ ...inputs, [name]: value }));
+    setInputs(inputs => ({ ...inputs, [name]: value.trim() }));
   }
 
   function handleSubmit() {

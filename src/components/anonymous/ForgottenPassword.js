@@ -54,7 +54,7 @@ function ForgottenPassword() {
     setInputsPassword(inputsPassword => ({ ...inputsPassword, [name]: value }));
   }
 
-  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,199})/);
+  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{12,199})/);
 
   function handleSubmitPassword() {
     setSubmittedPassword(true);
@@ -119,7 +119,7 @@ function ForgottenPassword() {
                 <div>
                   {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s\'est produite'}</span>}
                 </div>
-                <span>Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
+                <span>Celui-ci doit contenir au moins 12 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
 
 
                 <div className="fr-my-3w">

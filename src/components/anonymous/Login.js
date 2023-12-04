@@ -44,7 +44,7 @@ function Login() {
     }
   }
   useEffect(() => {
-    if (error === 'Reset password') {
+    if (error?.resetPasswordCnil) {
       setShowModalResetPassword(true);
     }
   }, [error]);
@@ -83,7 +83,7 @@ function Login() {
             <h2>Connexion</h2>
             <div>
               <div>
-                {error && <span style={{ color: 'red' }}>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
+                {(error && !error?.resetPasswordCnil) && <span style={{ color: 'red' }}>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
                 {deleteError && <span style={{ color: 'red' }}>{'Une erreur est survenue : ' + deleteError}</span>}
               </div>
 

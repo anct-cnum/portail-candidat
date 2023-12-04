@@ -33,8 +33,8 @@ const ModalResetPassword = ({ setShowModalResetPassword, username }) => {
                 </h1>
                 <p>
                   Conform&eacute;ment aux nouvelles r&egrave;gles de s&eacute;curit&eacute;
-                  des mots de passe impos&eacute;es par la CNIL, votre mot de passe &agrave;
-                  l&rsquo;espace Coop &agrave; &eacute;t&eacute; r&eacute;initialis&eacute;.
+                  des mots de passe impos&eacute;es par la CNIL, votre mot de passe de
+                  l&rsquo;espace candidat &agrave; &eacute;t&eacute; r&eacute;initialis&eacute;.
                   Vous allez recevoir par mail, un lien qui vous permettra de d&eacute;finir
                   un nouveau mot de passe.
                 </p>

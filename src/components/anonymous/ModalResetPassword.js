@@ -29,13 +29,14 @@ const ModalResetPassword = ({ setShowModalResetPassword, username }) => {
               <div className="fr-modal__content">
                 <h1 id="fr-modal-title-modal-1" className="fr-modal__title">
                   <span className="fr-icon-arrow-right-line fr-icon--lg"></span>
-                  Votre mot de passe a été réinitialisé
+                  R&eacute;initialiser votre mot de passe
                 </h1>
                 <p>
-                  Afin de respecter les nouvelles règles en matière de sécurité,
-                  le mot de passe de votre compte candidat a été réinitialisé.
-                  Nous allons vous envoyer un e-mail afin de vous permettre de modifier
-                  votre mot de passe.
+                  Conform&eacute;ment aux nouvelles r&egrave;gles de s&eacute;curit&eacute;
+                  des mots de passe impos&eacute;es par la CNIL, votre mot de passe &agrave;
+                  l&rsquo;espace Coop &agrave; &eacute;t&eacute; r&eacute;initialis&eacute;.
+                  Vous allez recevoir par mail, un lien qui vous permettra de d&eacute;finir
+                  un nouveau mot de passe.
                 </p>
               </div>
               <div className="fr-modal__footer">

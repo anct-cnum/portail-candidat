@@ -60,7 +60,7 @@ function Login() {
     if (errorEmail) {
       dispatch(alerteEtSpinnerActions.getMessageAlerte({
         type: 'error',
-        message: errorEmail === 'User not found' ? 'Cette adresse e-mail n\'existe pas' : errorEmail,
+        message: errorEmail,
         status: null, description: null
       }));
     }

@@ -19,11 +19,14 @@ function Footer() {
                             <img src="/logos/logoRF.svg" alt="logo République Française" style={{ height: '80px', marginRight: '28px' }}/>
                           </div>
                           <div style={{ display: 'inline-block' }} >
-                            <img src="/logos/logo-anct.svg" alt="logo Agence Nationale De La Cohésion Des Territoires"
-                              style={{ height: '59px', marginRight: '50px' }}/>
+                            <img
+                              src="/logos/logo-sonum-anct-min.svg"
+                              alt="logo Agence Nationale de la Coh&eacute;sion des Territoires - Soci&eacute;t&eacute; num&eacute;rique"
+                              style={{ height: '75px', marginRight: '40px' }}
+                            />
                           </div>
                           <div style={{ display: 'inline-block' }} >
-                            <img src="/logos/logo-france-relance.svg" alt="logo France Relance" style={{ height: '70px', marginBottom: '7px' }}/>
+                            <img src="/logos/logo-france-relance.svg" alt="logo France Relance" style={{ height: '75px', marginBottom: '7px' }}/>
                           </div>
                         </a>
                       </div>

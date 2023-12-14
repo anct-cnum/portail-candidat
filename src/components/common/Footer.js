@@ -16,7 +16,7 @@ function Footer() {
                       <div className="fr-footer__brand">
                         <a className="fr-footer__brand-link">
                           <div style={{ display: 'inline-block' }} >
-                            <img src="/logos/logoRF.svg" alt="logo République Française" style={{ height: '80px', marginRight: '28px' }}/>
+                            <img src="/logos/logoRF.svg" alt="logo R&eacute;publique Française" style={{ height: '80px', marginRight: '28px' }}/>
                           </div>
                           <div style={{ display: 'inline-block' }} >
                             <img

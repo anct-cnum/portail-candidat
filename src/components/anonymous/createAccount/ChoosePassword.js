@@ -33,7 +33,7 @@ function ChoosePassword() {
   }
 
   //Sécurité mot de passe :  Au moins 8 caratères (moins de 200) ayant au moins 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial
-  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,199})/);
+  const checkComplexity = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{12,199})/);
 
   function handleSubmit() {
     setSubmitted(true);
@@ -64,7 +64,7 @@ function ChoosePassword() {
                 <div>
                   {error && <span>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
                 </div>
-                <span>Celui-ci doit contenir au moins 8 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
+                <span>Celui-ci doit contenir au moins 12 caractères dont une minuscule, une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
                 <div className="fr-my-3w">
                   <label className="fr-label">Votre adresse email:</label>
                   <span>{resultVerifyToken.name}</span>

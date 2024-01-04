@@ -28,7 +28,7 @@ function Login() {
   const errorEmail = useSelector(state => state.motDePasseOublie.error);
   const validEmail = useSelector(state => state.motDePasseOublie.success);
   const loading = useSelector(state => state.motDePasseOublie?.loading);
-  const messageCodeVerified = useSelector(state => state.createAccount.messageCodeVerified);
+  const messageCodeVerified = useSelector(state => state.authentication.messageCodeVerified);
 
   const dispatch = useDispatch();
   const location = useLocation();

@@ -9,7 +9,8 @@ export const userActions = {
   inviteAccountsPrefet,
   forgottenPassword,
   updateInfosCandidat,
-  confirmUserEmail
+  confirmUserEmail,
+  verifyCode,
 };
 
 function login(username, password) {
@@ -207,6 +208,7 @@ function updateInfosCandidat({ id, infos }) {
     return { type: 'UPDATE_USER_EMAIL_FAILURE', error };
   }
 }
+
 function confirmUserEmail(token) {
   return dispatch => {
     dispatch(request());
@@ -227,5 +229,30 @@ function confirmUserEmail(token) {
   }
   function failure(error) {
     return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_FAILURE', error };
+  }
+}
+
+function verifyCode(code, email) {
+  return dispatch => {
+    dispatch(request());
+    userService.verifyCode(code, email)
+    .then(
+      result => {
+        dispatch(success(result));
+      },
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+
+  function request() {
+    return { type: 'VERIFY_CODE_CONNEXION_REQUEST' };
+  }
+  function success(result) {
+    return { type: 'VERIFY_CODE_CONNEXION_SUCCESS', result };
+  }
+  function failure(error) {
+    return { type: 'VERIFY_CODE_CONNEXION_FAILURE', error };
   }
 }

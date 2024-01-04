@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import FlashMessage from 'react-flash-message';
+import Pluralize from 'react-pluralize';
 import { alerteEtSpinnerActions, userActions } from '../../actions';
 import Header from '../common/Header';
 import ModalResetPassword from './ModalResetPassword';
 import Spinner from '../common/Spinner';
 import Alerte from '../common/Alerte';
+import ModalVerifyCode from './ModalVerifyCode';
 
 function Login() {
 
@@ -16,6 +19,8 @@ function Login() {
 
   const [submitted, setSubmitted] = useState(false);
   const [showModalResetPassword, setShowModalResetPassword] = useState(false);
+  const [showModalVerifyCode, setShowModalVerifyCode] = useState(false);
+  const [countAttempt, setCountAttempt] = useState(3);
   const { username, password } = inputs;
   const loggingIn = useSelector(state => state.authentication.loggingIn);
   const error = useSelector(state => state.authentication.error);
@@ -23,6 +28,7 @@ function Login() {
   const errorEmail = useSelector(state => state.motDePasseOublie.error);
   const validEmail = useSelector(state => state.motDePasseOublie.success);
   const loading = useSelector(state => state.motDePasseOublie?.loading);
+  const messageCodeVerified = useSelector(state => state.createAccount.messageCodeVerified);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -46,6 +52,10 @@ function Login() {
   useEffect(() => {
     if (error?.resetPasswordCnil) {
       setShowModalResetPassword(true);
+    } else if (error?.attemptFail) {
+      setCountAttempt(3 - error?.attemptFail);
+    } else if (error?.openPopinVerifyCode) {
+      setShowModalVerifyCode(true);
     }
   }, [error]);
 
@@ -70,9 +80,19 @@ function Login() {
     <div>
       <Header />
       <Spinner loading={loading} />
+      {messageCodeVerified &&
+        <FlashMessage duration={5000}>
+          <p className="fr-label flashBag">
+            {messageCodeVerified}
+          </p>
+        </FlashMessage>
+      }
       <Alerte />
       {showModalResetPassword &&
         <ModalResetPassword username={username} setShowModalResetPassword={setShowModalResetPassword} />
+      }
+      {showModalVerifyCode &&
+        <ModalVerifyCode setShowModalVerifyCode={setShowModalVerifyCode} email={username}/>
       }
       <div className="fr-container fr-mt-3w fr-mb-5w">
         <div className="fr-grid-row">
@@ -106,6 +126,18 @@ function Login() {
                   <div className="invalid">Mot de passe requis</div>
                 }
               </div>
+              {error?.attemptFail < 3 &&
+                  <div className="fr-mb-2w" style={{ color: 'red' }}>Erreur de mot de passe, il ne vous reste plus que&nbsp;
+                    <b><Pluralize
+                      zero={'essai'}
+                      singular={'essai'}
+                      plural={'essais'}
+                      count={countAttempt}
+                      showCount={true}/></b>.</div>
+              }
+              {error?.attemptFail === 3 &&
+                <div className="fr-mb-2w" style={{ color: 'red' }}>Votre compte est bloqu&eacute; pour les <b>10 prochaines minutes</b>.</div>
+              }
               {loggingIn && <span>Connexion en cours...</span>}
               <button className="fr-btn" onClick={handleSubmit}>Se connecter</button>
               <p className="fr-mt-3w">

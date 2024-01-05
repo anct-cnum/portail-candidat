@@ -11,6 +11,7 @@ export default function user(state = null, action) {
       return {
         ...state,
         userUpdated: true,
+        sendMail: action.user.sendmail,
         loading: false,
       };
     case 'UPDATE_USER_EMAIL_FAILURE':

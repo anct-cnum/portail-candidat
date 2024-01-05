@@ -26,6 +26,7 @@ function MonEspace() {
   const updateError = useSelector(state => state?.user?.patchError);
   const user = useSelector(state => state.authentication.user.user);
   const userUpdated = useSelector(state => state?.user?.userUpdated);
+  const sendMail = useSelector(state => state?.user?.sendMail);
   const blob = useSelector(state => state.conseiller?.blob);
   const lienCampagnePix = `${process.env.REACT_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
   const lienPix = `${process.env.REACT_APP_PIX_URL}`;
@@ -80,10 +81,10 @@ function MonEspace() {
       dispatch(conseillerActions.get(user?.entity?.$id));
       acceptedFiles.splice(0, 1);
     }
-    if (userUpdated === true) {
+    if (userUpdated === true || isUpdateStatutDispo === true) {
       dispatch(conseillerActions.get(user?.entity?.$id));
     }
-  }, [isUploaded, userUpdated]);
+  }, [isUploaded, userUpdated, isUpdateStatutDispo]);
 
   useEffect(() => {
     if (blob !== null && blob !== undefined && (downloadError === undefined || downloadError === false)) {
@@ -116,7 +117,16 @@ function MonEspace() {
           </p>
         </div>
       }
-
+      {userUpdated &&
+        <div className="fr-col-12 fr-mb-3w">
+          <div className="fr-alert fr-alert--success">
+            <span>Actualisation de vos informations a été enregistrer avec succès !</span><br/>
+            {sendMail && <span>
+              Un mail de confirmation de votre nouvelle adresse mail vous a été envoyé pour valider votre changement.
+            </span>}
+          </div>
+        </div>
+      }
       {isUpdateStatutDispo &&
         <div className="fr-col-12 fr-mb-3w">
           <p className="fr-alert fr-alert--success">

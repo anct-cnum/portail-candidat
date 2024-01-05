@@ -138,7 +138,7 @@ function handleResponse(response) {
         return Promise.reject({ attemptFail: data?.data?.attemptFail });
       }
       if (data?.data?.openPopinVerifyCode && data.message === 'PROCESS_LOGIN_UNBLOCKED') {
-        return Promise.reject({ openPopinVerifyCode: true });
+        return Promise.reject({ openPopinVerifyCode: data?.data?.openPopinVerifyCode });
       }
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);

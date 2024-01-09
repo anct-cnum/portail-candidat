@@ -120,9 +120,9 @@ function MonEspace() {
       {userUpdated &&
         <div className="fr-col-12 fr-mb-3w">
           <div className="fr-alert fr-alert--success">
-            <span>Actualisation de vos informations a été enregistrer avec succès !</span><br/>
+            <span>Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s&nbsp;!</span><br/>
             {sendMail && <span>
-              Un mail de confirmation de votre nouvelle adresse mail vous a été envoyé pour valider votre changement.
+              Un mail de confirmation vous a &eacute;t&eacute; envoy&eacute; sur votre nouvelle adresse mail pour valider votre changement.
             </span>}
           </div>
         </div>

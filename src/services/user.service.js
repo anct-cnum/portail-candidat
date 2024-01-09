@@ -115,7 +115,7 @@ function verifyCode(code, email) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'code': code, 'email': email
+      code, email
     })
   };
 

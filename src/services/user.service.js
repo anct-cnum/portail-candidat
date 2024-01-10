@@ -134,7 +134,7 @@ function handleResponse(response) {
       if (data?.data?.resetPasswordCnil && data.message === 'RESET_PASSWORD_CNIL') {
         return Promise.reject({ resetPasswordCnil: true });
       }
-      if (data?.data?.attemptFail && (data.message === 'ERROR_ATTEMPT_LOGIN' || data.message === 'ERROR_ATTEMPT_LOGIN_BLOCKED')) {
+      if (data?.data?.attemptFail && (data.message === 'ERROR_ATTEMPT_LOGIN')) {
         return Promise.reject({ attemptFail: data?.data?.attemptFail });
       }
       if (data?.data?.openPopinVerifyCode && data.message === 'PROCESS_LOGIN_UNBLOCKED') {

@@ -76,21 +76,21 @@ function ForgottenPassword() {
               <h2>Mot de passe oubli&eacute; ?</h2>
               <p className="fr-my-3w">Nous allons vous envoyer un e-mail afin de vous permettre de modifier votre mot de passe.</p>
               {submittedEmail && validEmail &&
-               <div className="valid fr-mb-3w">L&#39;e-mail de renouvellement de mot de passe a pu être envoy&eacute; sur : {username} !</div>
+               <div className="valid fr-mb-3w">L&rsquo;e-mail de renouvellement de mot de passe a pu &ecirc;tre envoy&eacute; sur&nbsp;: {username} !</div>
               }
               {submittedEmail && errorEmail === 'User not found' &&
                 <div className="invalid fr-mb-3w">
-                  L&#39;e-mail de renouvellement de mot de passe n&#39;a pas pu être envoy&eacute;, v&eacute;rifiez votre adresse e-mail !
+                  L&rsquo;e-mail de renouvellement de mot de passe n&rsquo;a pas pu &ecirc;tre envoy&eacute;, v&eacute;rifiez votre adresse e-mail !
                 </div>
               }
               {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
                 <div className="invalid fr-mb-3w">
-                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation reçu sur {username}
+                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation re&ccedil;u sur {username}
                 </div>
               }
               {submittedEmail && errorEmail === 'Error authorization user' &&
                 <div className="invalid fr-mb-3w">
-                  Le compte {username} n&#39;a pas acc&egrave;s à ce portail.
+                  Le compte {username} n&rsquo;a pas acc&egrave;s &agrave; ce portail.
                 </div>
               }
               {submittedEmail && !username &&
@@ -129,7 +129,7 @@ function ForgottenPassword() {
 
 
                 <div className="fr-my-3w">
-                  <label className="fr-label">Votre adresse email:</label>
+                  <label className="fr-label">Votre adresse email&nbsp;:</label>
                   <span>{resultVerifyToken.name}</span>
                 </div>
 
@@ -156,7 +156,7 @@ function ForgottenPassword() {
                     onChange={handleChangePassword}
                     className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
                   {password !== confirmPassword &&
-                      <div className="invalid">Le mot de passe doit être identique</div>
+                      <div className="invalid">Le mot de passe doit &ecirc;tre identique</div>
                   }
                 </div>
 

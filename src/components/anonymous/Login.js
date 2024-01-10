@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Pluralize from 'react-pluralize';
 import { alerteEtSpinnerActions, userActions } from '../../actions';
 import Header from '../common/Header';
 import ModalResetPassword from './ModalResetPassword';
@@ -130,12 +129,8 @@ function Login() {
               </div>
               {error?.attemptFail < 3 &&
                   <div className="fr-mb-2w" style={{ color: 'red' }}>Erreur de mot de passe, il ne vous reste plus que&nbsp;
-                    <b><Pluralize
-                      zero={'essai'}
-                      singular={'essai'}
-                      plural={'essais'}
-                      count={countAttempt}
-                      showCount={true}/></b>.</div>
+                    <b>{countAttempt}&nbsp;{countAttempt > 1 ? 'essais' : 'essai' }</b>.
+                  </div>
               }
               {error?.attemptFail === 3 &&
                 <div className="fr-mb-2w" style={{ color: 'red' }}>Votre compte est bloqu&eacute; pour les <b>10 prochaines minutes</b>.</div>

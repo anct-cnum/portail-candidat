@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import FlashMessage from 'react-flash-message';
 import Pluralize from 'react-pluralize';
 import { alerteEtSpinnerActions, userActions } from '../../actions';
 import Header from '../common/Header';
@@ -76,17 +75,20 @@ function Login() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if (messageCodeVerified) {
+      dispatch(userActions.clearErrorConnexion());
+      dispatch(alerteEtSpinnerActions.getMessageAlerte({
+        type: 'success',
+        message: messageCodeVerified,
+        status: null, description: null
+      }));
+    }
+  }, [messageCodeVerified]);
   return (
     <div>
       <Header />
       <Spinner loading={loading} />
-      {messageCodeVerified &&
-        <FlashMessage duration={5000}>
-          <p className="fr-label flashBag">
-            {messageCodeVerified}
-          </p>
-        </FlashMessage>
-      }
       <Alerte />
       {showModalResetPassword &&
         <ModalResetPassword username={username} setShowModalResetPassword={setShowModalResetPassword} />

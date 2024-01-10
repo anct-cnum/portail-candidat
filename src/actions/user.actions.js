@@ -3,6 +3,7 @@ import { userService } from '../services/user.service.js';
 export const userActions = {
   login,
   logout,
+  clearErrorConnexion,
   verifyToken,
   verifyPrefetToken,
   choosePassword,
@@ -51,6 +52,10 @@ function login(username, password) {
 function logout() {
   userService.logout();
   return { type: 'LOGOUT' };
+}
+
+function clearErrorConnexion() {
+  return { type: 'CLEAR_ERROR' };
 }
 
 function verifyToken(token) {

@@ -6,6 +6,7 @@ import Header from '../common/Header';
 import ModalResetPassword from './ModalResetPassword';
 import Spinner from '../common/Spinner';
 import Alerte from '../common/Alerte';
+import ModalVerifyCode from './ModalVerifyCode';
 
 function Login() {
 
@@ -16,6 +17,8 @@ function Login() {
 
   const [submitted, setSubmitted] = useState(false);
   const [showModalResetPassword, setShowModalResetPassword] = useState(false);
+  const [showModalVerifyCode, setShowModalVerifyCode] = useState(false);
+  const [countAttempt, setCountAttempt] = useState(3);
   const { username, password } = inputs;
   const loggingIn = useSelector(state => state.authentication.loggingIn);
   const error = useSelector(state => state.authentication.error);
@@ -23,6 +26,7 @@ function Login() {
   const errorEmail = useSelector(state => state.motDePasseOublie.error);
   const validEmail = useSelector(state => state.motDePasseOublie.success);
   const loading = useSelector(state => state.motDePasseOublie?.loading);
+  const messageCodeVerified = useSelector(state => state.authentication?.messageCodeVerified);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -46,6 +50,10 @@ function Login() {
   useEffect(() => {
     if (error?.resetPasswordCnil) {
       setShowModalResetPassword(true);
+    } else if (error?.attemptFail) {
+      setCountAttempt(3 - error?.attemptFail);
+    } else if (error?.openPopinVerifyCode) {
+      setShowModalVerifyCode(true);
     }
   }, [error]);
 
@@ -66,6 +74,16 @@ function Login() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if (messageCodeVerified) {
+      dispatch(userActions.clearErrorConnexion());
+      dispatch(alerteEtSpinnerActions.getMessageAlerte({
+        type: 'success',
+        message: messageCodeVerified,
+        status: null, description: null
+      }));
+    }
+  }, [messageCodeVerified]);
   return (
     <div>
       <Header />
@@ -73,6 +91,9 @@ function Login() {
       <Alerte />
       {showModalResetPassword &&
         <ModalResetPassword username={username} setShowModalResetPassword={setShowModalResetPassword} />
+      }
+      {showModalVerifyCode &&
+        <ModalVerifyCode setShowModalVerifyCode={setShowModalVerifyCode} email={username}/>
       }
       <div className="fr-container fr-mt-3w fr-mb-5w">
         <div className="fr-grid-row">
@@ -106,6 +127,14 @@ function Login() {
                   <div className="invalid">Mot de passe requis</div>
                 }
               </div>
+              {error?.attemptFail < 3 &&
+                  <div className="fr-mb-2w" style={{ color: 'red' }}>Erreur de mot de passe, il ne vous reste plus que&nbsp;
+                    <b>{countAttempt}&nbsp;{countAttempt > 1 ? 'essais' : 'essai' }</b>.
+                  </div>
+              }
+              {error?.attemptFail === 3 &&
+                <div className="fr-mb-2w" style={{ color: 'red' }}>Votre compte est bloqu&eacute; pour les <b>10 prochaines minutes</b>.</div>
+              }
               {loggingIn && <span>Connexion en cours...</span>}
               <button className="fr-btn" onClick={handleSubmit}>Se connecter</button>
               <p className="fr-mt-3w">

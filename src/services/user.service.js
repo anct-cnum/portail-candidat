@@ -7,7 +7,8 @@ export const userService = {
   choosePassword,
   updateInfosCandidat,
   confirmUserEmail,
-  sendForgottenPasswordEmail
+  sendForgottenPasswordEmail,
+  verifyCode,
 };
 
 function login(username, password) {
@@ -105,6 +106,23 @@ function sendForgottenPasswordEmail(username) {
   return fetch(uri, requestOptions).then(handleResponse);
 }
 
+function verifyCode(code, email) {
+  const apiUrlRoot = process.env.REACT_APP_API;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      code, email
+    })
+  };
+
+  let uri = `${apiUrlRoot}/users/verify-code`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
+
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -115,6 +133,12 @@ function handleResponse(response) {
       }
       if (data?.data?.resetPasswordCnil && data.message === 'RESET_PASSWORD_CNIL') {
         return Promise.reject({ resetPasswordCnil: true });
+      }
+      if (data?.data?.attemptFail && (data.message === 'ERROR_ATTEMPT_LOGIN')) {
+        return Promise.reject({ attemptFail: data?.data?.attemptFail });
+      }
+      if (data?.data?.openPopinVerifyCode && data.message === 'PROCESS_LOGIN_UNBLOCKED') {
+        return Promise.reject({ openPopinVerifyCode: data?.data?.openPopinVerifyCode });
       }
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);

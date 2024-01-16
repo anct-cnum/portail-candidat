@@ -38,10 +38,11 @@ const ModalVerifyCode = ({ setShowModalVerifyCode, email }) => {
                   V&eacute;rification du compte conseiller
                 </h1>
                 <p>
-                  Conform&eacute;ment aux r&egrave;gles de s&eacute;curit&eacute; des mots de passe,
-                  un code de v&eacute;rification vous a &eacute;t&eacute; envoy&eacute; sur votre
-                  adresse email personnelle.
-                  Merci de le renseigner ici.
+                  Votre compte &agrave; &eacute;t&eacute; verrouill&eacute; par mesure de s&eacute;curit&eacute;.<br/>
+                  <b>Pour d&eacute;verrouiller votre compte</b>
+                  Nous vous avons envoyer un code de s&eacute;curit&eacute; &agrave; l&rsquo;adresse mail personnelle que vous avez
+                  renseign&eacute; lors de votre inscription.<br/>
+                  Une fois que vous aurez entr&eacute; le code, vous pourrez de nouveau acc&eacute;der &agrave; votre compte.
                 </p>
 
                 <div className="fr-grid-row fr-mt-3w">

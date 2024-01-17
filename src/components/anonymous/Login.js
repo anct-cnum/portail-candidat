@@ -18,6 +18,7 @@ function Login() {
   const [submitted, setSubmitted] = useState(false);
   const [showModalResetPassword, setShowModalResetPassword] = useState(false);
   const [showModalVerifyCode, setShowModalVerifyCode] = useState(false);
+  const [showErrorPassword, setShowErrorPassword] = useState(false);
   const [countAttempt, setCountAttempt] = useState(3);
   const { username, password } = inputs;
   const loggingIn = useSelector(state => state.authentication.loggingIn);
@@ -52,6 +53,12 @@ function Login() {
       setShowModalResetPassword(true);
     } else if (error?.attemptFail) {
       setCountAttempt(3 - error?.attemptFail);
+      if (error?.attemptFail === 3) {
+        setShowErrorPassword(true);
+        setTimeout(() => {
+          setShowErrorPassword(false);
+        }, 20000);
+      }
     } else if (error?.openPopinVerifyCode) {
       setShowModalVerifyCode(true);
     }
@@ -89,6 +96,13 @@ function Login() {
       <Header />
       <Spinner loading={loading} />
       <Alerte />
+      {showErrorPassword &&
+        <p className="fr-label flashBag invalid">
+          Vous avez saisi un mot de passe incorrect &agrave; 3 reprises. Nous avons temporairement verrouill&eacute; votre compte.<br/>
+          R&eacute;essayez dans 10 min. Si vous l&rsquo;avez oubli&eacute;, cliquez sur&nbsp;
+          &quot;<Link to="/mot-de-passe-oublie" title="Mot de passe oubli&eacute; ?" >Mot de passe oubli&eacute; ?</Link>&quot;
+        </p>
+      }
       {showModalResetPassword &&
         <ModalResetPassword username={username} setShowModalResetPassword={setShowModalResetPassword} />
       }
@@ -128,12 +142,10 @@ function Login() {
                 }
               </div>
               {error?.attemptFail < 3 &&
-                  <div className="fr-mb-2w" style={{ color: 'red' }}>Erreur de mot de passe, il ne vous reste plus que&nbsp;
-                    <b>{countAttempt}&nbsp;{countAttempt > 1 ? 'essais' : 'essai' }</b>.
+                  <div className="fr-mb-2w" style={{ color: 'red' }}> <b>Mot de passe incorrect</b>, il vous reste&nbsp;
+                    <b>{countAttempt}&nbsp;{countAttempt > 1 ? 'tentatives' : 'tentative' }</b><br/>
+                     avant le verrouillage de votre compte.
                   </div>
-              }
-              {error?.attemptFail === 3 &&
-                <div className="fr-mb-2w" style={{ color: 'red' }}>Votre compte est bloqu&eacute; pour les <b>10 prochaines minutes</b>.</div>
               }
               {loggingIn && <span>Connexion en cours...</span>}
               <button className="fr-btn" onClick={handleSubmit}>Se connecter</button>

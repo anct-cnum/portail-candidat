@@ -119,7 +119,7 @@ function Login() {
             <div>
               <div>
                 {(error && !error?.resetPasswordCnil && !error?.openPopinVerifyCode) &&
-                <span style={{ color: 'red' }}>{error.error ?? 'Une erreur s\'est produite'}</span>}
+                <span style={{ color: 'red' }}>{error.error?.message?.toString() ?? 'Une erreur s\'est produite'}</span>}
                 {deleteError && <span style={{ color: 'red' }}>{'Une erreur est survenue : ' + deleteError}</span>}
               </div>
 

@@ -118,7 +118,8 @@ function Login() {
             <h2>Connexion</h2>
             <div>
               <div>
-                {(error && !error?.resetPasswordCnil) && <span style={{ color: 'red' }}>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
+                {(error && !error?.resetPasswordCnil && !error?.openPopinVerifyCode) &&
+                <span style={{ color: 'red' }}>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
                 {deleteError && <span style={{ color: 'red' }}>{'Une erreur est survenue : ' + deleteError}</span>}
               </div>
 

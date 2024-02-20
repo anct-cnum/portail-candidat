@@ -32,7 +32,7 @@ function Footer() {
                       </div>
                       <div className="fr-footer__content fr-mt-3w">
                         <p className="fr-footer__content-desc">
-                      Conseiller Numérique France services est un dispositif financé par l&rsquo;&Eacute;tat dans le cadre de France Relance.
+                      Conseiller Numérique est un dispositif financé par l&rsquo;&Eacute;tat dans le cadre de France Relance.
                       Il est piloté par l&rsquo;Agence Nationale de la Cohésion des Territoires et opéré par la Banque des Territoires.
                         </p>
                       </div>

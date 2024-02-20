@@ -92,7 +92,7 @@ function SupprimerCandidature({ conseiller }) {
                     <p className="fr-mb-7w">
                       En cliquant sur &laquo;&nbsp;supprimer mes informations&nbsp;&raquo;, votre candidature ainsi que vos donn&eacute;es de compte candidat
                       (mail, t&eacute;l&eacute;phone, etc) seront int&eacute;gralement supprim&eacute;es de la base de donn&eacute;es
-                      Conseiller num&eacute;rique France Services.
+                      Conseiller num&eacute;rique.
                       <b>Cette action est irr&eacute;versible.</b>
                     </p>
 
@@ -111,7 +111,7 @@ function SupprimerCandidature({ conseiller }) {
                             <label className="fr-label" htmlFor="emploi">J&rsquo;ai trouv&eacute; un emploi.</label>
                           </div>
                           <div className = "fr-radio-group">
-                            <input name="motif" value="Recruté en tant que CnFs" type="radio" id="recruter" onClick={e => {
+                            <input name="motif" value="Recruté en tant que Conum" type="radio" id="recruter" onClick={e => {
                               handleChange(e);
                               setAutre(false);
                             }}/>

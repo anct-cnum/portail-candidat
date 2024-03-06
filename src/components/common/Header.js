@@ -14,7 +14,7 @@ function Header({ connected }) {
             <div className="fr-header__body" style={{ display: 'flex' }}>
               <div className="fr-header__service sansBoxShadow" >
                 <a className="fr-header__operator" href="/">
-                  <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique France Services" className="logo"/>
+                  <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique" className="logo"/>
                 </a>
               </div>
               <div className="fr-header__service responsiveTextHeader sansBoxShadow fr-mt-2w placement-droite">

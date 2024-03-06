@@ -12,7 +12,7 @@ function CandidatureSupprimee() {
             <h1>Vos informations ont &eacute;t&eacute; supprim&eacute;es de la base de donn&eacute;es</h1>
             <img src="/logos/conseiller-conseillere.svg" style={{ width: '100%' }}/>
             <p className="fr-mt-5w">
-              <b>L&rsquo;&eacute;quipe Conseiller num&eacute;rique France Services vous remercie pour votre participation au dispositif</b>
+              <b>L&rsquo;&eacute;quipe Conseiller num&eacute;rique vous remercie pour votre participation au dispositif</b>
             </p>
           </div>
         </div>

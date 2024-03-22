@@ -54,7 +54,7 @@ jobs:
           envkey_REACT_APP_PIX_CAMPAGNE_URL: ${{ secrets.REACT_APP_PIX_CAMPAGNE_URL }}
           envkey_REACT_APP_PIX_URL: "https://app.pix.fr/connexion"
           file_name: .env
-       - name: copy robots.txt
+      - name: copy robots.txt
         uses: canastro/copy-file-action@master
         with:
           source: "desindexation/robots.txt"

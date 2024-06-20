@@ -1,8 +1,14 @@
 {
   "name": "candidat",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "AGPL-3.0",
-  "private": true,
+  "scripts": {
+    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --max-warnings=0 --cache --cache-location node_modules/.cache/eslint",
+    "start": "serve -s build"
+  },
   "dependencies": {
     "@gouvfr/dsfr": "^1.11.1",
     "@reduxjs/toolkit": "^2.2.1",
@@ -22,11 +28,10 @@
     "remixicon": "^4.2.0",
     "web-vitals": "^3.5.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "lint": "eslint src --max-warnings=0 --cache --cache-location node_modules/.cache/eslint"
+  "devDependencies": {
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.2.5",
+    "sass": "^1.71.1"
   },
   "eslintConfig": {
     "extends": [
@@ -44,11 +49,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint-plugin-react": "^7.33.2",
-    "prettier": "^3.2.5",
-    "sass": "^1.71.1"
   },
   "engines": {
     "node": "20.12.2"

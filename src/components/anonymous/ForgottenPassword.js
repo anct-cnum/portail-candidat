@@ -73,32 +73,32 @@ function ForgottenPassword() {
           /* Etape 1 */
           <>
             <div className="Login fr-col-6">
-              <h2>Mot de passe oubli&eacute; ?</h2>
+              <h2>Mot de passe oublié ?</h2>
               <p className="fr-my-3w">Nous allons vous envoyer un e-mail afin de vous permettre de modifier votre mot de passe.</p>
               {submittedEmail && validEmail &&
-               <div className="valid fr-mb-3w">L&rsquo;e-mail de renouvellement de mot de passe a pu &ecirc;tre envoy&eacute; sur&nbsp;: {username} !</div>
+               <div className="valid fr-mb-3w">L’e-mail de renouvellement de mot de passe a pu être envoyé sur&nbsp;: {username} !</div>
               }
               {submittedEmail && errorEmail === 'User not found' &&
                 <div className="invalid fr-mb-3w">
-                  L&rsquo;e-mail de renouvellement de mot de passe n&rsquo;a pas pu &ecirc;tre envoy&eacute;, v&eacute;rifiez votre adresse e-mail !
+                  L’e-mail de renouvellement de mot de passe n’a pas pu être envoyé, vérifiez votre adresse e-mail !
                 </div>
               }
               {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
                 <div className="invalid fr-mb-3w">
-                  Veuillez d&rsquo;abord activer votre compte via le dernier email d&rsquo;invitation re&ccedil;u sur {username}
+                  Veuillez d’abord activer votre compte via le dernier e-mail d’invitation reçu sur {username}
                 </div>
               }
               {submittedEmail && errorEmail === 'Error authorization user' &&
                 <div className="invalid fr-mb-3w">
-                  Le compte {username} n&rsquo;a pas acc&egrave;s &agrave; ce portail.
+                  Le compte {username} n’a pas accès &agrave; ce portail.
                 </div>
               }
               {submittedEmail && !username &&
-                <div className="invalid fr-mb-3w">Adresse email requise</div>
+                <div className="invalid fr-mb-3w">Adresse e-mail requise</div>
               }
 
-              <label className="fr-label">Adresse email</label>
-              <input name="username" value={username} onChange={handleChangeEmail}
+              <label className="fr-label" htmlFor="email">Adresse e-mail</label>
+              <input id="email" name="username" value={username} onChange={handleChangeEmail}
                 className={(submittedEmail && !username ? ' is-invalid fr-input' : 'fr-input')}
               />
 
@@ -116,20 +116,19 @@ function ForgottenPassword() {
               }
 
               { tokenVerified === false &&
-                <span>D&eacute;sol&eacute; mais le lien est invalide ou a d&eacute;jà &eacute;t&eacute; utilis&eacute;.</span>
+                <span>Désolé mais le lien est invalide ou a déjà été utilisé.</span>
               }
 
               { tokenVerified && !passwordChoosen && resultVerifyToken?.role === 'candidat' &&
               <div>
                 <div>
-                  {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s\'est produite'}</span>}
+                  {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s’est produite'}</span>}
                 </div>
-                <span>Celui-ci doit contenir au moins 12 caract&egrave;res dont une minuscule,
-                  une majuscule, un chiffre et un caract&egrave;re sp&eacute;cial(!@#$%^&amp;*)</span>
-
+                <span>Celui-ci doit contenir au moins 12 caractères dont une minuscule,
+                  une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
 
                 <div className="fr-my-3w">
-                  <label className="fr-label">Votre adresse email&nbsp;:</label>
+                  <label className="fr-label">Votre adresse e-mail&nbsp;:</label>
                   <span>{resultVerifyToken.name}</span>
                 </div>
 
@@ -144,7 +143,7 @@ function ForgottenPassword() {
                       <div className="invalid">Mot de passe requis</div>
                   }
                   { password && !checkComplexity.test(password) &&
-                      <span className="invalid">Le mot de passe ne correspond pas aux exigences de s&eacute;curit&eacute;.</span>
+                      <span className="invalid">Le mot de passe ne correspond pas aux exigences de sécurité.</span>
                   }
                 </div>
 
@@ -156,7 +155,7 @@ function ForgottenPassword() {
                     onChange={handleChangePassword}
                     className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
                   {password !== confirmPassword &&
-                      <div className="invalid">Le mot de passe doit &ecirc;tre identique</div>
+                      <div className="invalid">Le mot de passe doit être identique</div>
                   }
                 </div>
 
@@ -167,7 +166,7 @@ function ForgottenPassword() {
               { passwordChoosen &&
                 <>
                   <span>
-                    Votre mot de passe a &eacute;t&eacute; renouvel&eacute; avec succ&egrave;s
+                    Votre mot de passe a été renouvelé avec succès
                     <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle', color: 'green' }}></i>
                   </span><br/><br/>
                   <span><Link to={`/login?role=${resultChoosePassword?.role}`}>Vous pouvez vous connecter</Link></span>
@@ -180,8 +179,6 @@ function ForgottenPassword() {
       </div>
     </>
   );
-
-
 }
 
 export default ForgottenPassword;

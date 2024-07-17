@@ -13,14 +13,14 @@ function Header({ connected }) {
           <div className="fr-col-offset-1 responsiveHeaderTools" style={{ display: 'flex' }}>
             <div className="fr-header__body" style={{ display: 'flex' }}>
               <div className="fr-header__service sansBoxShadow" >
-                <a className="fr-header__operator" href="/">
+                <Link className="fr-header__operator" to="/">
                   <img src="/logos/logo-conseiller-numerique.svg" alt="logo Conseiller Numérique" className="logo"/>
-                </a>
+                </Link>
               </div>
               <div className="fr-header__service responsiveTextHeader sansBoxShadow fr-mt-2w placement-droite">
-                <a href="/" title="Portail Candidat">
+                <Link to="/" title="Portail Candidat">
                   <p className="fr-header__service-title">Portail Candidat</p>
-                </a>
+                </Link>
                 <p className="fr-header__service-tagline">Gestion des informations du candidat</p>
               </div>
             </div>
@@ -33,7 +33,7 @@ function Header({ connected }) {
                     </h3>
                   </li>
                   <li className="fr-shortcuts__item placement-droite">
-                    <Link className="fr-btn fr-btn--sm" to={`/login`}>
+                    <Link className="fr-btn fr-btn--sm" to="/login">
                       <span className="hide-deconnexion">Se déconnecter&nbsp;</span>
                       <i className="ri-logout-box-r-line"></i>
                     </Link>

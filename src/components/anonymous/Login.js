@@ -109,9 +109,8 @@ function Login() {
       {showModalVerifyCode &&
         <ModalVerifyCode setShowModalVerifyCode={setShowModalVerifyCode} email={username}/>
       }
-      <div className="fr-container fr-mt-3w fr-mb-5w">
-        <div className="fr-grid-row">
-          <div className="fr-col-offset-3"></div>
+      <div className="fr-container fr-mt-3w">
+        <div className="fr-grid-row fr-grid-row--center">
           <div
             className="Login fr-col-6"
             style={{ textAlign: 'center' }}>
@@ -124,16 +123,23 @@ function Login() {
               </div>
 
               <div className="fr-my-3w">
-                <label className="fr-label">Adresse email</label>
-                <input name="username" value={username} onChange={handleChange} className={(submitted && !username ? ' is-invalid fr-input' : 'fr-input')} />
+                <label className="fr-label" htmlFor="email">Adresse e-mail</label>
+                <input
+                  id="email"
+                  name="username"
+                  value={username}
+                  onChange={handleChange}
+                  className={(submitted && !username ? ' is-invalid fr-input' : 'fr-input')} />
                 {submitted && !username &&
-                  <div className="invalid">Adresse email requise</div>
+                  <div className="invalid">Adresse e-mail requise</div>
                 }
               </div>
 
               <div className="fr-my-3w">
-                <label className="fr-label">Mot de passe</label>
-                <input name="password"
+                <label className="fr-label" htmlFor="motDePasse">Mot de passe</label>
+                <input
+                  id="motDePasse"
+                  name="password"
                   type="password"
                   value={password}
                   onChange={handleChange}

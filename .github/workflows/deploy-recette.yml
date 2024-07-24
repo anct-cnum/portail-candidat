@@ -29,50 +29,25 @@ jobs:
           key: node_modules.-${{ hashFiles('package-lock.json') }}
           path: node_modules
 
-  build:
-    needs: dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Retrieve cached dependencies
-        uses: actions/cache@v4
-        with:
-          key: node_modules-${{ hashFiles('package-lock.json') }}
-          path: node_modules
       - name: Override .env
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_VITE_APP_API: ${{ secrets.REACT_APP_API_RECETTE }}
           envkey_VITE_APP_PIX_CAMPAGNE_URL: ${{ secrets.REACT_APP_PIX_CAMPAGNE_URL }}
           file_name: .env
-      - name: copy robots.txt
-        uses: canastro/copy-file-action@master
-        with:
-          source: "desindexation/robots.txt"
-          target: "public/robots.txt"
       - name: Build application
         run: npm run build
-      - name: copy .htaccess
+      - name: Copy robots.txt
         uses: canastro/copy-file-action@master
         with:
-          source: ".htaccess"
-          target: "dist/.htaccess"
-      - name: Upload release bundle as artifact
-        uses: actions/upload-artifact@v4
+          source: desindexation/robots.txt
+          target: dist/robots.txt
+      - name: Copy .htaccess
+        uses: canastro/copy-file-action@master
         with:
-          name: bundle
-          path: dist/*
+          source: .htaccess
+          target: dist/.htaccess
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Retrieve bundle React
-        uses: actions/download-artifact@v4
-        with:
-          name: bundle
-          path: dist
       - name: Deploy on clever cloud
         uses: s0/git-publish-subdir-action@develop
         env:

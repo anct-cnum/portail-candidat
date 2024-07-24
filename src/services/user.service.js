@@ -12,8 +12,7 @@ export const userService = {
 };
 
 function login(username, password) {
-
-  const strategy = import.meta.env.VITE_APP_STRATEGYAUTH;
+  const strategy = 'local';
   const apiUrlAuth = `${import.meta.env.VITE_APP_API}/authentication`;
 
   const requestOptions = {

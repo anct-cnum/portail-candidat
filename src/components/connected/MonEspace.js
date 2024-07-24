@@ -29,7 +29,6 @@ function MonEspace() {
   const sendMail = useSelector(state => state?.user?.sendMail);
   const blob = useSelector(state => state.conseiller?.blob);
   const lienCampagnePix = `${import.meta.env.VITE_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
-  const lienPix = `${import.meta.env.VITE_APP_PIX_URL}`;
 
   const [infos, setInfos] = useState({
     nom: conseiller?.nom,
@@ -64,7 +63,7 @@ function MonEspace() {
         'text/pdf': ['.pdf']
       },
       maxFiles: 1,
-      maxSize: import.meta.env.VITE_APP_CV_FILE_MAX_SIZE
+      maxSize: 10485760
     });
 
   const downloadCV = () => {
@@ -249,7 +248,7 @@ function MonEspace() {
               Elle est accessible depuis la rubrique <strong>&quot;Certification&quot;</strong>
               en cliquant sur <strong>&quot;Voir mes certifications&quot;</strong>.
             </p>
-            <a href={lienPix}
+            <a href="https://app.pix.fr/connexion"
               target="blank"
               rel="noopener noreferrer"
               title="Je me connecte à mon compte Pix"

@@ -28,8 +28,8 @@ function MonEspace() {
   const userUpdated = useSelector(state => state?.user?.userUpdated);
   const sendMail = useSelector(state => state?.user?.sendMail);
   const blob = useSelector(state => state.conseiller?.blob);
-  const lienCampagnePix = `${process.env.REACT_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
-  const lienPix = `${process.env.REACT_APP_PIX_URL}`;
+  const lienCampagnePix = `${import.meta.env.VITE_APP_PIX_CAMPAGNE_URL}?participantExternalId=${conseiller?.idPG}`;
+  const lienPix = `${import.meta.env.VITE_APP_PIX_URL}`;
 
   const [infos, setInfos] = useState({
     nom: conseiller?.nom,
@@ -64,7 +64,7 @@ function MonEspace() {
         'text/pdf': ['.pdf']
       },
       maxFiles: 1,
-      maxSize: process.env.REACT_APP_CV_FILE_MAX_SIZE
+      maxSize: import.meta.env.VITE_APP_CV_FILE_MAX_SIZE
     });
 
   const downloadCV = () => {

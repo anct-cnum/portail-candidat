@@ -3,7 +3,7 @@ import { authHeader } from '../helpers';
 
 import { userService } from './user.service';
 
-const apiUrlRoot = process.env.REACT_APP_API;
+const apiUrlRoot = import.meta.env.VITE_APP_API;
 
 export const conseillerService = {
   get,

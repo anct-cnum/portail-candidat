@@ -5,6 +5,10 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import DatePicker from 'react-datepicker';
 
+import '@gouvfr/dsfr/dist/utility/icons/icons-design/icons-design.min.css';
+import '@gouvfr/dsfr/dist/utility/icons/icons-system/icons-system.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
+
 function Informations({ infos, setInfos, conseiller }) {
   const dispatch = useDispatch();
   const { _id } = useSelector(state => state.authentication.user?.user);

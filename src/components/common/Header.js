@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import '@gouvfr/dsfr/dist/utility/icons/icons-user/icons-user.min.css';
+
 function Header({ connected }) {
   const user = useSelector(state => state.authentication?.user?.user);
 
@@ -35,7 +37,7 @@ function Header({ connected }) {
                   <li className="fr-shortcuts__item placement-droite">
                     <Link className="fr-btn fr-btn--sm" to="/login">
                       <span className="hide-deconnexion">Se déconnecter&nbsp;</span>
-                      <i className="ri-logout-box-r-line"></i>
+                      <span className="fr-icon-logout-box-r-line" aria-hidden="true"></span>
                     </Link>
                   </li>
                 </ul>

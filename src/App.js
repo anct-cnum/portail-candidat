@@ -1,11 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import './assets/js/app.js';
-import './assets/css/app.scss';
-import Login from './components/anonymous/Login.js';
-import Home from './components/connected/Home.js';
+import Login from './components/anonymous/Login';
+import Home from './components/connected/Home';
 import ChoosePassword from './components/anonymous/createAccount/ChoosePassword';
-
 import PrivateRoute from './components/connected/PrivateRoute';
 import Footer from './components/common/Footer';
 import EmailConfirmer from './components/anonymous/ConfirmationEmail';
@@ -13,9 +10,13 @@ import ForgottenPassword from './components/anonymous/ForgottenPassword';
 import CandidatureSupprimee from './components/anonymous/CandidatureSupprimee';
 import { useSelector } from 'react-redux';
 
-function App() {
+import '@gouvfr/dsfr/dist/dsfr/dsfr.module.min.js';
+import '@gouvfr/dsfr/dist/dsfr/dsfr.min.css';
+import './assets/css/app.scss';
 
+function App() {
   const isLoading = useSelector(state => state.alerteEtSpinner?.isLoading);
+
   return (
     <div className="App">
       {isLoading &&

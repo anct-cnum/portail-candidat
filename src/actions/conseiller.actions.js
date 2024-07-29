@@ -1,6 +1,6 @@
 import download from 'downloadjs';
-import { conseillerService } from '../services/conseiller.service.js';
-import { userService } from '../services/user.service.js';
+import { conseillerService } from '../services/conseiller.service';
+import { userService } from '../services/user.service';
 
 export const conseillerActions = {
   get,

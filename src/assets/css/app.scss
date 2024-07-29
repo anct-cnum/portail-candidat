@@ -1,12 +1,398 @@
-@use './style';
+.flashBag {
+  background-color: var(--grey-50-1000);
+  color: #008941;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 20px;
+}
 
-@import '../../../node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-communication/icons-communication.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-business/icons-business.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-user/icons-user.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-design/icons-design.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-system/icons-system.min.css';
-@import '../../../node_modules/@gouvfr/dsfr/dist/utility/icons/icons-document/icons-document.min.css';
-@import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
-@import '../../../node_modules/remixicon/fonts/remixicon.css';
+.labelError {
+  color: #FF3333;
+}
 
+.red-background {
+  background-color: #E10600;
+}
+
+.header__logo-rf {
+  height: 78px;
+}
+
+.Login {
+  border-radius: 8px;
+  text-align: center;
+}
+
+.fr-sur-mesure {
+  flex: none;
+  padding-right: 0;
+  height: 75px;
+}
+
+.logo-conseiller-numerique {
+  height: 75px;
+  margin-left: 1.25rem;
+  display: flex;
+}
+
+.logo-conseiller-numerique img:first-child {
+  height: 54px;
+  margin-top: 1.1em;
+  font-weight: lighter !important;
+}
+
+.fr-tag.current {
+  font-weight: 600;
+  color: var(--grey-50-1000);
+  background-color: #5770BE;
+}
+
+.fr-tag:hover {
+  background-color: #D5DBEF;
+}
+
+.hidden {
+  display: none;
+}
+
+.big-btn {
+  display: inline-block;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem !important;
+  width: 60%;
+  text-align: center;
+  background: var(--grey-50-1000) !important;
+  border: 1px solid #383838 !important;
+  color: #383838 !important;
+}
+
+/* Modal Gestion */
+.modalOpened {
+  opacity: 1;
+  visibility: visible;
+}
+
+#fr-modal-supprimer-candidat {
+  .fr-modal__body {
+    width: 130%;
+  }
+}
+
+/** Icones menu gauche **/
+.Menu .fr-sidemenu__item--active [class^="fr-fi"] {
+  color: var(--blue-france-975-sun-113);
+}
+
+.fr-sidemenu__inner {
+  padding: 0 1rem 0 .25rem;
+}
+
+/** style custom **/
+.alignRight {
+  text-align: right;
+}
+
+.valignTextTop {
+  vertical-align: text-top;
+}
+
+.valignMiddle {
+  vertical-align: middle;
+}
+
+.valignBottom {
+  vertical-align: bottom;
+}
+
+.conseiller .customTitleLink {
+  color: var(--blue-france-975-sun-113);
+  text-align: right;
+}
+
+.capitalizeFirstLetter {
+  text-transform: capitalize;
+  color: var(--blue-france-975-sun-113);
+}
+
+.centrerTexte {
+  text-align: center;
+}
+
+.titrage {
+  font-size: 56px;
+}
+
+.invalid, .important {
+  color: #e10600;
+}
+
+.valid {
+  color: #008941;
+}
+
+.sansBoxShadow {
+  box-shadow: none;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.supprimer-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.supprimer-link:hover {
+  color: red;
+}
+
+.upload-btn {
+  height: 64px;
+  cursor: pointer;
+}
+
+.download-btn {
+  padding: 1em 1.8em;
+  width: 100%;
+  text-align: left;
+}
+
+.download-img {
+  margin-right: 0.8em;
+}
+
+.red-btn {
+  background-color: #e10600;
+  padding: .5rem 1.5rem;
+  text-align: center;
+  color: #e7e7e7;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #d30000 !important;
+  }
+}
+
+.desactiver-btn {
+  padding: .5rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.info-candidat {
+  margin-bottom: 'revert';
+}
+
+/** Header **/
+.logo {
+  height: 72px;
+  margin-top: -32px;
+}
+
+.fr-header__tools-links {
+  display: block !important;
+}
+
+.menu-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.user-header {
+  margin: 0 2.5rem 0 0.7rem;
+}
+
+.user-img {
+  position: relative;
+  top: 3px;
+}
+
+.informations p {
+  margin: 0 0 1.5rem;
+}
+
+.image-download {
+  margin: 0 15px 0 6px;
+}
+
+.dropZone {
+  background-color: #f3f3f3;
+  padding: 15px 15px 1px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .drop-error-message {
+    text-align: center;
+    color: #ff6961;
+  }
+
+  .image-dropZone {
+    float: left;
+    margin: 0 15px;
+  }
+
+  .texte-dropZone {
+    margin: 0 10px 1.5rem 54px;
+  }
+
+  img {
+    margin-right: 15px;
+  }
+}
+
+.drop-error {
+  background-color: #ffb4bf;
+  border: 1px solid #ff6961;
+}
+
+.contenu-droite {
+  float: right;
+}
+
+.marge-radio {
+  margin-right: 7.5rem;
+}
+
+.input-autre {
+  width: 322px;
+}
+
+.wrapperModal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.spinnerCustom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.link-test-pix {
+  display: 'flex';
+  align-items: center;
+  width: 41%;
+}
+
+@media (min-width: 769px) {
+  .headerAlignementmd-lg {
+    margin-left: 2.5rem !important;
+  }
+}
+
+@media (max-width: 1092) and (min-width: 992px) {
+  .info-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0 35%;
+  }
+}
+
+@media (max-width: 1177px) and (min-width: 992px) {
+  .upload-btn {
+    height: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hide-deconnexion {
+    display: none;
+  }
+
+  .user-header {
+    margin: 0 2.5rem 0 0.7rem;
+  }
+
+  #fr-modal-supprimer-candidat {
+    .fr-modal__body {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 963px) {
+  .user-header {
+    margin: 0 1rem 0 0.7rem;
+  }
+
+  .marge-radio {
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .responsiveHeaderTools {
+    display: block !important;
+  }
+
+  .responsiveVisibilityMenu {
+    visibility: hidden;
+    margin: -3.5rem;
+  }
+
+  .responsiveBouton {
+    width: 26rem;
+  }
+
+  .responsiveTextHeader {
+    text-align: end;
+    margin-right: 0;
+  }
+
+  .headerAlignement {
+    margin-left: 0.6rem;
+  }
+
+  .responsiveHeaderTools {
+    margin-left: 0 !important;
+  }
+
+  .marge-contenu {
+    margin: 0.7em;
+  }
+}
+
+@media (min-width: 460px) and (max-width: 767px) {
+  .placement-droite {
+    position: absolute;
+    right: 0;
+    margin: 0 30px;
+  }
+}
+
+@media (max-width: 460px) {
+  .user-header {
+    font-size: 12px;
+  }
+
+  .marge-contenu {
+    margin: 0 10px;
+  }
+
+  .input-autre {
+    width: 80%;
+  }
+}
+
+@media (max-width: 411px) {
+  .upload-btn {
+    height: 80px;
+  }
+}

@@ -245,7 +245,7 @@ function MonEspace() {
             <p>
               Pour consulter vos r&eacute;sultats, il vous suffit de vous connecter &agrave; votre compte personnel Pix,
               vous pourrez alors retrouver vos r&eacute;sultats depuis la page <strong>&quot;Mes certifications&quot;</strong>.
-              Elle est accessible depuis la rubrique <strong>&quot;Certification&quot;</strong>
+              Elle est accessible depuis la rubrique <strong>&quot;Certification&quot;</strong>{' '}
               en cliquant sur <strong>&quot;Voir mes certifications&quot;</strong>.
             </p>
             <a href="https://app.pix.fr/connexion"

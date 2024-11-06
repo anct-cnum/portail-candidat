@@ -27,10 +27,10 @@ function Home() {
 
   return (
     <>
-      {user?.role === 'candidat' && (!candidat || candidat?.sexe !== undefined) &&
+      {['candidat', 'conseiller'].includes(user?.role) && (!candidat || candidat?.sexe !== undefined) &&
         <Connected />
       }
-      {user?.role === 'candidat' && candidat && candidat?.sexe === undefined &&
+      {['candidat', 'conseiller'].includes(user?.role) && candidat && candidat?.sexe === undefined &&
         <FormulaireSexeAge />
       }
     </>

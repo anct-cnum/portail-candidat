@@ -38,6 +38,24 @@ export default function user(state = null, action) {
         patchError: action.error,
         loading: false
       };
+    case 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_REQUEST':
+      return {
+        ...state,
+        loading: true,
+        patchError: false
+      };
+    case 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_SUCCESS':
+      return {
+        ...state,
+        isEmailPro: action.user.isEmailPro,
+        loading: false
+      };
+    case 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_FAILURE':
+      return {
+        ...state,
+        patchError: action.error,
+        loading: false
+      };
     default:
       return state;
   }

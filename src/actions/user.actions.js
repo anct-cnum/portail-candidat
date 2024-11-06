@@ -10,7 +10,9 @@ export const userActions = {
   inviteAccountsPrefet,
   forgottenPassword,
   updateInfosCandidat,
+  updateInfosConseiller,
   confirmUserEmail,
+  confirmUserEmailPro,
   verifyCode,
 };
 
@@ -18,18 +20,17 @@ function login(username, password) {
   return dispatch => {
     dispatch(request({ username }));
 
-    userService.login(username, password)
-    .then(
+    userService.login(username, password).then(
       data => {
         data.user.role = data.user.roles[0];
         delete data.user.roles;
         dispatch(success(data));
-        if (data.user.role !== 'candidat') {
-          window.location.pathname = '/login';
-        } else {
+        if (['candidat', 'conseiller'].includes(data.user.role)) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(data));
           window.location.pathname = '/mon-espace';
+        } else {
+          window.location.pathname = '/login';
         }
       },
       error => {
@@ -214,6 +215,29 @@ function updateInfosCandidat({ id, infos }) {
   }
 }
 
+function updateInfosConseiller({ id, infos }) {
+  return dispatch => {
+    dispatch(request());
+    userService.updateInfosConseiller(id, infos)
+    .then(
+      user => dispatch(success(user)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+
+  function request() {
+    return { type: 'UPDATE_USER_EMAIL_REQUEST' };
+  }
+  function success(user) {
+    return { type: 'UPDATE_USER_EMAIL_SUCCESS', user };
+  }
+  function failure(error) {
+    return { type: 'UPDATE_USER_EMAIL_FAILURE', error };
+  }
+}
+
 function confirmUserEmail(token) {
   return dispatch => {
     dispatch(request());
@@ -234,6 +258,28 @@ function confirmUserEmail(token) {
   }
   function failure(error) {
     return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_FAILURE', error };
+  }
+}
+
+function confirmUserEmailPro(token) {
+  return dispatch => {
+    dispatch(request());
+    userService.confirmUserEmailPro(token).then(
+      user => dispatch(success(user)),
+      error => {
+        dispatch(failure(error));
+      }
+    );
+  };
+
+  function request() {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_REQUEST' };
+  }
+  function success(user) {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_SUCCESS', user };
+  }
+  function failure(error) {
+    return { type: 'CONFIRMATION_UPDATE_USER_EMAIL_PRO_FAILURE', error };
   }
 }
 

@@ -119,7 +119,7 @@ function ForgottenPassword() {
                 <span>Désolé mais le lien est invalide ou a déjà été utilisé.</span>
               }
 
-              { tokenVerified && !passwordChoosen && resultVerifyToken?.role === 'candidat' &&
+              { tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
               <div>
                 <div>
                   {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s’est produite'}</span>}

@@ -34,7 +34,16 @@ function MonEspace() {
     nom: conseiller?.nom,
     prenom: conseiller?.prenom,
     email: conseiller?.email,
-    telephone: conseiller?.telephone
+    emailPro: conseiller?.emailPro,
+    telephone: conseiller?.telephone,
+    dateDisponibilite: conseiller?.dateDisponibilite
+  });
+
+  const [infosConseiller, setInfosConseiller] = useState({
+    email: conseiller?.email,
+    emailPro: conseiller?.emailPro,
+    telephone: conseiller?.telephone,
+    dateDisponibilite: conseiller?.dateDisponibilite
   });
 
   const errorTab = [{
@@ -177,9 +186,11 @@ function MonEspace() {
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-lg-6">
             <h2 className="fr-mb-7w">Mes informations</h2>
-            <Informations infos={infos} setInfos={setInfos} conseiller={conseiller} />
+            <Informations infosConseiller={infosConseiller} setInfosConseiller={setInfosConseiller} infos={infos} setInfos={setInfos} conseiller={conseiller} />
             <UpdateDisponibilite conseiller={conseiller} />
-            <SupprimerCandidature conseiller={conseiller} />
+            {conseiller && conseiller?.statut !== 'RECRUTE' &&
+              <SupprimerCandidature conseiller={conseiller} />
+            }
           </div>
           <div className="fr-col-12 fr-col-lg-6" >
             <h2 className="fr-mb-7w">Mon Curriculum vit&aelig;</h2>

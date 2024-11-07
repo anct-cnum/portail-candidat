@@ -6,7 +6,9 @@ export const userService = {
   verifyToken,
   choosePassword,
   updateInfosCandidat,
+  updateInfosConseiller,
   confirmUserEmail,
+  confirmUserEmailPro,
   sendForgottenPasswordEmail,
   verifyCode,
 };
@@ -78,6 +80,18 @@ function updateInfosCandidat(id, infos) {
   return fetch(uri, requestOptions).then(handleResponse);
 }
 
+function updateInfosConseiller(id, infos) {
+  const apiUrlRoot = import.meta.env.VITE_APP_API;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader()),
+    body: JSON.stringify(infos)
+  };
+
+  let uri = `${apiUrlRoot}/conseiller/updateInfosConseiller/${id}`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
+
 function confirmUserEmail(token) {
   const apiUrlRoot = import.meta.env.VITE_APP_API;
   const requestOptions = {
@@ -85,6 +99,16 @@ function confirmUserEmail(token) {
     headers: authHeader(),
   };
   let uri = `${apiUrlRoot}/candidat/confirmation-email/${token}`;
+  return fetch(uri, requestOptions).then(handleResponse);
+}
+
+function confirmUserEmailPro(token) {
+  const apiUrlRoot = import.meta.env.VITE_APP_API;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: authHeader(),
+  };
+  let uri = `${apiUrlRoot}/conseillers/confirmation-email/${token}`;
   return fetch(uri, requestOptions).then(handleResponse);
 }
 

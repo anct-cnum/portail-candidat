@@ -6,6 +6,7 @@ import ChoosePassword from './components/anonymous/createAccount/ChoosePassword'
 import PrivateRoute from './components/connected/PrivateRoute';
 import Footer from './components/common/Footer';
 import EmailConfirmer from './components/anonymous/ConfirmationEmail';
+import ConfirmationEmailPro from './components/anonymous/ConfirmationEmailPro';
 import ForgottenPassword from './components/anonymous/ForgottenPassword';
 import CandidatureSupprimee from './components/anonymous/CandidatureSupprimee';
 import { useSelector } from 'react-redux';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/inscription/:token" element={<ChoosePassword />} />
         <Route path="/candidat/confirmation-email/:token" element={<EmailConfirmer />} />
+        <Route path="/conseillers/confirmation-email/:token" element={<ConfirmationEmailPro />} />
         <Route path="/mot-de-passe-oublie" element={<ForgottenPassword />} />
         <Route path="/renouveler-mot-de-passe/:token" element={<ForgottenPassword />} />
         <Route path="/candidature-supprimee" element={<CandidatureSupprimee />} />

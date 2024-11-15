@@ -55,11 +55,11 @@ function ChoosePassword() {
               <span>Chargement...</span>
             }
 
-            { ((resultVerifyToken && resultVerifyToken?.role !== 'candidat') || tokenVerified === false) &&
+            { ((resultVerifyToken && !['candidat', 'conseiller'].includes(resultVerifyToken?.role)) || tokenVerified === false) &&
               <span>Désolé mais le lien est invalide ou a déjà été utilisé. Veuillez réinitialiser votre mot de passe si nécessaire.</span>
             }
 
-            { tokenVerified && !passwordChoosen && resultVerifyToken?.role === 'candidat' &&
+            { tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
               <div>
                 <div>
                   {error && <span>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}

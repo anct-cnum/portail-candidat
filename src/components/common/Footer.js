@@ -23,7 +23,7 @@ function Footer() {
             </a>
           </div>
           <div className="fr-footer__content fr-mt-3w">
-            <p className="fr-footer__content-desc">
+            <p className="fr-footer__content-descending">
               Conseiller Numérique est un dispositif financé par l’état dans le cadre de France Relance.
               Il est piloté par l’Agence Nationale de la Cohésion des Territoires et opéré par la Banque des Territoires.
             </p>

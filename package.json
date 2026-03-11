@@ -33,6 +33,6 @@
     "sass-embedded": "^1.98.0"
   },
   "engines": {
-    "node": "20.12.2"
+    "node": "22.12.0"
   }
 }

@@ -10,11 +10,11 @@
     "start": "vite preview"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "^1.14.0",
-    "@reduxjs/toolkit": "^2.8.2",
+    "@gouvfr/dsfr": "^1.14.4",
+    "@reduxjs/toolkit": "^2.11.2",
     "@vitejs/plugin-react": "^4.6.0",
     "axios": "^1.12.0",
-    "dayjs": "^1.11.13",
+    "dayjs": "^1.11.19",
     "downloadjs": "^1.4.7",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

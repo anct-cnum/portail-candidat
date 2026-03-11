@@ -20,7 +20,7 @@ function UpdateDisponibilite({ conseiller }) {
       <button className="fr-btn fr-mb-4w" onClick={() => {
         setShowModal(true);
       }}>
-        <span className="fr-fi-refresh-line fr-mr-3v" aria-hidden="true" />
+        <span className="fr-icon-refresh-line fr-mr-3v" aria-hidden="true" />
         {conseiller?.disponible ? 'Je souhaite me désinscrire' : 'Je souhaite me réinscrire'}
       </button>
       {showModal &&
@@ -38,7 +38,7 @@ function UpdateDisponibilite({ conseiller }) {
                     {conseiller?.disponible ?
                       <>
                         <h1 id="fr-modal-2-title" className="fr-modal__title">
-                          <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
+                          <span className="fr-icon-arrow-right-line fr-icon--lg" aria-hidden="true"></span>
                           Confirmer votre d&eacute;sinscription
                         </h1>
                         <p>
@@ -48,7 +48,7 @@ function UpdateDisponibilite({ conseiller }) {
                       </> :
                       <>
                         <h1 id="fr-modal-2-title" className="fr-modal__title">
-                          <span className="fr-fi-arrow-right-line fr-fi--lg" aria-hidden="true"></span>
+                          <span className="fr-icon-arrow-right-line fr-icon--lg" aria-hidden="true"></span>
                           Confirmer votre r&eacute;inscription
                         </h1>
                         <p>

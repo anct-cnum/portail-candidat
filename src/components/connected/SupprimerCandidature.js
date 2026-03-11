@@ -64,12 +64,12 @@ function SupprimerCandidature({ conseiller }) {
   return (
     <>
       <div className="fr-mb-md-15w">
-        <p className="supprimer-link" onClick={ () => {
+        <p className="supprimer-link" onClick={() => {
           setDisplaySupprimerCandidatureForm(true);
           setActive(false);
           setAutre(false);
         }}>
-            Supprimer ma candidature et toutes mes informations
+          Supprimer ma candidature et toutes mes informations
         </p>
       </div>
       {displaySupprimerCandidatureForm &&
@@ -79,14 +79,14 @@ function SupprimerCandidature({ conseiller }) {
               <div className="fr-col-11 fr-col-md-10 fr-col-lg-6">
                 <div className="fr-modal__body">
                   <div className="fr-modal__header">
-                    <button className="fr-link--close fr-link" title="Fermer la fenêtre" onClick={ () => {
+                    <button className="fr-link--close fr-link" title="Fermer la fenêtre" onClick={() => {
                       setDisplaySupprimerCandidatureForm(false);
                       setActive(false);
-                    } }>Fermer</button>
+                    }}>Fermer</button>
                   </div>
                   <div className="fr-modal__content">
                     <h1 id="fr-modal-supprimer-candidat" className="fr-modal__title">
-                      <span className="fr-fi-arrow-right-line fr-fi--lg"></span>
+                      <span className="fr-icon-arrow-right-line fr-icon--lg"></span>
                       Supprimer ma candidature et mes informations
                     </h1>
                     <p className="fr-mb-7w">
@@ -103,51 +103,51 @@ function SupprimerCandidature({ conseiller }) {
                           <span className="important">*</span></b>
                         </div>
                         <div className="fr-fieldset__content">
-                          <div className = "fr-radio-group">
+                          <div className="fr-radio-group">
                             <input name="motif" value="Trouvé un emploi" type="radio" id="emploi" onClick={e => {
                               handleChange(e);
                               setAutre(false);
-                            }}/>
+                            }} />
                             <label className="fr-label" htmlFor="emploi">J&rsquo;ai trouv&eacute; un emploi.</label>
                           </div>
-                          <div className = "fr-radio-group">
+                          <div className="fr-radio-group">
                             <input name="motif" value="Recruté en tant que Conum" type="radio" id="recruter" onClick={e => {
                               handleChange(e);
                               setAutre(false);
-                            }}/>
+                            }} />
                             <label className="fr-label" htmlFor="recruter">
                               J&rsquo;ai &eacute;t&eacute; recrut&eacute; en tant que conseiller num&eacute;rique.
                             </label>
                           </div>
-                          <div className = "fr-radio-group">
+                          <div className="fr-radio-group">
                             <input name="motif" value="Autre" type="radio" id="Autre" onClick={() => {
                               setAutre(true);
                               setInputs(inputs => ({ ...inputs, motif: '' }));
-                            }}/>
+                            }} />
                             <label className="fr-label" htmlFor="Autre">Autre.</label>
                           </div>
                         </div>
                         {autre &&
-                        <div className="fr-ml-4w">
-                          <label>
-                          Vous pouvez préciser si vous le souhaitez :
-                          </label>
-                          <input name="motif" type="text" className="fr-input input-autre fr-mt-1w" onChange={handleChange}/>
-                        </div>
+                          <div className="fr-ml-4w">
+                            <label>
+                              Vous pouvez préciser si vous le souhaitez :
+                            </label>
+                            <input name="motif" type="text" className="fr-input input-autre fr-mt-1w" onChange={handleChange} />
+                          </div>
                         }
                       </fieldset>
                     </div>
 
                     <div className="fr-col-6">
                       <label htmlFor="password">Votre mot de passe :</label>
-                      <input type="password" className="fr-input fr-mt-1w" name="password" id="password" onChange={handleChange}/>
+                      <input type="password" className="fr-input fr-mt-1w" name="password" id="password" onChange={handleChange} />
                     </div>
 
                     <div className="fr-mt-7w">
-                      <button className="fr-btn fr-col-5" style={{ paddingLeft: '15%' }} onClick={ () => {
+                      <button className="fr-btn fr-col-5" style={{ paddingLeft: '15%' }} onClick={() => {
                         setDisplaySupprimerCandidatureForm(false);
                         setActive(false);
-                      } }>Annuler</button>
+                      }}>Annuler</button>
                       <button className={active ? 'red-btn fr-col-offset-2 fr-col-5 ' : 'desactiver-btn fr-col-offset-2 fr-col-5'}
                         style={clickDisabled ? { cursor: 'not-allowed' } : {}}
                         disabled={!active || clickDisabled} onClick={e => {

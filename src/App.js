@@ -12,6 +12,7 @@ import CandidatureSupprimee from './components/anonymous/CandidatureSupprimee';
 import { useSelector } from 'react-redux';
 
 import '@gouvfr/dsfr/dist/dsfr/dsfr.module.min.js';
+import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr/dsfr.min.css';
 import './assets/css/app.scss';
 

@@ -63,16 +63,16 @@ function Informations({ infos, setInfos, infosConseiller, setInfosConseiller, co
     <div>
       {form === false ?
         <div className="fr-my-3w">
-          <p className="info-candidat">Nom&nbsp;: <strong>{ conseiller?.nom }</strong></p>
-          <p className="info-candidat">Prénom&nbsp;: { conseiller?.prenom }</p>
-          <p className="info-candidat">Email&nbsp;: { conseiller?.email }</p>
+          <p className="info-candidat">Nom&nbsp;: <strong>{conseiller?.nom}</strong></p>
+          <p className="info-candidat">Prénom&nbsp;: {conseiller?.prenom}</p>
+          <p className="info-candidat">Email&nbsp;: {conseiller?.email}</p>
           {conseiller?.statut === 'RECRUTE' &&
-          <p className="info-candidat">Email&nbsp; professionnel: { conseiller?.emailPro ?? '-'}</p>}
-          <p>Téléphone&nbsp;: { conseiller?.telephone }</p>
-          <p>Disponible à partir du&nbsp;: { dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY') }</p>
+            <p className="info-candidat">Email&nbsp; professionnel: {conseiller?.emailPro ?? '-'}</p>}
+          <p>Téléphone&nbsp;: {conseiller?.telephone}</p>
+          <p>Disponible à partir du&nbsp;: {dayjs(conseiller?.dateDisponibilite).format('DD/MM/YYYY')}</p>
           <button className="fr-btn fr-mt-6w fr-mb-1w" onClick={activeFormulaire}>
-            <span className="fr-fi-edit-line fr-mr-3v" aria-hidden="true"/>
-              Modifier mes informations
+            <span className="fr-icon-edit-line fr-mr-3v" aria-hidden="true" />
+            Modifier mes informations
           </button>
         </div> :
         <div className="fr-container--fluid">
@@ -96,6 +96,7 @@ function Informations({ infos, setInfos, infosConseiller, setInfosConseiller, co
                   className="fr-input fr-my-2w"
                   dateFormat="dd/MM/yyyy"
                   locale="fr"
+                  fixedHeight
                   selected={infosConseiller?.dateDisponibilite ?? ''}
                   onChange={date => setInfosConseiller({ ...infosConseiller, dateDisponibilite: date })}
                   minDate={new Date()}
@@ -120,6 +121,7 @@ function Informations({ infos, setInfos, infosConseiller, setInfosConseiller, co
                   className="fr-input fr-my-2w"
                   dateFormat="dd/MM/yyyy"
                   locale="fr"
+                  fixedHeight
                   selected={infos?.dateDisponibilite ?? ''}
                   onChange={date => setInfos({ ...infos, dateDisponibilite: date })}
                   minDate={new Date()}

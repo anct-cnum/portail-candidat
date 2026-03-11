@@ -44,22 +44,22 @@ function ChoosePassword() {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <div className="fr-container fr-mt-3w">
         <div className="fr-grid-row">
           <div className="fr-col-3"></div>
           <div className="Login fr-col-6 fr-p-5w">
-            <h2>Choisissez votre mot de passe<br />de votre portail candidat<br /><span className="fr-fi-account-fill fr-icon--lg" /></h2>
+            <h2>Choisissez votre mot de passe<br />de votre portail candidat<br /><span className="fr-icon-account-fill fr-icon--lg" /></h2>
 
-            { verifyingToken &&
+            {verifyingToken &&
               <span>Chargement...</span>
             }
 
-            { ((resultVerifyToken && !['candidat', 'conseiller'].includes(resultVerifyToken?.role)) || tokenVerified === false) &&
+            {((resultVerifyToken && !['candidat', 'conseiller'].includes(resultVerifyToken?.role)) || tokenVerified === false) &&
               <span>Désolé mais le lien est invalide ou a déjà été utilisé. Veuillez réinitialiser votre mot de passe si nécessaire.</span>
             }
 
-            { tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
+            {tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
               <div>
                 <div>
                   {error && <span>{error.error ? error.error : 'Une erreur s\'est produite'}</span>}
@@ -80,7 +80,7 @@ function ChoosePassword() {
                   {submitted && !password &&
                     <div className="invalid">Mot de passe requis</div>
                   }
-                  { password && !checkComplexity.test(password) &&
+                  {password && !checkComplexity.test(password) &&
                     <div className="invalid">Le mot de passe ne correspond pas aux exigences de sécurité.</div>
                   }
                 </div>
@@ -102,7 +102,7 @@ function ChoosePassword() {
               </div>
             }
 
-            { passwordChoosen &&
+            {passwordChoosen &&
               <span>Votre compte a été créé avec succès. <Link to={`/login?role=${resultChoosePassword?.role}`}>Vous pouvez vous connecter</Link>.</span>
             }
 

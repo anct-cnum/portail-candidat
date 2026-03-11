@@ -65,110 +65,110 @@ function ForgottenPassword() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div className="fr-container fr-mt-3w fr-mb-5w">
         <div className="fr-grid-row fr-grid-row--center fr-p-2w">
 
           {!token &&
-          /* Etape 1 */
-          <>
-            <div className="Login fr-col-6">
-              <h2>Mot de passe oublié ?</h2>
-              <p className="fr-my-3w">Nous allons vous envoyer un e-mail afin de vous permettre de modifier votre mot de passe.</p>
-              {submittedEmail && validEmail &&
-               <div className="valid fr-mb-3w">L’e-mail de renouvellement de mot de passe a pu être envoyé sur&nbsp;: {username} !</div>
-              }
-              {submittedEmail && errorEmail === 'User not found' &&
-                <div className="invalid fr-mb-3w">
-                  L’e-mail de renouvellement de mot de passe n’a pas pu être envoyé, vérifiez votre adresse e-mail !
-                </div>
-              }
-              {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
-                <div className="invalid fr-mb-3w">
-                  Veuillez d’abord activer votre compte via le dernier e-mail d’invitation reçu sur {username}
-                </div>
-              }
-              {submittedEmail && errorEmail === 'Error authorization user' &&
-                <div className="invalid fr-mb-3w">
-                  Le compte {username} n’a pas accès &agrave; ce portail.
-                </div>
-              }
-              {submittedEmail && !username &&
-                <div className="invalid fr-mb-3w">Adresse e-mail requise</div>
-              }
+            /* Etape 1 */
+            <>
+              <div className="Login fr-col-6">
+                <h2>Mot de passe oublié ?</h2>
+                <p className="fr-my-3w">Nous allons vous envoyer un e-mail afin de vous permettre de modifier votre mot de passe.</p>
+                {submittedEmail && validEmail &&
+                  <div className="valid fr-mb-3w">L’e-mail de renouvellement de mot de passe a pu être envoyé sur&nbsp;: {username} !</div>
+                }
+                {submittedEmail && errorEmail === 'User not found' &&
+                  <div className="invalid fr-mb-3w">
+                    L’e-mail de renouvellement de mot de passe n’a pas pu être envoyé, vérifiez votre adresse e-mail !
+                  </div>
+                }
+                {submittedEmail && errorEmail === 'Error authorization forgottenPassword' &&
+                  <div className="invalid fr-mb-3w">
+                    Veuillez d’abord activer votre compte via le dernier e-mail d’invitation reçu sur {username}
+                  </div>
+                }
+                {submittedEmail && errorEmail === 'Error authorization user' &&
+                  <div className="invalid fr-mb-3w">
+                    Le compte {username} n’a pas accès &agrave; ce portail.
+                  </div>
+                }
+                {submittedEmail && !username &&
+                  <div className="invalid fr-mb-3w">Adresse e-mail requise</div>
+                }
 
-              <label className="fr-label" htmlFor="email">Adresse e-mail</label>
-              <input id="email" name="username" value={username} onChange={handleChangeEmail}
-                className={(submittedEmail && !username ? ' is-invalid fr-input' : 'fr-input')}
-              />
+                <label className="fr-label" htmlFor="email">Adresse e-mail</label>
+                <input id="email" name="username" value={username} onChange={handleChangeEmail}
+                  className={(submittedEmail && !username ? ' is-invalid fr-input' : 'fr-input')}
+                />
 
-              <button className="fr-btn fr-my-3w" onClick={handleSubmitEmail}>Poursuivre</button>
-            </div>
-          </>
+                <button className="fr-btn fr-my-3w" onClick={handleSubmitEmail}>Poursuivre</button>
+              </div>
+            </>
           }
           {token &&
             /* Etape 2 */
             <div className="Login fr-col-8 fr-p-5w">
-              <h2>Renouveler votre mot de passe<br /><span className="fr-fi-account-fill fr-fi--xl" /></h2>
+              <h2>Renouveler votre mot de passe<br /><span className="fr-icon-account-fill fr-icon--xl" /></h2>
 
-              { verifyingToken &&
+              {verifyingToken &&
                 <span>Chargement...</span>
               }
 
-              { tokenVerified === false &&
+              {tokenVerified === false &&
                 <span>Désolé mais le lien est invalide ou a déjà été utilisé.</span>
               }
 
-              { tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
-              <div>
+              {tokenVerified && !passwordChoosen && ['candidat', 'conseiller'].includes(resultVerifyToken?.role) &&
                 <div>
-                  {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s’est produite'}</span>}
-                </div>
-                <span>Celui-ci doit contenir au moins 12 caractères dont une minuscule,
-                  une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
+                  <div>
+                    {errorPassword && <span>{errorPassword.error ? errorPassword.error : 'Une erreur s’est produite'}</span>}
+                  </div>
+                  <span>Celui-ci doit contenir au moins 12 caractères dont une minuscule,
+                    une majuscule, un chiffre et un caractère spécial(!@#$%^&amp;*)</span>
 
-                <div className="fr-my-3w">
-                  <label className="fr-label">Votre adresse e-mail&nbsp;:</label>
-                  <span>{resultVerifyToken.name}</span>
-                </div>
+                  <div className="fr-my-3w">
+                    <label className="fr-label">Votre adresse e-mail&nbsp;:</label>
+                    <span>{resultVerifyToken.name}</span>
+                  </div>
 
-                <div className="fr-my-3w">
-                  <label className="fr-label">Mot de passe</label>
-                  <input name="password"
-                    type="password"
-                    value={password}
-                    onChange={handleChangePassword}
-                    className={(submittedPassword && !password ? ' is-invalid fr-input' : 'fr-input')} />
-                  {submittedPassword && !password &&
+                  <div className="fr-my-3w">
+                    <label className="fr-label">Mot de passe</label>
+                    <input name="password"
+                      type="password"
+                      value={password}
+                      onChange={handleChangePassword}
+                      className={(submittedPassword && !password ? ' is-invalid fr-input' : 'fr-input')} />
+                    {submittedPassword && !password &&
                       <div className="invalid">Mot de passe requis</div>
-                  }
-                  { password && !checkComplexity.test(password) &&
+                    }
+                    {password && !checkComplexity.test(password) &&
                       <span className="invalid">Le mot de passe ne correspond pas aux exigences de sécurité.</span>
-                  }
-                </div>
+                    }
+                  </div>
 
-                <div className="fr-my-3w">
-                  <label className="fr-label">Mot de passe (confirmation)</label>
-                  <input name="confirmPassword"
-                    type="password"
-                    value={confirmPassword}
-                    onChange={handleChangePassword}
-                    className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
-                  {password !== confirmPassword &&
+                  <div className="fr-my-3w">
+                    <label className="fr-label">Mot de passe (confirmation)</label>
+                    <input name="confirmPassword"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={handleChangePassword}
+                      className={(password !== confirmPassword ? ' is-invalid fr-input' : 'fr-input')} />
+                    {password !== confirmPassword &&
                       <div className="invalid">Le mot de passe doit être identique</div>
-                  }
-                </div>
+                    }
+                  </div>
 
-                {choosingPassword && <span>Chargement...</span>}
-                <button className="fr-btn" onClick={handleSubmitPassword}>Valider</button>
-              </div>
+                  {choosingPassword && <span>Chargement...</span>}
+                  <button className="fr-btn" onClick={handleSubmitPassword}>Valider</button>
+                </div>
               }
-              { passwordChoosen &&
+              {passwordChoosen &&
                 <>
                   <span>
                     Votre mot de passe a été renouvelé avec succès
                     <i className="ri-check-line ri-xl" style={{ verticalAlign: 'middle', color: 'green' }}></i>
-                  </span><br/><br/>
+                  </span><br /><br />
                   <span><Link to={`/login?role=${resultChoosePassword?.role}`}>Vous pouvez vous connecter</Link></span>
                 </>
               }

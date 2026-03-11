@@ -128,7 +128,7 @@ function MonEspace() {
       {userUpdated &&
         <div className="fr-col-12 fr-mb-3w">
           <div className="fr-alert fr-alert--success">
-            <span>Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s&nbsp;!</span><br/>
+            <span>Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s&nbsp;!</span><br />
             {sendMail && <span>
               Un mail de confirmation vous a &eacute;t&eacute; envoy&eacute; sur votre nouvelle adresse mail pour valider votre changement.
             </span>}
@@ -230,7 +230,7 @@ function MonEspace() {
               <>
                 <span>Voir ou télécharger votre CV&nbsp;:<br /></span>
                 <button className="fr-mt-3w download-btn" onClick={downloadCV}>
-                  <span className="fr-fi-file-download-line download-img" aria-hidden="true"></span>
+                  <span className="fr-icon-file-download-line download-img" aria-hidden="true"></span>
                   Mon CV ({candidat?.cv?.file})
                 </button>
                 {loadingDeleteCv ?

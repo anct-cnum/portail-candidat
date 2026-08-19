@@ -13,7 +13,7 @@
     "@gouvfr/dsfr": "^1.14.4",
     "@reduxjs/toolkit": "^2.11.2",
     "@vitejs/plugin-react": "^5.2.0",
-    "axios": "^1.12.0",
+    "axios": "^1.18.0",
     "dayjs": "^1.11.21",
     "downloadjs": "^1.4.7",
     "prop-types": "^15.8.1",
